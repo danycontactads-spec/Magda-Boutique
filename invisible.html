@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Esenciales Invisibles — Madam Maison du Soleil by Magda</title>
+<meta name="description" content="Soporte invisible, confianza visible. Bras adhesivos de silicona, cubre-pezones, boob tape y bikini pads de lujo.">
+<link rel="canonical" href="https://madammaisondusoleilbymagda.life/invisible.html">
+<meta property="og:title" content="Esenciales Invisibles — Madam Maison du Soleil by Magda">
+<meta name="theme-color" content="#E7B7C1">
+<link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Cormorant+Garamond:ital,wght@0,400;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --rosa:#E7B7C1; --rosa-soft:#F6E3E7; --rosa-bg:#FAE8EC; --marfil:#FBEDEF;
+    --arena:#EADBC6; --arena-deep:#D9C3A6; --gold:#C9A84C; --gold-soft:#E4CE93;
+    --ocean:#AFD6DE; --pearl:#FDF4F5; --ink:#3A2E2A; --ink-soft:#7A6A63; --line:#EADFE0;
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family:'Montserrat',sans-serif; color:var(--ink); background:var(--pearl); overflow-x:hidden; line-height:1.6; }
+  h1,h2,h3,h4 { font-family:'Playfair Display',serif; font-weight:600; line-height:1.15; }
+  a { text-decoration:none; color:inherit; } img { max-width:100%; display:block; }
+  .announce { background:linear-gradient(90deg,var(--gold),var(--gold-soft),var(--gold)); color:#fff; text-align:center; font-size:.74rem; letter-spacing:.18em; text-transform:uppercase; padding:9px 5%; font-weight:500; }
+  nav { position:sticky; top:0; z-index:100; background:rgba(253,244,245,.94); backdrop-filter:blur(10px); border-bottom:1px solid var(--line); }
+  .nav-top { display:grid; grid-template-columns:1fr auto 1fr; align-items:center; padding:14px 5%; gap:12px; }
+  .nav-icons { display:flex; align-items:center; gap:20px; } .nav-icons.right { justify-content:flex-end; }
+  .nav-icon { cursor:pointer; color:var(--ink); display:flex; } .nav-icon svg { width:21px; height:21px; }
+  .brand { text-align:center; display:flex; flex-direction:column; align-items:center; line-height:1; }
+  .brand .crown { font-size:1.05rem; color:var(--gold); }
+  .brand .name { font-family:'Playfair Display',serif; font-weight:700; font-size:clamp(1.1rem,2.4vw,1.55rem); letter-spacing:.04em; margin:2px 0; }
+  .brand .sub { font-size:.58rem; letter-spacing:.34em; text-transform:uppercase; color:var(--gold); font-weight:500; }
+  .nav-menu { display:flex; justify-content:center; gap:34px; border-top:1px solid var(--line); padding:12px 5%; list-style:none; }
+  .nav-menu a { font-size:.78rem; letter-spacing:.13em; text-transform:uppercase; font-weight:600; color:var(--ink); transition:color .2s; }
+  .nav-menu a:hover { color:var(--gold); }
+  @media(max-width:900px){ .nav-menu{ display:none; } }
+
+  .page-hero { text-align:center; padding:70px 6% 54px;
+    background:radial-gradient(circle at 30% 20%,rgba(228,206,147,.3),transparent 45%),
+      linear-gradient(135deg,var(--rosa-bg),var(--rosa-soft) 55%,var(--marfil)); }
+  .breadcrumb { font-size:.72rem; letter-spacing:.1em; color:var(--ink-soft); margin-bottom:18px; text-transform:uppercase; }
+  .breadcrumb a:hover { color:var(--gold); }
+  .page-hero .eyebrow { font-size:.7rem; letter-spacing:.3em; text-transform:uppercase; color:var(--gold); font-weight:600; margin-bottom:14px; }
+  .page-hero h1 { font-size:clamp(2.2rem,5.5vw,3.6rem); }
+  .page-hero p { font-family:'Cormorant Garamond',serif; font-style:italic; font-size:1.2rem; color:var(--ink-soft); margin-top:12px; }
+
+  /* USP bar */
+  .usp { display:flex; justify-content:center; gap:40px; flex-wrap:wrap; padding:30px 6%; background:var(--marfil); border-bottom:1px solid var(--line); }
+  .usp div { text-align:center; font-size:.74rem; letter-spacing:.08em; text-transform:uppercase; color:var(--ink-soft); font-weight:600; }
+  .usp div span { display:block; font-size:1.1rem; color:var(--gold); margin-bottom:4px; }
+
+  .filters { display:flex; justify-content:center; gap:12px; flex-wrap:wrap; padding:36px 6% 0; }
+  .chip { border:1px solid var(--line); background:var(--marfil); border-radius:50px; padding:9px 22px; font-size:.72rem; letter-spacing:.1em; text-transform:uppercase; font-weight:600; cursor:pointer; transition:all .2s; }
+  .chip:hover, .chip.active { background:var(--gold); color:#fff; border-color:var(--gold); }
+
+  section { padding:48px 6% 40px; }
+  .prod-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(240px,1fr)); gap:44px 34px; max-width:1240px; margin:0 auto; }
+  .prod-card { background:transparent; border:none; border-radius:0; overflow:visible; transition:transform .25s; }
+  .prod-card:hover { transform:translateY(-3px); }
+  .prod-img { aspect-ratio:1; position:relative; overflow:hidden; border-radius:8px; border:1px solid #F0E3E6; margin-bottom:16px; }
+  .prod-img .ph { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; }
+  .prod-img .ph svg { width:42%; height:42%; opacity:.35; }
+  .ph-a{background:#F6E3E7;}
+  .ph-b{background:#E9F0F1;}
+  .ph-c{background:#F1E6D9;}
+  .ph-d{background:#F3EAD3;}
+  .ph-e{background:#FAEFF1;}
+  .ph-f{background:#EFE4D3;}
+  .prod-img .tag { position:absolute; top:12px; left:12px; z-index:3; background:var(--gold); color:#fff; font-size:.56rem; letter-spacing:.14em; text-transform:uppercase; padding:5px 12px; border-radius:50px; font-weight:600; }
+  .prod-body { padding:0; text-align:center; }
+  .prod-body .cat { font-size:.6rem; letter-spacing:.2em; text-transform:uppercase; color:var(--gold); font-weight:600; }
+  .prod-body h4 { font-family:'Playfair Display',serif; font-weight:500; font-size:1rem; margin:8px 0 8px; }
+  .prod-body .meta { font-size:.74rem; color:var(--ink-soft); margin-bottom:3px; }
+  .prod-body .price { color:var(--gold); font-weight:500; font-size:.92rem; margin-top:10px; letter-spacing:.05em; }
+  .prod-body .add { margin-top:14px; width:100%; border:1px solid var(--line); background:transparent; color:var(--ink); padding:11px; border-radius:50px; font-size:.66rem; letter-spacing:.18em; text-transform:uppercase; font-weight:500; cursor:pointer; transition:all .2s; }
+  .prod-body .add:hover { border-color:var(--ink); background:var(--ink); color:var(--pearl); }
+
+  .cta { text-align:center; padding:60px 6% 84px; }
+  .btn { display:inline-block; padding:15px 42px; border-radius:50px; font-size:.78rem; letter-spacing:.16em; text-transform:uppercase; font-weight:600; cursor:pointer; transition:transform .2s, box-shadow .2s; background:linear-gradient(135deg,var(--gold),var(--gold-soft)); color:#fff; box-shadow:0 10px 26px rgba(201,168,76,.34); }
+  .btn:hover { transform:translateY(-3px); box-shadow:0 14px 32px rgba(201,168,76,.44); }
+
+  footer { background:var(--marfil); border-top:1px solid var(--line); padding:44px 6% 24px; text-align:center; }
+  footer .name { font-family:'Playfair Display',serif; font-weight:700; font-size:1.2rem; }
+  footer .sub { font-size:.58rem; letter-spacing:.3em; text-transform:uppercase; color:var(--gold); margin-bottom:14px; }
+  footer .links { display:flex; justify-content:center; gap:24px; flex-wrap:wrap; margin:18px 0; }
+  footer .links a { font-size:.78rem; letter-spacing:.08em; color:var(--ink-soft); text-transform:uppercase; }
+  footer .links a:hover { color:var(--gold); }
+  footer .copy { font-size:.74rem; color:var(--ink-soft); margin-top:16px; }
+  .wa { position:fixed; bottom:26px; right:26px; z-index:200; width:56px; height:56px; border-radius:50%; background:#25D366; display:flex; align-items:center; justify-content:center; box-shadow:0 6px 20px rgba(37,211,102,.45); transition:transform .2s; }
+  .wa:hover { transform:scale(1.08); } .wa svg { width:30px; height:30px; fill:#fff; }
+  .reveal { opacity:0; transform:translateY(30px); transition:opacity .7s cubic-bezier(.2,.7,.3,1),transform .7s cubic-bezier(.2,.7,.3,1); }
+  .reveal.in { opacity:1; transform:translateY(0); }
+  @media(prefers-reduced-motion:reduce){ .reveal{opacity:1;transform:none;transition:none;} }
+</style>
+</head>
+<body>
+<div class="announce">Envío gratis en pedidos superiores a $100 · Where European Elegance Meets Caribbean Soul</div>
+<nav>
+  <div class="nav-top">
+    <div class="nav-icons">
+      <a class="nav-icon" href="#" aria-label="Buscar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></a>
+    </div>
+    <a class="brand" href="index.html"><span class="crown">♛</span><span class="name">Madam Maison du Soleil</span><span class="sub">by Magda</span></a>
+    <div class="nav-icons right">
+      <a class="nav-icon" href="#" aria-label="Cuenta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg></a>
+      <a class="nav-icon" href="#" aria-label="Carrito"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 7h12l-1 13H7L6 7z"/><path d="M9 7a3 3 0 0 1 6 0"/></svg></a>
+    </div>
+  </div>
+  <ul class="nav-menu">
+    <li><a href="swim.html">Nuevas Llegadas</a></li>
+    <li><a href="swim.html">Trajes de Baño</a></li>
+    <li><a href="index.html#collections">Colecciones</a></li>
+    <li><a href="invisible.html">Esenciales Invisibles</a></li>
+    <li><a href="index.html#contact">Contacto</a></li>
+  </ul>
+</nav>
+
+<header class="page-hero">
+  <div class="breadcrumb"><a href="index.html">Inicio</a> / Esenciales Invisibles</div>
+  <p class="eyebrow">Invisible Comfort</p>
+  <h1>Esenciales Invisibles</h1>
+  <p>Soporte invisible, confianza visible.</p>
+</header>
+
+<div class="usp">
+  <div><span>✦</span>Adhesión Segura</div>
+  <div><span>♲</span>Reutilizable</div>
+  <div><span>☁</span>Ajuste Cómodo</div>
+  <div><span>♛</span>Silicona Premium</div>
+</div>
+
+<div class="filters">
+  <span class="chip active">Todos</span>
+  <span class="chip">Bras Adhesivos</span>
+  <span class="chip">Cubre-Pezones</span>
+  <span class="chip">Bikini Pads</span>
+  <span class="chip">Boob Tape</span>
+</div>
+
+<section>
+  <div class="prod-grid reveal">
+
+    <div class="prod-card"><div class="prod-img"><span class="tag">Best Seller</span><span class="ph ph-a"><svg viewBox="0 0 40 40" fill="currentColor"><path d="M12 14c-3 0-6 2-6 6s3 6 6 6 8-4 8-8-5-4-8-4zm16 0c-3 0-8 0-8 4s5 8 8 8 6-2 6-6-3-6-6-6z"/></svg></span></div>
+      <div class="prod-body"><div class="cat">Bra Adhesivo</div><h4>Thin Silicone Bra</h4><div class="meta">Front Clasp · Color: Skin / Transparent</div><div class="meta">Tallas: A / B / C / D</div><div class="price">$28.00</div><button class="add">Agregar</button></div></div>
+
+    <div class="prod-card"><div class="prod-img"><span class="ph ph-b"><svg viewBox="0 0 40 40" fill="currentColor"><path d="M12 14c-3 0-6 2-6 6s3 6 6 6 8-4 8-8-5-4-8-4zm16 0c-3 0-8 0-8 4s5 8 8 8 6-2 6-6-3-6-6-6z"/></svg></span></div>
+      <div class="prod-body"><div class="cat">Bra Adhesivo</div><h4>Strong Self-Adhesive Bra</h4><div class="meta">Reutilizable · Color: Skin / Brown</div><div class="meta">Tallas: A / B / C / D / E / F</div><div class="price">$30.00</div><button class="add">Agregar</button></div></div>
+
+    <div class="prod-card"><div class="prod-img"><span class="tag">Popular</span><span class="ph ph-c"><svg viewBox="0 0 40 40" fill="currentColor"><path d="M10 22c0-5 4-8 10-8s10 3 10 8-4 6-10 6-10-1-10-6z"/></svg></span></div>
+      <div class="prod-body"><div class="cat">Bra Adhesivo</div><h4>Invisible Mango Bra</h4><div class="meta">Esponja · Bio Adhesive</div><div class="meta">Tallas: A / B / C / D · Nude, Black</div><div class="price">$24.00</div><button class="add">Agregar</button></div></div>
+
+    <div class="prod-card"><div class="prod-img"><span class="ph ph-d"><svg viewBox="0 0 40 40" fill="currentColor"><path d="M20 12l8 14H12z"/></svg></span></div>
+      <div class="prod-body"><div class="cat">Bra Adhesivo</div><h4>Side-Wing U-Shape Bra</h4><div class="meta">Seamless & Secure Fit</div><div class="meta">Tallas: A / B / C / D · Nude, Black</div><div class="price">$26.00</div><button class="add">Agregar</button></div></div>
+
+    <div class="prod-card"><div class="prod-img"><span class="tag">Nuevo</span><span class="ph ph-e"><svg viewBox="0 0 40 40" fill="currentColor"><circle cx="20" cy="20" r="10"/></svg></span></div>
+      <div class="prod-body"><div class="cat">Cubre-Pezones</div><h4>Matt Silicone Nipple Cover</h4><div class="meta">100% Silicona · Skin / Brown</div><div class="meta">Tallas: 7 / 8 / 10 / 13 / 15 cm</div><div class="price">$18.00</div><button class="add">Agregar</button></div></div>
+
+    <div class="prod-card"><div class="prod-img"><span class="ph ph-f"><svg viewBox="0 0 40 40" fill="currentColor"><path d="M20 10l3 5 5-1-2 5 4 4-5 1-1 5-4-3-4 3-1-5-5-1 4-4-2-5 5 1z"/></svg></span></div>
+      <div class="prod-body"><div class="cat">Cubre-Pezones</div><h4>Invisible Comfort Flower</h4><div class="meta">Silicona + Adhesivo · Nude, Pink</div><div class="meta">Tallas: 6 – 14 cm</div><div class="price">$16.00</div><button class="add">Agregar</button></div></div>
+
+    <div class="prod-card"><div class="prod-img"><span class="ph ph-a"><svg viewBox="0 0 40 40" fill="currentColor"><path d="M20 12l7 12H13z"/></svg></span></div>
+      <div class="prod-body"><div class="cat">Cubre-Pezones</div><h4>Solid Triangle Covers</h4><div class="meta">Silicona Gel · 8 x 10.5 cm</div><div class="meta">Nude, Coffee, Brown</div><div class="price">$17.00</div><button class="add">Agregar</button></div></div>
+
+    <div class="prod-card"><div class="prod-img"><span class="ph ph-b"><svg viewBox="0 0 40 40" fill="currentColor"><path d="M20 12c4 0 8 4 8 9s-4 7-8 7-8-2-8-7 4-9 8-9z"/></svg></span></div>
+      <div class="prod-body"><div class="cat">Bikini Pads</div><h4>Invisible Lift Bikini Pads</h4><div class="meta">Silicona Gel · Nude, Clear</div><div class="meta">Tallas: M / L</div><div class="price">$20.00</div><button class="add">Agregar</button></div></div>
+
+    <div class="prod-card"><div class="prod-img"><span class="ph ph-c"><svg viewBox="0 0 40 40" fill="currentColor"><path d="M13 14h14l-1 6h-12z"/><path d="M14 20h12l-1 6h-10z"/></svg></span></div>
+      <div class="prod-body"><div class="cat">Bikini Pads</div><h4>Double-Sided Glue Pads</h4><div class="meta">Esponja · Bio Adhesive · 11 x 11 cm</div><div class="meta">Color: Nude</div><div class="price">$19.00</div><button class="add">Agregar</button></div></div>
+
+    <div class="prod-card"><div class="prod-img"><span class="tag">Best Seller</span><span class="ph ph-d"><svg viewBox="0 0 40 40" fill="currentColor"><circle cx="20" cy="20" r="11"/><circle cx="20" cy="20" r="4" fill="#fff"/></svg></span></div>
+      <div class="prod-body"><div class="cat">Boob Tape</div><h4>Boob Tape Premium</h4><div class="meta">95% Algodón + 5% Spandex</div><div class="meta">Light Skin / Skin / Brown / Black</div><div class="price">$22.00</div><button class="add">Agregar</button></div></div>
+
+    <div class="prod-card"><div class="prod-img"><span class="ph ph-e"><svg viewBox="0 0 40 40" fill="currentColor"><path d="M12 16c0-3 3-4 8-4s8 1 8 4-3 5-8 5-8-2-8-5z"/></svg></span></div>
+      <div class="prod-body"><div class="cat">Bra Adhesivo</div><h4>Silicone Spoon-Cup Bra</h4><div class="meta">Skin / Transparent</div><div class="meta">Tallas: A / B / C</div><div class="price">$27.00</div><button class="add">Agregar</button></div></div>
+
+    <div class="prod-card"><div class="prod-img"><span class="ph ph-f"><svg viewBox="0 0 40 40" fill="currentColor"><path d="M20 11c5 0 9 4 9 9s-4 9-9 9-9-4-9-9 4-9 9-9zm0 4c-3 0-5 2-5 5s2 5 5 5 5-2 5-5-2-5-5-5z"/></svg></span></div>
+      <div class="prod-body"><div class="cat">Cubre-Pezones</div><h4>Liquid Silicone Cover</h4><div class="meta">Skin-Friendly · Skin</div><div class="meta">Talla: 8 x 8 cm</div><div class="price">$15.00</div><button class="add">Agregar</button></div></div>
+
+  </div>
+</section>
+
+<div class="cta reveal">
+  <a href="https://wa.me/17866670539" target="_blank" rel="noopener" class="btn">Consultar por WhatsApp</a>
+</div>
+
+<footer>
+  <div class="name">Madam Maison du Soleil</div>
+  <div class="sub">by Magda</div>
+  <div class="links">
+    <a href="index.html">Inicio</a>
+    <a href="swim.html">Trajes de Baño</a>
+    <a href="invisible.html">Esenciales Invisibles</a>
+    <a href="index.html#contact">Contacto</a>
+  </div>
+  <div class="copy">© 2026 Madam Maison du Soleil by Magda — Todos los derechos reservados.</div>
+</footer>
+<a class="wa" href="https://wa.me/17866670539" target="_blank" rel="noopener" aria-label="WhatsApp"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.5 15.2L2 22l4.9-1.5A10 10 0 1 0 12 2zm5.8 14.2c-.2.7-1.4 1.3-2 1.4-.5.1-1.1.1-1.8-.1-.4-.1-1-.3-1.6-.6-2.8-1.2-4.6-4-4.8-4.2-.1-.2-1.1-1.4-1.1-2.7s.7-1.9.9-2.2c.2-.2.4-.3.6-.3h.5c.2 0 .4 0 .6.5l.7 1.7c.1.2.1.4 0 .5l-.3.5c-.1.2-.3.3-.1.6.1.2.6 1 1.3 1.6.9.8 1.6 1 1.9 1.2.2.1.4.1.5-.1l.6-.7c.2-.2.3-.2.6-.1l1.6.8c.3.1.4.2.5.3.1.2.1.6-.1 1.2z"/></svg></a>
+<script>
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.08});
+  document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
+  document.querySelectorAll('.chip').forEach(function(c){c.addEventListener('click',function(){document.querySelector('.chip.active').classList.remove('active');c.classList.add('active');});});
+</script>
+</body>
+</html>

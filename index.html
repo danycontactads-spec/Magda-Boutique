@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Madam Maison du Soleil by Magda — Boutique de Lujo | Trajes de Baño & Resort</title>
+<meta name="description" content="Madam Maison du Soleil by Magda: boutique de lujo donde la elegancia europea se encuentra con el alma caribeña. Trajes de baño, resort wear y accesorios premium.">
+<link rel="canonical" href="https://madammaisondusoleilbymagda.life/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Madam Maison du Soleil by Magda">
+<meta property="og:title" content="Madam Maison du Soleil by Magda — Boutique de Lujo">
+<meta property="og:description" content="Where European Elegance Meets Caribbean Soul. Trajes de baño y resort wear de lujo.">
+<meta property="og:url" content="https://madammaisondusoleilbymagda.life/">
+<meta property="og:image" content="assets/images/og-image.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#E7B7C1">
+<link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Madam Maison du Soleil by Magda",
+  "url": "https://madammaisondusoleilbymagda.life/",
+  "slogan": "Where European Elegance Meets Caribbean Soul",
+  "sameAs": ["https://instagram.com/"]
+}
+</script>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --rosa:        #E7B7C1;   /* rosa palo */
+    --rosa-soft:   #F6E3E7;
+    --rosa-bg:     #FAE8EC;   /* fondo rosa suave */
+    --marfil:      #FBEDEF;   /* rosa tenue (antes marfil) */
+    --arena:       #EADBC6;   /* arena suave */
+    --arena-deep:  #D9C3A6;
+    --gold:        #C9A84C;   /* dorado champagne */
+    --gold-soft:   #E4CE93;
+    --ocean:       #AFD6DE;   /* azul océano claro */
+    --pearl:       #FDF4F5;   /* base rosada muy clara */
+    --ink:         #3A2E2A;
+    --ink-soft:    #7A6A63;
+    --line:        #EADFE0;
+  }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Montserrat', sans-serif;
+    color: var(--ink);
+    background: var(--pearl);
+    overflow-x: hidden;
+    line-height: 1.6;
+  }
+  h1,h2,h3,h4 { font-family: 'Playfair Display', serif; font-weight: 600; line-height: 1.15; }
+  a { text-decoration: none; color: inherit; }
+  img { max-width: 100%; display: block; }
+
+  /* ── ANNOUNCEMENT BAR ── */
+  .announce {
+    background: linear-gradient(90deg, var(--gold), var(--gold-soft), var(--gold));
+    color: #fff; text-align: center; font-size: .74rem; letter-spacing: .18em;
+    text-transform: uppercase; padding: 9px 5%; font-weight: 500;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(253,244,245,.94); backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav-top {
+    display: grid; grid-template-columns: 1fr auto 1fr; align-items: center;
+    padding: 14px 5%; gap: 12px;
+  }
+  .nav-icons { display: flex; align-items: center; gap: 20px; }
+  .nav-icons.right { justify-content: flex-end; }
+  .nav-icon { cursor: pointer; color: var(--ink); display: flex; }
+  .nav-icon svg { width: 21px; height: 21px; }
+  .brand {
+    text-align: center; display: flex; flex-direction: column; align-items: center; line-height: 1;
+  }
+  .brand .crown { font-size: 1.05rem; color: var(--gold); letter-spacing: .05em; }
+  .brand .name {
+    font-family: 'Playfair Display', serif; font-weight: 700;
+    font-size: clamp(1.1rem, 2.4vw, 1.55rem); letter-spacing: .04em; color: var(--ink);
+    margin: 2px 0;
+  }
+  .brand .sub {
+    font-size: .58rem; letter-spacing: .34em; text-transform: uppercase;
+    color: var(--gold); font-family: 'Montserrat', sans-serif; font-weight: 500;
+  }
+  .nav-menu {
+    display: flex; justify-content: center; gap: 34px;
+    border-top: 1px solid var(--line); padding: 12px 5%;
+    list-style: none; position: relative;
+  }
+  .nav-menu > li > a {
+    font-size: .78rem; letter-spacing: .13em; text-transform: uppercase;
+    font-weight: 600; color: var(--ink); padding: 4px 0; display: inline-flex; align-items: center; gap: 5px;
+    transition: color .2s;
+  }
+  .nav-menu > li > a:hover { color: var(--gold); }
+  .nav-menu > li { position: relative; }
+  .caret { font-size: .55rem; opacity: .6; }
+  .dropdown {
+    position: absolute; top: 100%; left: 50%; transform: translateX(-50%) translateY(8px);
+    background: var(--pearl); border: 1px solid var(--line); border-radius: 12px;
+    padding: 18px 22px; min-width: 210px; box-shadow: 0 20px 44px rgba(58,46,42,.13);
+    opacity: 0; visibility: hidden; transition: all .22s; z-index: 120;
+  }
+  .nav-menu > li:hover .dropdown { opacity: 1; visibility: visible; transform: translateX(-50%) translateY(0); }
+  .dropdown a {
+    display: block; font-size: .8rem; letter-spacing: .04em; color: var(--ink-soft);
+    padding: 7px 0; border-bottom: 1px solid var(--rosa-bg); transition: color .18s, padding .18s;
+    text-transform: none; font-weight: 500;
+  }
+  .dropdown a:last-child { border-bottom: none; }
+  .dropdown a:hover { color: var(--gold); padding-left: 6px; }
+
+  /* ── HERO ── */
+  .hero {
+    position: relative; min-height: 78vh; display: flex; align-items: center; justify-content: center;
+    text-align: center; overflow: hidden;
+    background:
+      radial-gradient(circle at 20% 20%, rgba(175,214,222,.35), transparent 45%),
+      radial-gradient(circle at 80% 30%, rgba(228,206,147,.32), transparent 45%),
+      linear-gradient(135deg, var(--rosa-bg) 0%, var(--rosa-soft) 45%, var(--arena) 100%);
+    padding: 90px 6%;
+  }
+  .hero::after {
+    content: ''; position: absolute; inset: 0;
+    background-image: radial-gradient(rgba(201,168,76,.09) 1px, transparent 1px);
+    background-size: 22px 22px; pointer-events: none;
+  }
+  .hero-inner { position: relative; z-index: 2; max-width: 780px; animation: fadeUp .9s ease both; }
+  .hero .eyebrow {
+    font-size: .72rem; letter-spacing: .34em; text-transform: uppercase; color: var(--gold);
+    font-weight: 600; margin-bottom: 20px;
+  }
+  .hero h1 {
+    font-size: clamp(2.6rem, 7vw, 5rem); font-weight: 700; color: var(--ink); letter-spacing: .01em;
+  }
+  .hero h1 em { font-style: italic; color: var(--gold); }
+  .hero .tagline {
+    font-family: 'Cormorant Garamond', serif; font-size: clamp(1.1rem, 2.6vw, 1.5rem);
+    font-style: italic; color: var(--ink-soft); margin: 18px 0 34px;
+  }
+  .btn {
+    display: inline-block; padding: 15px 42px; border-radius: 50px;
+    font-size: .78rem; letter-spacing: .16em; text-transform: uppercase; font-weight: 600;
+    cursor: pointer; transition: transform .2s, box-shadow .2s, background .2s, color .2s;
+  }
+  .btn-gold {
+    background: linear-gradient(135deg, var(--gold), var(--gold-soft));
+    color: #fff; border: none; box-shadow: 0 10px 26px rgba(201,168,76,.34);
+  }
+  .btn-gold:hover { transform: translateY(-3px); box-shadow: 0 14px 32px rgba(201,168,76,.44); }
+  .btn-outline { border: 1.5px solid var(--ink); color: var(--ink); background: transparent; }
+  .btn-outline:hover { background: var(--ink); color: var(--pearl); }
+
+  /* ── SECTION SHELL ── */
+  section { padding: 84px 6%; }
+  .sec-head { text-align: center; max-width: 640px; margin: 0 auto 54px; }
+  .sec-head .eyebrow {
+    font-size: .7rem; letter-spacing: .3em; text-transform: uppercase; color: var(--gold);
+    font-weight: 600; margin-bottom: 14px;
+  }
+  .sec-head h2 { font-size: clamp(1.9rem, 4.4vw, 2.9rem); color: var(--ink); }
+  .sec-head p { color: var(--ink-soft); margin-top: 14px; font-size: .96rem; }
+
+  /* ── CATEGORY GRID ── */
+  .cat-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 22px;
+    max-width: 1200px; margin: 0 auto;
+  }
+  .cat-card {
+    position: relative; border-radius: 18px; overflow: hidden; aspect-ratio: 3/4;
+    display: flex; align-items: flex-end; justify-content: center;
+    color: #fff; text-align: center; transition: transform .3s, box-shadow .3s;
+    box-shadow: 0 10px 30px rgba(58,46,42,.09);
+  }
+  .cat-card:hover { transform: translateY(-6px); box-shadow: 0 18px 40px rgba(58,46,42,.16); }
+  .cat-ph { position: absolute; inset: 0; }
+  .cat-ph.c1 { background: linear-gradient(160deg, var(--rosa) 0%, var(--gold-soft) 100%); }
+  .cat-ph.c2 { background: linear-gradient(160deg, var(--ocean) 0%, var(--rosa-soft) 100%); }
+  .cat-ph.c3 { background: linear-gradient(160deg, var(--gold-soft) 0%, var(--arena) 100%); }
+  .cat-ph.c4 { background: linear-gradient(160deg, var(--arena-deep) 0%, var(--rosa) 100%); }
+  .cat-ph.c5 { background: linear-gradient(160deg, var(--rosa) 0%, var(--ocean) 100%); }
+  .cat-ph::after {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(58,46,42,.45), transparent 55%);
+  }
+  .cat-label {
+    position: relative; z-index: 2; padding: 0 20px 26px; width: 100%;
+  }
+  .cat-label span {
+    font-family: 'Playfair Display', serif; font-size: 1.35rem; font-weight: 600;
+    display: block; text-shadow: 0 2px 12px rgba(0,0,0,.3);
+  }
+  .cat-label small {
+    display: inline-block; margin-top: 10px; font-size: .64rem; letter-spacing: .2em;
+    text-transform: uppercase; border: 1px solid rgba(255,255,255,.7); padding: 6px 16px; border-radius: 50px;
+    transition: background .2s, color .2s;
+  }
+  .cat-card:hover .cat-label small { background: #fff; color: var(--ink); }
+
+  /* ── FEATURED SPLIT ── */
+  .split {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 0; align-items: stretch;
+    max-width: 1200px; margin: 0 auto; border-radius: 22px; overflow: hidden;
+    box-shadow: 0 20px 50px rgba(58,46,42,.1);
+  }
+  .split-media { min-height: 460px; position: relative;
+    background: linear-gradient(150deg, var(--gold-soft), var(--rosa), var(--ocean)); }
+  .split-media::after {
+    content: 'SOLEIL SWIM'; position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+    font-family: 'Playfair Display', serif; font-size: 2rem; letter-spacing: .3em; color: rgba(255,255,255,.55);
+  }
+  .split-body {
+    background: var(--marfil); padding: 60px 52px; display: flex; flex-direction: column; justify-content: center;
+  }
+  .split-body .eyebrow { font-size: .7rem; letter-spacing: .3em; text-transform: uppercase; color: var(--gold); font-weight: 600; }
+  .split-body h2 { font-size: clamp(1.8rem, 3.6vw, 2.6rem); margin: 14px 0 16px; }
+  .split-body p { color: var(--ink-soft); margin-bottom: 28px; }
+
+  /* ── PRODUCT GRID ── */
+  .prod-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 36px;
+    max-width: 1200px; margin: 0 auto;
+  }
+  .prod-card { text-align: center; transition: transform .25s; }
+  .prod-card:hover { transform: translateY(-3px); }
+  .prod-img {
+    aspect-ratio: 3/4; border-radius: 8px; position: relative; overflow: hidden; margin-bottom: 15px;
+    border: 1px solid #F0E3E6;
+  }
+  .prod-img .ph { position: absolute; inset: 0; }
+  .ph-a { background: #F6E3E7; }
+  .ph-b { background: #E9F0F1; }
+  .ph-c { background: #F1E6D9; }
+  .ph-d { background: #F3EAD3; }
+  .ph-e { background: #FAEFF1; }
+  .ph-f { background: #EFE4D3; }
+  .prod-img .tag {
+    position: absolute; top: 12px; left: 12px; z-index: 3; background: var(--gold); color: #fff;
+    font-size: .58rem; letter-spacing: .14em; text-transform: uppercase; padding: 5px 12px; border-radius: 50px; font-weight: 600;
+  }
+  .prod-img .quick {
+    position: absolute; bottom: 0; left: 0; right: 0; z-index: 3;
+    background: rgba(255,253,249,.94); color: var(--ink); text-align: center; padding: 11px;
+    font-size: .68rem; letter-spacing: .16em; text-transform: uppercase; font-weight: 600;
+    transform: translateY(100%); transition: transform .25s;
+  }
+  .prod-card:hover .quick { transform: translateY(0); }
+  .prod-card h4 { font-family: 'Montserrat', sans-serif; font-weight: 500; font-size: .8rem; letter-spacing: .1em; color: var(--ink); }
+  .prod-card .price { color: var(--gold); font-weight: 500; font-size: .85rem; margin-top: 7px; letter-spacing: .05em; }
+
+  /* ── BRAND STORY ── */
+  .story { background: var(--ink); color: var(--pearl); text-align: center; }
+  .story .eyebrow { color: var(--gold-soft); }
+  .story h2 { color: #fff; font-size: clamp(1.9rem, 4.4vw, 3rem); max-width: 760px; margin: 0 auto 22px; }
+  .story h2 em { font-style: italic; color: var(--gold-soft); }
+  .story p { color: rgba(255,253,249,.72); max-width: 620px; margin: 0 auto 16px; font-size: .98rem; }
+  .story .pillars { display: flex; justify-content: center; gap: 46px; flex-wrap: wrap; margin-top: 46px; }
+  .pillar { max-width: 240px; }
+  .pillar .icon { font-size: 1.5rem; color: var(--gold-soft); margin-bottom: 12px; }
+  .pillar h4 { color: #fff; font-size: 1.05rem; margin-bottom: 8px; }
+  .pillar p { font-size: .84rem; }
+
+  /* ── LINGERIE CATALOG STRIP ── */
+  .strip { background: var(--rosa-bg); }
+  .strip .prod-card h4 { font-size: .8rem; }
+
+  /* ── TESTIMONIALS ── */
+  .testi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px; max-width: 1100px; margin: 0 auto; }
+  .testi {
+    background: var(--marfil); border: 1px solid var(--line); border-radius: 16px; padding: 30px 26px; text-align: center;
+  }
+  .testi .stars { color: var(--gold); letter-spacing: .15em; margin-bottom: 14px; }
+  .testi p { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1.12rem; color: var(--ink); margin-bottom: 16px; }
+  .testi .who { font-size: .72rem; letter-spacing: .16em; text-transform: uppercase; color: var(--ink-soft); font-weight: 600; }
+
+  /* ── INSTAGRAM ── */
+  .ig-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px; max-width: 1200px; margin: 40px auto 0; }
+  .ig-cell { aspect-ratio: 1; border-radius: 10px; overflow: hidden; position: relative; cursor: pointer; }
+  .ig-cell .ph { position: absolute; inset: 0; transition: transform .3s; }
+  .ig-cell:hover .ph { transform: scale(1.08); }
+  .ig-cell::after { content: '⊕'; position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 1.4rem; opacity: 0; transition: opacity .25s; background: rgba(58,46,42,.25); }
+  .ig-cell:hover::after { opacity: 1; }
+
+  /* ── NEWSLETTER ── */
+  .news {
+    background: linear-gradient(135deg, var(--rosa-soft), var(--gold-soft));
+    text-align: center;
+  }
+  .news h2 { font-size: clamp(1.8rem, 4vw, 2.6rem); }
+  .news p { color: var(--ink-soft); margin: 12px 0 28px; }
+  .news form { display: flex; gap: 10px; max-width: 460px; margin: 0 auto; flex-wrap: wrap; justify-content: center; }
+  .news input {
+    flex: 1; min-width: 220px; padding: 15px 20px; border-radius: 50px; border: 1px solid rgba(255,255,255,.7);
+    background: rgba(255,255,255,.75); font-family: inherit; font-size: .9rem; outline: none; color: var(--ink);
+  }
+  .news input::placeholder { color: var(--ink-soft); }
+
+  /* ── FOOTER ── */
+  footer { background: var(--marfil); border-top: 1px solid var(--line); padding: 64px 6% 28px; }
+  .foot-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 40px; max-width: 1200px; margin: 0 auto 44px; }
+  .foot-brand .crown { color: var(--gold); font-size: 1.1rem; }
+  .foot-brand .name { font-family: 'Playfair Display', serif; font-weight: 700; font-size: 1.3rem; margin: 4px 0; }
+  .foot-brand .sub { font-size: .58rem; letter-spacing: .3em; text-transform: uppercase; color: var(--gold); }
+  .foot-brand p { color: var(--ink-soft); font-size: .86rem; margin-top: 16px; max-width: 280px; }
+  .foot-col h4 { font-family: 'Montserrat', sans-serif; font-size: .74rem; letter-spacing: .18em; text-transform: uppercase; color: var(--ink); margin-bottom: 16px; font-weight: 700; }
+  .foot-col a { display: block; color: var(--ink-soft); font-size: .84rem; padding: 6px 0; transition: color .18s; }
+  .foot-col a:hover { color: var(--gold); }
+  .foot-social { display: flex; gap: 14px; margin-top: 14px; }
+  .foot-social a { width: 36px; height: 36px; border-radius: 50%; border: 1px solid var(--line); display: flex; align-items: center; justify-content: center; color: var(--ink); transition: background .2s, color .2s; }
+  .foot-social a:hover { background: var(--gold); color: #fff; border-color: var(--gold); }
+  .foot-social svg { width: 17px; height: 17px; }
+  .foot-bottom { border-top: 1px solid var(--line); padding-top: 22px; text-align: center; color: var(--ink-soft); font-size: .76rem; letter-spacing: .04em; }
+
+  /* ── WHATSAPP FLOAT ── */
+  .wa {
+    position: fixed; bottom: 26px; right: 26px; z-index: 200; width: 56px; height: 56px; border-radius: 50%;
+    background: #25D366; display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 6px 20px rgba(37,211,102,.45); transition: transform .2s;
+  }
+  .wa:hover { transform: scale(1.08); }
+  .wa svg { width: 30px; height: 30px; fill: #fff; }
+
+  /* ── MOBILE MENU ── */
+  .hamburger { display: none; }
+  @media (max-width: 900px) {
+    .nav-menu { display: none; }
+    .hamburger { display: flex; }
+    .foot-grid { grid-template-columns: 1fr 1fr; }
+    .split { grid-template-columns: 1fr; }
+    .split-media { min-height: 300px; }
+    .ig-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+  @media (max-width: 560px) {
+    section { padding: 60px 6%; }
+    .foot-grid { grid-template-columns: 1fr; }
+    .nav-icons { gap: 14px; }
+  }
+
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(28px); } to { opacity: 1; transform: translateY(0); } }
+  .reveal { opacity: 0; transform: translateY(30px); transition: opacity .7s cubic-bezier(.2,.7,.3,1), transform .7s cubic-bezier(.2,.7,.3,1); }
+  .reveal.in { opacity: 1; transform: translateY(0); }
+  @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; transition: none; } .hero-inner { animation: none; } }
+</style>
+</head>
+<body>
+
+<!-- ANNOUNCEMENT -->
+<div class="announce">Envío gratis en pedidos superiores a $100 · Where European Elegance Meets Caribbean Soul</div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-top">
+    <div class="nav-icons">
+      <a class="nav-icon hamburger" onclick="toggleMenu()" aria-label="Menú">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><line x1="3" y1="7" x2="21" y2="7"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="17" x2="21" y2="17"/></svg>
+      </a>
+      <a class="nav-icon" href="#" aria-label="Buscar">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </a>
+    </div>
+    <a class="brand" href="index.html">
+      <span class="crown">♛</span>
+      <span class="name">Madam Maison du Soleil</span>
+      <span class="sub">by Magda</span>
+    </a>
+    <div class="nav-icons right">
+      <a class="nav-icon" href="#" aria-label="Cuenta">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>
+      </a>
+      <a class="nav-icon" href="#" aria-label="Carrito">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 7h12l-1 13H7L6 7z"/><path d="M9 7a3 3 0 0 1 6 0"/></svg>
+      </a>
+    </div>
+  </div>
+  <ul class="nav-menu" id="navMenu">
+    <li><a href="swim.html">Nuevas Llegadas</a></li>
+    <li>
+      <a href="swim.html">Trajes de Baño <span class="caret">▾</span></a>
+      <div class="dropdown">
+        <a href="swim.html">Ver todo</a>
+        <a href="swim.html">Bikinis</a>
+        <a href="swim.html">Enterizos</a>
+        <a href="swim.html">Cover-Ups</a>
+        <a href="swim.html">Resort Wear</a>
+      </div>
+    </li>
+    <li>
+      <a href="#collections">Comprar por Colección <span class="caret">▾</span></a>
+      <div class="dropdown">
+        <a href="swim.html">The Soleil Edit</a>
+        <a href="swim.html">The Vacation Edit</a>
+        <a href="swim.html">Best Sellers</a>
+        <a href="invisible.html">Invisible Comfort</a>
+      </div>
+    </li>
+    <li>
+      <a href="invisible.html">Esenciales Invisibles <span class="caret">▾</span></a>
+      <div class="dropdown">
+        <a href="invisible.html">Ver todo</a>
+        <a href="invisible.html">Bras Adhesivos</a>
+        <a href="invisible.html">Cubre-Pezones</a>
+        <a href="invisible.html">Boob Tape</a>
+        <a href="invisible.html">Bikini Pads</a>
+      </div>
+    </li>
+    <li><a href="#contact">Contacto</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-inner">
+    <p class="eyebrow">Boutique de Lujo · Temporada Soleil 2026</p>
+    <h1>New <em>Arrivals</em></h1>
+    <p class="tagline">Sun. Sea. Desire. — Lujo hecho para el mar.</p>
+    <a href="swim.html" class="btn btn-gold">Comprar Ahora</a>
+  </div>
+</header>
+
+<!-- SHOP BY CATEGORY -->
+<section id="category">
+  <div class="sec-head reveal">
+    <p class="eyebrow">Comprar por Categoría</p>
+    <h2>Tu Escape Refinado</h2>
+    <p>Desde el bikini perfecto hasta el resort wear que te acompaña del mar a la mesa.</p>
+  </div>
+  <div class="cat-grid reveal">
+    <a class="cat-card" href="swim.html"><span class="cat-ph c1"></span><span class="cat-label"><span>Bikinis</span><small>Explorar</small></span></a>
+    <a class="cat-card" href="swim.html"><span class="cat-ph c2"></span><span class="cat-label"><span>Enterizos</span><small>Explorar</small></span></a>
+    <a class="cat-card" href="swim.html"><span class="cat-ph c3"></span><span class="cat-label"><span>Cover-Ups</span><small>Explorar</small></span></a>
+    <a class="cat-card" href="swim.html"><span class="cat-ph c4"></span><span class="cat-label"><span>Resort Wear</span><small>Explorar</small></span></a>
+    <a class="cat-card" href="invisible.html"><span class="cat-ph c5"></span><span class="cat-label"><span>Esenciales Invisibles</span><small>Explorar</small></span></a>
+  </div>
+</section>
+
+<!-- FEATURED SPLIT -->
+<section style="padding-top:0;">
+  <div class="split reveal">
+    <div class="split-media"></div>
+    <div class="split-body">
+      <p class="eyebrow">The Soleil Swim Edit</p>
+      <h2>Elegancia europea, alma caribeña</h2>
+      <p>Nuestra colección insignia de trajes de baño: siluetas atemporales, tejidos premium y tonos inspirados en el sol y el mar. Diseñado para sentirte confiada del amanecer al atardecer.</p>
+      <a href="swim.html" class="btn btn-gold" style="align-self:flex-start;">Ver la Colección</a>
+    </div>
+  </div>
+</section>
+
+<!-- NEW ARRIVALS PRODUCTS -->
+<section id="new" style="padding-top:0;">
+  <div class="sec-head reveal">
+    <p class="eyebrow">Recién Llegado</p>
+    <h2>The Vacation Edit</h2>
+    <p>Piezas seleccionadas para tu próxima escapada bajo el sol.</p>
+  </div>
+  <div class="prod-grid reveal">
+    <a class="prod-card" href="swim.html"><div class="prod-img"><span class="tag">Nuevo</span><span class="ph ph-a"></span><span class="quick">Vista Rápida</span></div><h4>Bikini Riviera Dorado</h4><div class="price">$78.00</div></a>
+    <a class="prod-card" href="swim.html"><div class="prod-img"><span class="ph ph-b"></span><span class="quick">Vista Rápida</span></div><h4>Enterizo Océano Perla</h4><div class="price">$92.00</div></a>
+    <a class="prod-card" href="swim.html"><div class="prod-img"><span class="tag">Popular</span><span class="ph ph-c"></span><span class="quick">Vista Rápida</span></div><h4>Cover-Up Arena Suave</h4><div class="price">$64.00</div></a>
+    <a class="prod-card" href="swim.html"><div class="prod-img"><span class="ph ph-d"></span><span class="quick">Vista Rápida</span></div><h4>Bikini Soleil Champagne</h4><div class="price">$84.00</div></a>
+  </div>
+  <div style="text-align:center; margin-top:44px;" class="reveal"><a href="swim.html" class="btn btn-outline">Ver Todo</a></div>
+</section>
+
+<!-- BRAND STORY -->
+<section class="story">
+  <div class="sec-head reveal" style="margin-bottom:20px;">
+    <p class="eyebrow">Nuestra Historia</p>
+  </div>
+  <h2 class="reveal">Donde la <em>elegancia europea</em> se encuentra con el <em>alma caribeña</em></h2>
+  <p class="reveal">Madam Maison du Soleil by Magda nace de la fusión entre la sofisticación del viejo continente y la calidez vibrante del Caribe. Cada pieza celebra el refinamiento, la luz natural y el arte de vivir bien.</p>
+  <div class="pillars reveal">
+    <div class="pillar"><div class="icon">✦</div><h4>Estilo Europeo</h4><p>Elegancia clásica y contemporánea con detalles refinados y diseño atemporal.</p></div>
+    <div class="pillar"><div class="icon">☀</div><h4>Esencia Caribeña</h4><p>Luz, color y hospitalidad cálida inspirada en el mar y el sol.</p></div>
+    <div class="pillar"><div class="icon">♛</div><h4>Lujo Atemporal</h4><p>Materiales premium y una experiencia boutique exclusiva en cada detalle.</p></div>
+  </div>
+</section>
+
+<!-- INVISIBLE ESSENTIALS STRIP -->
+<section class="strip" id="essentials">
+  <div class="sec-head reveal">
+    <p class="eyebrow">Esenciales Invisibles</p>
+    <h2>Soporte Invisible, Confianza Visible</h2>
+    <p>Bras adhesivos, cubre-pezones y más — el secreto perfecto bajo cada look.</p>
+  </div>
+  <div class="prod-grid reveal">
+    <a class="prod-card" href="invisible.html"><div class="prod-img"><span class="ph ph-e"></span><span class="quick">Vista Rápida</span></div><h4>Bra Adhesivo de Silicona</h4><div class="price">$28.00</div></a>
+    <a class="prod-card" href="invisible.html"><div class="prod-img"><span class="tag">Best Seller</span><span class="ph ph-f"></span><span class="quick">Vista Rápida</span></div><h4>Bra Invisible Mango</h4><div class="price">$24.00</div></a>
+    <a class="prod-card" href="invisible.html"><div class="prod-img"><span class="ph ph-a"></span><span class="quick">Vista Rápida</span></div><h4>Cubre-Pezones de Silicona</h4><div class="price">$18.00</div></a>
+    <a class="prod-card" href="invisible.html"><div class="prod-img"><span class="ph ph-b"></span><span class="quick">Vista Rápida</span></div><h4>Boob Tape Premium</h4><div class="price">$22.00</div></a>
+  </div>
+  <div style="text-align:center; margin-top:44px;" class="reveal"><a href="invisible.html" class="btn btn-outline">Ver el Catálogo Completo</a></div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="reviews">
+  <div class="sec-head reveal">
+    <p class="eyebrow">Nos Aman</p>
+    <h2>Lo que dicen nuestras clientas</h2>
+  </div>
+  <div class="testi-grid reveal">
+    <div class="testi"><div class="stars">★★★★★</div><p>"El bikini más elegante que he tenido. La tela y el ajuste son de otro nivel."</p><div class="who">— Valentina R.</div></div>
+    <div class="testi"><div class="stars">★★★★★</div><p>"Se siente lujo de verdad. Recibí cumplidos toda la vacación en Punta Cana."</p><div class="who">— Camila S.</div></div>
+    <div class="testi"><div class="stars">★★★★★</div><p>"Mi boutique favorita. Siempre encuentro algo único y hermoso."</p><div class="who">— Isabella M.</div></div>
+  </div>
+</section>
+
+<!-- INSTAGRAM -->
+<section id="instagram" style="padding-top:0;">
+  <div class="sec-head reveal">
+    <p class="eyebrow">@madammaisondusoleil</p>
+    <h2>Síguenos en Instagram</h2>
+  </div>
+  <div class="ig-grid reveal">
+    <a class="ig-cell"><span class="ph ph-a"></span></a>
+    <a class="ig-cell"><span class="ph ph-b"></span></a>
+    <a class="ig-cell"><span class="ph ph-c"></span></a>
+    <a class="ig-cell"><span class="ph ph-d"></span></a>
+    <a class="ig-cell"><span class="ph ph-e"></span></a>
+    <a class="ig-cell"><span class="ph ph-f"></span></a>
+  </div>
+</section>
+
+<!-- NEWSLETTER -->
+<section class="news" id="contact">
+  <div class="reveal">
+    <h2>Únete a la Maison</h2>
+    <p>Suscríbete y recibe 15% de descuento en tu primera compra.</p>
+    <form onsubmit="return false;">
+      <input type="email" placeholder="Tu correo electrónico" required>
+      <button class="btn btn-gold" type="submit">Suscribirme</button>
+    </form>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="foot-grid">
+    <div class="foot-brand">
+      <div class="crown">♛</div>
+      <div class="name">Madam Maison du Soleil</div>
+      <div class="sub">by Magda</div>
+      <p>Boutique de lujo donde la elegancia europea se encuentra con el alma caribeña. Inspirado por el sol, la cultura y el arte de vivir bien.</p>
+      <div class="foot-social">
+        <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
+        <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M14 9h3V6h-3c-2 0-3 1-3 3v2H9v3h2v7h3v-7h2.5l.5-3H14v-1.5c0-.6.4-1 1-1z"/></svg></a>
+        <a href="#" aria-label="TikTok"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 3c.3 2 1.6 3.4 3.5 3.7v3c-1.3 0-2.5-.4-3.5-1v6.3c0 3.3-2.5 5.7-5.6 5.7C7 20.7 5 18.6 5 15.8c0-2.7 2-4.9 4.8-4.9.4 0 .8 0 1.2.1v3.1c-.4-.1-.8-.2-1.2-.2-1 0-1.8.8-1.8 1.9s.8 1.9 1.9 1.9 2-.8 2-2.1V3h3z"/></svg></a>
+      </div>
+    </div>
+    <div class="foot-col">
+      <h4>Comprar</h4>
+      <a href="swim.html">Nuevas Llegadas</a>
+      <a href="swim.html">Trajes de Baño</a>
+      <a href="swim.html">Resort Wear</a>
+      <a href="invisible.html">Esenciales Invisibles</a>
+    </div>
+    <div class="foot-col">
+      <h4>Atención al Cliente</h4>
+      <a href="#">Contáctanos</a>
+      <a href="#">Envíos y Devoluciones</a>
+      <a href="#">Guía de Tallas</a>
+      <a href="#">Preguntas Frecuentes</a>
+    </div>
+    <div class="foot-col">
+      <h4>La Maison</h4>
+      <a href="#">Nuestra Historia</a>
+      <a href="#">Política de Privacidad</a>
+      <a href="#">Términos y Condiciones</a>
+      <a href="#contact">Newsletter</a>
+    </div>
+  </div>
+  <div class="foot-bottom">© 2026 Madam Maison du Soleil by Magda — Todos los derechos reservados.</div>
+</footer>
+
+<!-- WHATSAPP -->
+<a class="wa" href="https://wa.me/17866670539" target="_blank" rel="noopener" aria-label="WhatsApp">
+  <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.5 15.2L2 22l4.9-1.5A10 10 0 1 0 12 2zm5.8 14.2c-.2.7-1.4 1.3-2 1.4-.5.1-1.1.1-1.8-.1-.4-.1-1-.3-1.6-.6-2.8-1.2-4.6-4-4.8-4.2-.1-.2-1.1-1.4-1.1-2.7s.7-1.9.9-2.2c.2-.2.4-.3.6-.3h.5c.2 0 .4 0 .6.5l.7 1.7c.1.2.1.4 0 .5l-.3.5c-.1.2-.3.3-.1.6.1.2.6 1 1.3 1.6.9.8 1.6 1 1.9 1.2.2.1.4.1.5-.1l.6-.7c.2-.2.3-.2.6-.1l1.6.8c.3.1.4.2.5.3.1.2.1.6-.1 1.2z"/></svg>
+</a>
+
+<script>
+  function toggleMenu(){
+    var m = document.getElementById('navMenu');
+    m.style.display = (m.style.display === 'flex') ? 'none' : 'flex';
+    m.style.flexDirection = 'column';
+  }
+  // Scroll reveal
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: .12 });
+  document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
+</script>
+</body>
+</html>
