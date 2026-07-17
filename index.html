@@ -535,10 +535,11 @@
   <div class="reveal">
     <h2>Únete a la Maison</h2>
     <p>Suscríbete y recibe 15% de descuento en tu primera compra.</p>
-    <form onsubmit="return false;">
-      <input type="email" placeholder="Tu correo electrónico" required>
-      <button class="btn btn-gold" type="submit">Suscribirme</button>
+    <form id="newsletterForm">
+      <input type="email" id="newsletterEmail" placeholder="Tu correo electrónico" required>
+      <button class="btn btn-gold" type="submit" id="newsletterBtn">Suscribirme</button>
     </form>
+    <p id="newsletterMsg" style="margin-top:14px; font-size:.82rem; min-height:1.2em; color:var(--ink);"></p>
   </div>
 </section>
 
@@ -597,6 +598,52 @@
     entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
   }, { threshold: .12 });
   document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
+
+  // Newsletter form -> /api/submit-lead
+  var newsletterForm = document.getElementById('newsletterForm');
+  if (newsletterForm) {
+    newsletterForm.addEventListener('submit', function(e){
+      e.preventDefault();
+      var emailInput = document.getElementById('newsletterEmail');
+      var btn = document.getElementById('newsletterBtn');
+      var msg = document.getElementById('newsletterMsg');
+      var email = emailInput.value.trim();
+
+      btn.disabled = true;
+      emailInput.disabled = true;
+      var originalLabel = btn.textContent;
+      btn.textContent = 'Enviando…';
+      msg.textContent = '';
+      msg.style.color = 'var(--ink)';
+
+      fetch('/api/submit-lead', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: email })
+      })
+        .then(function(r){ return r.json().then(function(data){ return { ok: r.ok, data: data }; }); })
+        .then(function(result){
+          if (result.ok && result.data.ok) {
+            msg.textContent = '¡Gracias! Revisa tu correo — tu 15% de descuento va en camino.';
+            msg.style.color = 'var(--gold)';
+            newsletterForm.reset();
+            if (typeof fbq === 'function') { fbq('track', 'Lead'); }
+          } else {
+            msg.textContent = (result.data && result.data.error) || 'Algo salió mal. Intenta de nuevo.';
+            msg.style.color = '#B3413B';
+          }
+        })
+        .catch(function(){
+          msg.textContent = 'No se pudo conectar. Intenta de nuevo en unos minutos.';
+          msg.style.color = '#B3413B';
+        })
+        .finally(function(){
+          btn.disabled = false;
+          emailInput.disabled = false;
+          btn.textContent = originalLabel;
+        });
+    });
+  }
 </script>
 </body>
 </html>
