@@ -63,17 +63,12 @@
   .hero-photo {
     position:absolute; top:0; bottom:0; width:27%; max-width:300px;
     overflow:hidden; z-index:1; pointer-events:none;
-    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 16%, #000 84%, transparent 100%);
-            mask-image: linear-gradient(to bottom, transparent 0%, #000 16%, #000 84%, transparent 100%);
+    -webkit-mask-image: radial-gradient(ellipse closest-side at 50% 50%, #000 55%, transparent 100%);
+            mask-image: radial-gradient(ellipse closest-side at 50% 50%, #000 55%, transparent 100%);
   }
   .hero-photo img { width:100%; height:100%; object-fit:contain; display:block; }
-  .hero-photo::after {
-    content:''; position:absolute; inset:0;
-  }
   .hero-photo-left { left:0; }
-  .hero-photo-left::after { background:linear-gradient(to right, rgba(248,223,229,0), rgba(248,223,229,.65) 88%, rgba(248,223,229,.9) 100%); }
   .hero-photo-right { right:0; }
-  .hero-photo-right::after { background:linear-gradient(to left, rgba(248,223,229,0), rgba(248,223,229,.65) 88%, rgba(248,223,229,.9) 100%); }
   .hero-text { position:relative; z-index:2; max-width:600px; margin:0 auto; }
   @media (max-width:640px) {
     .page-hero { min-height:380px; padding:56px 6% 40px; }

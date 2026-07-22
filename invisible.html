@@ -54,12 +54,19 @@
   @media(max-width:900px){ .nav-menu{ display:none; } }
 
   .page-hero {
+    position:relative; overflow:hidden;
     text-align:center; padding:70px 6% 54px; min-height:42vh;
     display:flex; flex-direction:column; align-items:center; justify-content:center;
+    background: var(--rosa-bg);
+  }
+  .page-hero::before {
+    content:''; position:absolute; inset:0; z-index:0;
     background-image:
       linear-gradient(rgba(248,223,229,.72), rgba(248,223,229,.72)),
       url('assets/images/Imagen-portada-productos.jpeg');
     background-size:cover; background-position:center;
+    -webkit-mask-image: radial-gradient(ellipse closest-side at 50% 50%, #000 55%, transparent 100%);
+            mask-image: radial-gradient(ellipse closest-side at 50% 50%, #000 55%, transparent 100%);
   }
   .page-hero > * { position:relative; z-index:2; }
   .breadcrumb { font-size:.72rem; letter-spacing:.1em; color:var(--ink-soft); margin-bottom:18px; text-transform:uppercase; }
