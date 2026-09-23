@@ -247,6 +247,9 @@
     position: absolute; top: 12px; left: 12px; z-index: 3; background: var(--gold); color: #fff;
     font-size: .58rem; letter-spacing: .14em; text-transform: uppercase; padding: 5px 12px; border-radius: 50px; font-weight: 600;
   }
+  .prod-img .tag-agotado { background: #B5564B; }
+  .prod-card.agotado { opacity: .55; filter: grayscale(.2); }
+  .prod-img img { width: 100%; height: 100%; object-fit: cover; }
   .prod-img .quick {
     position: absolute; bottom: 0; left: 0; right: 0; z-index: 3;
     background: rgba(255,253,249,.94); color: var(--ink); text-align: center; padding: 11px;
@@ -477,7 +480,7 @@ fbq('track', 'PageView');
     <h2>The Vacation Edit</h2>
     <p>Piezas seleccionadas para tu próxima escapada bajo el sol.</p>
   </div>
-  <div class="prod-grid reveal">
+  <div class="prod-grid reveal" id="new-grid">
     <a class="prod-card" href="swim.html"><div class="prod-img"><span class="tag">Nuevo</span><span class="ph ph-a"></span><span class="quick">Vista Rápida</span></div><h4>Bikini Riviera Dorado</h4><div class="price">$78.00</div></a>
     <a class="prod-card" href="swim.html"><div class="prod-img"><span class="ph ph-b"></span><span class="quick">Vista Rápida</span></div><h4>Enterizo Océano Perla</h4><div class="price">$92.00</div></a>
     <a class="prod-card" href="swim.html"><div class="prod-img"><span class="tag">Popular</span><span class="ph ph-c"></span><span class="quick">Vista Rápida</span></div><h4>Cover-Up Arena Suave</h4><div class="price">$64.00</div></a>
@@ -507,7 +510,7 @@ fbq('track', 'PageView');
     <h2>Soporte Invisible, Confianza Visible</h2>
     <p>Bras adhesivos, cubre-pezones y más — el secreto perfecto bajo cada look.</p>
   </div>
-  <div class="prod-grid reveal">
+  <div class="prod-grid reveal" id="essentials-grid">
     <a class="prod-card" href="invisible.html"><div class="prod-img"><span class="ph ph-e"></span><span class="quick">Vista Rápida</span></div><h4>Bra Adhesivo de Silicona</h4><div class="price">$28.00</div></a>
     <a class="prod-card" href="invisible.html"><div class="prod-img"><span class="tag">Best Seller</span><span class="ph ph-f"></span><span class="quick">Vista Rápida</span></div><h4>Bra Invisible Mango</h4><div class="price">$24.00</div></a>
     <a class="prod-card" href="invisible.html"><div class="prod-img"><span class="ph ph-a"></span><span class="quick">Vista Rápida</span></div><h4>Cubre-Pezones de Silicona</h4><div class="price">$18.00</div></a>
@@ -659,6 +662,44 @@ fbq('track', 'PageView');
         });
     });
   }
+
+  // Productos destacados desde la API (con fallback a los placeholders de arriba)
+  (function () {
+    var PH_CLASSES = ['ph-a','ph-b','ph-c','ph-d','ph-e','ph-f'];
+    function escHtml(str){ return String(str==null?'':str).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];}); }
+    function money(n){ return '$'+Number(n).toFixed(2); }
+
+    function renderCard(p, i, href){
+      var imgHtml = p.imagen_url
+        ? '<img src="'+escHtml(p.imagen_url)+'" alt="'+escHtml(p.nombre)+'" loading="lazy">'
+        : '<span class="ph '+PH_CLASSES[i % PH_CLASSES.length]+'"></span>';
+      var tagHtml = p.agotado ? '<span class="tag tag-agotado">Agotado</span>' : '';
+      return '<a class="prod-card'+(p.agotado?' agotado':'')+'" href="'+href+'">'+
+        '<div class="prod-img">'+tagHtml+imgHtml+'<span class="quick">Vista Rápida</span></div>'+
+        '<h4>'+escHtml(p.nombre)+'</h4><div class="price">'+money(p.precio)+'</div></a>';
+    }
+
+    function pickFeatured(products, categoria, limit){
+      var pool = products.filter(function(p){ return p.categoria === categoria; });
+      var destacados = pool.filter(function(p){ return p.destacado; });
+      var resto = pool.filter(function(p){ return !p.destacado; });
+      return destacados.concat(resto).slice(0, limit);
+    }
+
+    fetch('/api/products').then(function(r){ return r.json(); }).then(function(json){
+      if (!json || !json.ok || !Array.isArray(json.products) || !json.products.length) return;
+
+      var trajes = pickFeatured(json.products, 'trajes', 4);
+      if (trajes.length) {
+        document.getElementById('new-grid').innerHTML = trajes.map(function(p,i){ return renderCard(p, i, 'swim.html'); }).join('');
+      }
+
+      var esenciales = pickFeatured(json.products, 'esenciales', 4);
+      if (esenciales.length) {
+        document.getElementById('essentials-grid').innerHTML = esenciales.map(function(p,i){ return renderCard(p, i, 'invisible.html'); }).join('');
+      }
+    }).catch(function(){ /* si la API falla, se quedan los productos de respaldo */ });
+  })();
 </script>
 </body>
 </html>

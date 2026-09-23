@@ -98,6 +98,9 @@
   .ph-e{background:#FAEFF1;}
   .ph-f{background:#EFE4D3;}
   .prod-img .tag { position:absolute; top:12px; left:12px; z-index:3; background:var(--gold); color:#fff; font-size:.56rem; letter-spacing:.14em; text-transform:uppercase; padding:5px 12px; border-radius:50px; font-weight:600; }
+  .prod-img .tag-agotado { background:#B5564B; }
+  .prod-card.agotado { opacity:.55; filter:grayscale(.2); }
+  .prod-img img { width:100%; height:100%; object-fit:cover; }
   .prod-body { padding:0; text-align:center; }
   .prod-body .cat { font-size:.6rem; letter-spacing:.2em; text-transform:uppercase; color:var(--gold); font-weight:600; }
   .prod-body h4 { font-family:'Playfair Display',serif; font-weight:500; font-size:1rem; margin:8px 0 8px; }
@@ -176,50 +179,50 @@ fbq('track', 'PageView');
 </div>
 
 <div class="filters">
-  <span class="chip active">Todos</span>
-  <span class="chip">Bras Adhesivos</span>
-  <span class="chip">Cubre-Pezones</span>
-  <span class="chip">Bikini Pads</span>
-  <span class="chip">Boob Tape</span>
+  <span class="chip active" data-sub="">Todos</span>
+  <span class="chip" data-sub="Bras Adhesivos">Bras Adhesivos</span>
+  <span class="chip" data-sub="Cubre-Pezones">Cubre-Pezones</span>
+  <span class="chip" data-sub="Bikini Pads">Bikini Pads</span>
+  <span class="chip" data-sub="Boob Tape">Boob Tape</span>
 </div>
 
 <section>
-  <div class="prod-grid reveal">
+  <div class="prod-grid reveal" id="prod-grid">
 
-    <div class="prod-card"><div class="prod-img"><span class="tag">Best Seller</span><span class="ph ph-a"><svg viewBox="0 0 40 40" fill="currentColor"><path d="M12 14c-3 0-6 2-6 6s3 6 6 6 8-4 8-8-5-4-8-4zm16 0c-3 0-8 0-8 4s5 8 8 8 6-2 6-6-3-6-6-6z"/></svg></span></div>
+    <div class="prod-card" data-sub="Bras Adhesivos"><div class="prod-img"><span class="tag">Best Seller</span><span class="ph ph-a"><svg viewBox="0 0 40 40" fill="currentColor"><path d="M12 14c-3 0-6 2-6 6s3 6 6 6 8-4 8-8-5-4-8-4zm16 0c-3 0-8 0-8 4s5 8 8 8 6-2 6-6-3-6-6-6z"/></svg></span></div>
       <div class="prod-body"><div class="cat">Bra Adhesivo</div><h4>Thin Silicone Bra</h4><div class="meta">Front Clasp · Color: Skin / Transparent</div><div class="meta">Tallas: A / B / C / D</div><div class="price">$28.00</div><button class="add">Agregar</button></div></div>
 
-    <div class="prod-card"><div class="prod-img"><span class="ph ph-b"><svg viewBox="0 0 40 40" fill="currentColor"><path d="M12 14c-3 0-6 2-6 6s3 6 6 6 8-4 8-8-5-4-8-4zm16 0c-3 0-8 0-8 4s5 8 8 8 6-2 6-6-3-6-6-6z"/></svg></span></div>
+    <div class="prod-card" data-sub="Bras Adhesivos"><div class="prod-img"><span class="ph ph-b"><svg viewBox="0 0 40 40" fill="currentColor"><path d="M12 14c-3 0-6 2-6 6s3 6 6 6 8-4 8-8-5-4-8-4zm16 0c-3 0-8 0-8 4s5 8 8 8 6-2 6-6-3-6-6-6z"/></svg></span></div>
       <div class="prod-body"><div class="cat">Bra Adhesivo</div><h4>Strong Self-Adhesive Bra</h4><div class="meta">Reutilizable · Color: Skin / Brown</div><div class="meta">Tallas: A / B / C / D / E / F</div><div class="price">$30.00</div><button class="add">Agregar</button></div></div>
 
-    <div class="prod-card"><div class="prod-img"><span class="tag">Popular</span><span class="ph ph-c"><svg viewBox="0 0 40 40" fill="currentColor"><path d="M10 22c0-5 4-8 10-8s10 3 10 8-4 6-10 6-10-1-10-6z"/></svg></span></div>
+    <div class="prod-card" data-sub="Bras Adhesivos"><div class="prod-img"><span class="tag">Popular</span><span class="ph ph-c"><svg viewBox="0 0 40 40" fill="currentColor"><path d="M10 22c0-5 4-8 10-8s10 3 10 8-4 6-10 6-10-1-10-6z"/></svg></span></div>
       <div class="prod-body"><div class="cat">Bra Adhesivo</div><h4>Invisible Mango Bra</h4><div class="meta">Esponja · Bio Adhesive</div><div class="meta">Tallas: A / B / C / D · Nude, Black</div><div class="price">$24.00</div><button class="add">Agregar</button></div></div>
 
-    <div class="prod-card"><div class="prod-img"><span class="ph ph-d"><svg viewBox="0 0 40 40" fill="currentColor"><path d="M20 12l8 14H12z"/></svg></span></div>
-      <div class="prod-body"><div class="cat">Bra Adhesivo</div><h4>Side-Wing U-Shape Bra</h4><div class="meta">Seamless & Secure Fit</div><div class="meta">Tallas: A / B / C / D · Nude, Black</div><div class="price">$26.00</div><button class="add">Agregar</button></div></div>
+    <div class="prod-card" data-sub="Bras Adhesivos"><div class="prod-img"><span class="ph ph-d"><svg viewBox="0 0 40 40" fill="currentColor"><path d="M20 12l8 14H12z"/></svg></span></div>
+      <div class="prod-body"><div class="cat">Bra Adhesivo</div><h4>Side-Wing U-Shape Bra</h4><div class="meta">Seamless &amp; Secure Fit</div><div class="meta">Tallas: A / B / C / D · Nude, Black</div><div class="price">$26.00</div><button class="add">Agregar</button></div></div>
 
-    <div class="prod-card"><div class="prod-img"><span class="tag">Nuevo</span><span class="ph ph-e"><svg viewBox="0 0 40 40" fill="currentColor"><circle cx="20" cy="20" r="10"/></svg></span></div>
+    <div class="prod-card" data-sub="Cubre-Pezones"><div class="prod-img"><span class="tag">Nuevo</span><span class="ph ph-e"><svg viewBox="0 0 40 40" fill="currentColor"><circle cx="20" cy="20" r="10"/></svg></span></div>
       <div class="prod-body"><div class="cat">Cubre-Pezones</div><h4>Matt Silicone Nipple Cover</h4><div class="meta">100% Silicona · Skin / Brown</div><div class="meta">Tallas: 7 / 8 / 10 / 13 / 15 cm</div><div class="price">$18.00</div><button class="add">Agregar</button></div></div>
 
-    <div class="prod-card"><div class="prod-img"><span class="ph ph-f"><svg viewBox="0 0 40 40" fill="currentColor"><path d="M20 10l3 5 5-1-2 5 4 4-5 1-1 5-4-3-4 3-1-5-5-1 4-4-2-5 5 1z"/></svg></span></div>
+    <div class="prod-card" data-sub="Cubre-Pezones"><div class="prod-img"><span class="ph ph-f"><svg viewBox="0 0 40 40" fill="currentColor"><path d="M20 10l3 5 5-1-2 5 4 4-5 1-1 5-4-3-4 3-1-5-5-1 4-4-2-5 5 1z"/></svg></span></div>
       <div class="prod-body"><div class="cat">Cubre-Pezones</div><h4>Invisible Comfort Flower</h4><div class="meta">Silicona + Adhesivo · Nude, Pink</div><div class="meta">Tallas: 6 – 14 cm</div><div class="price">$16.00</div><button class="add">Agregar</button></div></div>
 
-    <div class="prod-card"><div class="prod-img"><span class="ph ph-a"><svg viewBox="0 0 40 40" fill="currentColor"><path d="M20 12l7 12H13z"/></svg></span></div>
+    <div class="prod-card" data-sub="Cubre-Pezones"><div class="prod-img"><span class="ph ph-a"><svg viewBox="0 0 40 40" fill="currentColor"><path d="M20 12l7 12H13z"/></svg></span></div>
       <div class="prod-body"><div class="cat">Cubre-Pezones</div><h4>Solid Triangle Covers</h4><div class="meta">Silicona Gel · 8 x 10.5 cm</div><div class="meta">Nude, Coffee, Brown</div><div class="price">$17.00</div><button class="add">Agregar</button></div></div>
 
-    <div class="prod-card"><div class="prod-img"><span class="ph ph-b"><svg viewBox="0 0 40 40" fill="currentColor"><path d="M20 12c4 0 8 4 8 9s-4 7-8 7-8-2-8-7 4-9 8-9z"/></svg></span></div>
+    <div class="prod-card" data-sub="Bikini Pads"><div class="prod-img"><span class="ph ph-b"><svg viewBox="0 0 40 40" fill="currentColor"><path d="M20 12c4 0 8 4 8 9s-4 7-8 7-8-2-8-7 4-9 8-9z"/></svg></span></div>
       <div class="prod-body"><div class="cat">Bikini Pads</div><h4>Invisible Lift Bikini Pads</h4><div class="meta">Silicona Gel · Nude, Clear</div><div class="meta">Tallas: M / L</div><div class="price">$20.00</div><button class="add">Agregar</button></div></div>
 
-    <div class="prod-card"><div class="prod-img"><span class="ph ph-c"><svg viewBox="0 0 40 40" fill="currentColor"><path d="M13 14h14l-1 6h-12z"/><path d="M14 20h12l-1 6h-10z"/></svg></span></div>
+    <div class="prod-card" data-sub="Bikini Pads"><div class="prod-img"><span class="ph ph-c"><svg viewBox="0 0 40 40" fill="currentColor"><path d="M13 14h14l-1 6h-12z"/><path d="M14 20h12l-1 6h-10z"/></svg></span></div>
       <div class="prod-body"><div class="cat">Bikini Pads</div><h4>Double-Sided Glue Pads</h4><div class="meta">Esponja · Bio Adhesive · 11 x 11 cm</div><div class="meta">Color: Nude</div><div class="price">$19.00</div><button class="add">Agregar</button></div></div>
 
-    <div class="prod-card"><div class="prod-img"><span class="tag">Best Seller</span><span class="ph ph-d"><svg viewBox="0 0 40 40" fill="currentColor"><circle cx="20" cy="20" r="11"/><circle cx="20" cy="20" r="4" fill="#fff"/></svg></span></div>
+    <div class="prod-card" data-sub="Boob Tape"><div class="prod-img"><span class="tag">Best Seller</span><span class="ph ph-d"><svg viewBox="0 0 40 40" fill="currentColor"><circle cx="20" cy="20" r="11"/><circle cx="20" cy="20" r="4" fill="#fff"/></svg></span></div>
       <div class="prod-body"><div class="cat">Boob Tape</div><h4>Boob Tape Premium</h4><div class="meta">95% Algodón + 5% Spandex</div><div class="meta">Light Skin / Skin / Brown / Black</div><div class="price">$22.00</div><button class="add">Agregar</button></div></div>
 
-    <div class="prod-card"><div class="prod-img"><span class="ph ph-e"><svg viewBox="0 0 40 40" fill="currentColor"><path d="M12 16c0-3 3-4 8-4s8 1 8 4-3 5-8 5-8-2-8-5z"/></svg></span></div>
+    <div class="prod-card" data-sub="Bras Adhesivos"><div class="prod-img"><span class="ph ph-e"><svg viewBox="0 0 40 40" fill="currentColor"><path d="M12 16c0-3 3-4 8-4s8 1 8 4-3 5-8 5-8-2-8-5z"/></svg></span></div>
       <div class="prod-body"><div class="cat">Bra Adhesivo</div><h4>Silicone Spoon-Cup Bra</h4><div class="meta">Skin / Transparent</div><div class="meta">Tallas: A / B / C</div><div class="price">$27.00</div><button class="add">Agregar</button></div></div>
 
-    <div class="prod-card"><div class="prod-img"><span class="ph ph-f"><svg viewBox="0 0 40 40" fill="currentColor"><path d="M20 11c5 0 9 4 9 9s-4 9-9 9-9-4-9-9 4-9 9-9zm0 4c-3 0-5 2-5 5s2 5 5 5 5-2 5-5-2-5-5-5z"/></svg></span></div>
+    <div class="prod-card" data-sub="Cubre-Pezones"><div class="prod-img"><span class="ph ph-f"><svg viewBox="0 0 40 40" fill="currentColor"><path d="M20 11c5 0 9 4 9 9s-4 9-9 9-9-4-9-9 4-9 9-9zm0 4c-3 0-5 2-5 5s2 5 5 5 5-2 5-5-2-5-5-5z"/></svg></span></div>
       <div class="prod-body"><div class="cat">Cubre-Pezones</div><h4>Liquid Silicone Cover</h4><div class="meta">Skin-Friendly · Skin</div><div class="meta">Talla: 8 x 8 cm</div><div class="price">$15.00</div><button class="add">Agregar</button></div></div>
 
   </div>
@@ -244,7 +247,48 @@ fbq('track', 'PageView');
 <script>
   var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.08});
   document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
-  document.querySelectorAll('.chip').forEach(function(c){c.addEventListener('click',function(){document.querySelector('.chip.active').classList.remove('active');c.classList.add('active');});});
+
+  var PH_CLASSES = ['ph-a','ph-b','ph-c','ph-d','ph-e','ph-f'];
+  var SUB_LABEL = { 'Bras Adhesivos':'Bra Adhesivo', 'Cubre-Pezones':'Cubre-Pezón', 'Bikini Pads':'Bikini Pad', 'Boob Tape':'Boob Tape' };
+  function escHtml(str){ return String(str==null?'':str).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];}); }
+  function money(n){ return '$'+Number(n).toFixed(2); }
+
+  function applyFilter(sub){
+    document.querySelectorAll('#prod-grid .prod-card').forEach(function(card){
+      var match = !sub || card.dataset.sub === sub;
+      card.style.display = match ? '' : 'none';
+    });
+  }
+
+  function wireChips(){
+    document.querySelectorAll('.chip').forEach(function(c){
+      c.addEventListener('click',function(){
+        document.querySelector('.chip.active').classList.remove('active');
+        c.classList.add('active');
+        applyFilter(c.dataset.sub || '');
+      });
+    });
+  }
+  wireChips();
+
+  function renderCard(p, i){
+    var imgHtml = p.imagen_url
+      ? '<img src="'+escHtml(p.imagen_url)+'" alt="'+escHtml(p.nombre)+'" loading="lazy">'
+      : '<span class="ph '+PH_CLASSES[i % PH_CLASSES.length]+'"></span>';
+    var tagHtml = p.agotado ? '<span class="tag tag-agotado">Agotado</span>' : '';
+    var catLabel = SUB_LABEL[p.subcategoria] || p.subcategoria || '';
+    return '<div class="prod-card'+(p.agotado?' agotado':'')+'" data-sub="'+escHtml(p.subcategoria||'')+'">'+
+      '<div class="prod-img">'+tagHtml+imgHtml+'</div>'+
+      '<div class="prod-body"><div class="cat">'+escHtml(catLabel)+'</div><h4>'+escHtml(p.nombre)+'</h4>'+
+      '<div class="price">'+money(p.precio)+'</div><button class="add"'+(p.agotado?' disabled':'')+'>'+(p.agotado?'Agotado':'Agregar')+'</button></div></div>';
+  }
+
+  fetch('/api/products?categoria=esenciales').then(function(r){ return r.json(); }).then(function(json){
+    if (json && json.ok && Array.isArray(json.products) && json.products.length){
+      var grid = document.getElementById('prod-grid');
+      grid.innerHTML = json.products.map(renderCard).join('');
+    }
+  }).catch(function(){ /* si la API falla, se quedan los productos de respaldo */ });
 </script>
 </body>
 </html>

@@ -101,6 +101,8 @@
   .ph-g{background:#E4EEEF;}
   .ph-h{background:#F2E5DE;}
   .prod-img .tag { position:absolute; top:12px; left:12px; z-index:3; background:var(--gold); color:#fff; font-size:.58rem; letter-spacing:.14em; text-transform:uppercase; padding:5px 12px; border-radius:50px; font-weight:600; }
+  .prod-img .tag-agotado { background:#B5564B; }
+  .prod-card.agotado { opacity:.55; filter:grayscale(.2); }
   .prod-img .quick { position:absolute; bottom:0; left:0; right:0; z-index:3; background:rgba(255,253,249,.94); color:var(--ink); text-align:center; padding:11px; font-size:.68rem; letter-spacing:.16em; text-transform:uppercase; font-weight:600; transform:translateY(100%); transition:transform .25s; }
   .prod-card:hover .quick { transform:translateY(0); }
   .prod-card h4 { font-family:'Montserrat',sans-serif; font-weight:500; font-size:.8rem; letter-spacing:.1em; }
@@ -169,27 +171,27 @@ fbq('track', 'PageView');
 </header>
 
 <div class="filters">
-  <span class="chip active">Todos</span>
-  <span class="chip">Bikinis</span>
-  <span class="chip">Enterizos</span>
-  <span class="chip">Cover-Ups</span>
-  <span class="chip">Resort Wear</span>
+  <span class="chip active" data-sub="">Todos</span>
+  <span class="chip" data-sub="Bikinis">Bikinis</span>
+  <span class="chip" data-sub="Enterizos">Enterizos</span>
+  <span class="chip" data-sub="Cover-Ups">Cover-Ups</span>
+  <span class="chip" data-sub="Resort Wear">Resort Wear</span>
 </div>
 
 <section>
-  <div class="prod-grid reveal">
-    <a class="prod-card"><div class="prod-img"><span class="tag">Nuevo</span><img src="assets/images/Producto-1.jpeg" alt="Bikini Riviera Dorado" loading="lazy"><span class="quick">Vista Rápida</span></div><h4>Bikini Riviera Dorado</h4><div class="price">$78.00</div></a>
-    <a class="prod-card"><div class="prod-img"><img src="assets/images/Producto-2.jpeg" alt="Enterizo Océano Perla" loading="lazy"><span class="quick">Vista Rápida</span></div><h4>Enterizo Océano Perla</h4><div class="price">$92.00</div></a>
-    <a class="prod-card"><div class="prod-img"><span class="tag">Popular</span><img src="assets/images/Producto-3.jpeg" alt="Cover-Up Arena Suave" loading="lazy"><span class="quick">Vista Rápida</span></div><h4>Cover-Up Arena Suave</h4><div class="price">$64.00</div></a>
-    <a class="prod-card"><div class="prod-img"><img src="assets/images/Producto-4.jpeg" alt="Bikini Soleil Champagne" loading="lazy"><span class="quick">Vista Rápida</span></div><h4>Bikini Soleil Champagne</h4><div class="price">$84.00</div></a>
-    <a class="prod-card"><div class="prod-img"><img src="assets/images/Producto-5.jpeg" alt="Enterizo Marfil Clásico" loading="lazy"><span class="quick">Vista Rápida</span></div><h4>Enterizo Marfil Clásico</h4><div class="price">$96.00</div></a>
-    <a class="prod-card"><div class="prod-img"><span class="tag">Nuevo</span><span class="ph ph-f"></span><span class="quick">Vista Rápida</span></div><h4>Bikini Caribe Dorado</h4><div class="price">$82.00</div></a>
-    <a class="prod-card"><div class="prod-img"><span class="ph ph-g"></span><span class="quick">Vista Rápida</span></div><h4>Kaftán Brisa de Mar</h4><div class="price">$110.00</div></a>
-    <a class="prod-card"><div class="prod-img"><span class="ph ph-h"></span><span class="quick">Vista Rápida</span></div><h4>Bikini Rosa Palo</h4><div class="price">$76.00</div></a>
-    <a class="prod-card"><div class="prod-img"><span class="ph ph-c"></span><span class="quick">Vista Rápida</span></div><h4>Vestido Playa Mediterráneo</h4><div class="price">$124.00</div></a>
-    <a class="prod-card"><div class="prod-img"><span class="tag">Popular</span><span class="ph ph-b"></span><span class="quick">Vista Rápida</span></div><h4>Enterizo Escote V Ocean</h4><div class="price">$98.00</div></a>
-    <a class="prod-card"><div class="prod-img"><span class="ph ph-a"></span><span class="quick">Vista Rápida</span></div><h4>Bikini Triángulo Soleil</h4><div class="price">$74.00</div></a>
-    <a class="prod-card"><div class="prod-img"><span class="ph ph-d"></span><span class="quick">Vista Rápida</span></div><h4>Pareo Champagne Silk</h4><div class="price">$58.00</div></a>
+  <div class="prod-grid reveal" id="prod-grid">
+    <a class="prod-card" data-sub="Bikinis"><div class="prod-img"><span class="tag">Nuevo</span><img src="assets/images/Producto-1.jpeg" alt="Bikini Riviera Dorado" loading="lazy"><span class="quick">Vista Rápida</span></div><h4>Bikini Riviera Dorado</h4><div class="price">$78.00</div></a>
+    <a class="prod-card" data-sub="Enterizos"><div class="prod-img"><img src="assets/images/Producto-2.jpeg" alt="Enterizo Océano Perla" loading="lazy"><span class="quick">Vista Rápida</span></div><h4>Enterizo Océano Perla</h4><div class="price">$92.00</div></a>
+    <a class="prod-card" data-sub="Cover-Ups"><div class="prod-img"><span class="tag">Popular</span><img src="assets/images/Producto-3.jpeg" alt="Cover-Up Arena Suave" loading="lazy"><span class="quick">Vista Rápida</span></div><h4>Cover-Up Arena Suave</h4><div class="price">$64.00</div></a>
+    <a class="prod-card" data-sub="Bikinis"><div class="prod-img"><img src="assets/images/Producto-4.jpeg" alt="Bikini Soleil Champagne" loading="lazy"><span class="quick">Vista Rápida</span></div><h4>Bikini Soleil Champagne</h4><div class="price">$84.00</div></a>
+    <a class="prod-card" data-sub="Enterizos"><div class="prod-img"><img src="assets/images/Producto-5.jpeg" alt="Enterizo Marfil Clásico" loading="lazy"><span class="quick">Vista Rápida</span></div><h4>Enterizo Marfil Clásico</h4><div class="price">$96.00</div></a>
+    <a class="prod-card" data-sub="Bikinis"><div class="prod-img"><span class="tag">Nuevo</span><span class="ph ph-f"></span><span class="quick">Vista Rápida</span></div><h4>Bikini Caribe Dorado</h4><div class="price">$82.00</div></a>
+    <a class="prod-card" data-sub="Resort Wear"><div class="prod-img"><span class="ph ph-g"></span><span class="quick">Vista Rápida</span></div><h4>Kaftán Brisa de Mar</h4><div class="price">$110.00</div></a>
+    <a class="prod-card" data-sub="Bikinis"><div class="prod-img"><span class="ph ph-h"></span><span class="quick">Vista Rápida</span></div><h4>Bikini Rosa Palo</h4><div class="price">$76.00</div></a>
+    <a class="prod-card" data-sub="Resort Wear"><div class="prod-img"><span class="ph ph-c"></span><span class="quick">Vista Rápida</span></div><h4>Vestido Playa Mediterráneo</h4><div class="price">$124.00</div></a>
+    <a class="prod-card" data-sub="Enterizos"><div class="prod-img"><span class="tag">Popular</span><span class="ph ph-b"></span><span class="quick">Vista Rápida</span></div><h4>Enterizo Escote V Ocean</h4><div class="price">$98.00</div></a>
+    <a class="prod-card" data-sub="Bikinis"><div class="prod-img"><span class="ph ph-a"></span><span class="quick">Vista Rápida</span></div><h4>Bikini Triángulo Soleil</h4><div class="price">$74.00</div></a>
+    <a class="prod-card" data-sub="Cover-Ups"><div class="prod-img"><span class="ph ph-d"></span><span class="quick">Vista Rápida</span></div><h4>Pareo Champagne Silk</h4><div class="price">$58.00</div></a>
   </div>
 </section>
 
@@ -208,7 +210,45 @@ fbq('track', 'PageView');
 <script>
   var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.1});
   document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
-  document.querySelectorAll('.chip').forEach(function(c){c.addEventListener('click',function(){document.querySelector('.chip.active').classList.remove('active');c.classList.add('active');});});
+
+  var PH_CLASSES = ['ph-a','ph-b','ph-c','ph-d','ph-e','ph-f','ph-g','ph-h'];
+  function escHtml(str){ return String(str==null?'':str).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];}); }
+  function money(n){ return '$'+Number(n).toFixed(2); }
+
+  function applyFilter(sub){
+    document.querySelectorAll('#prod-grid .prod-card').forEach(function(card){
+      var match = !sub || card.dataset.sub === sub;
+      card.style.display = match ? '' : 'none';
+    });
+  }
+
+  function wireChips(){
+    document.querySelectorAll('.chip').forEach(function(c){
+      c.addEventListener('click',function(){
+        document.querySelector('.chip.active').classList.remove('active');
+        c.classList.add('active');
+        applyFilter(c.dataset.sub || '');
+      });
+    });
+  }
+  wireChips();
+
+  function renderCard(p, i){
+    var imgHtml = p.imagen_url
+      ? '<img src="'+escHtml(p.imagen_url)+'" alt="'+escHtml(p.nombre)+'" loading="lazy">'
+      : '<span class="ph '+PH_CLASSES[i % PH_CLASSES.length]+'"></span>';
+    var tagHtml = p.agotado ? '<span class="tag tag-agotado">Agotado</span>' : '';
+    return '<a class="prod-card'+(p.agotado?' agotado':'')+'" data-sub="'+escHtml(p.subcategoria||'')+'">'+
+      '<div class="prod-img">'+tagHtml+imgHtml+'<span class="quick">Vista Rápida</span></div>'+
+      '<h4>'+escHtml(p.nombre)+'</h4><div class="price">'+money(p.precio)+'</div></a>';
+  }
+
+  fetch('/api/products?categoria=trajes').then(function(r){ return r.json(); }).then(function(json){
+    if (json && json.ok && Array.isArray(json.products) && json.products.length){
+      var grid = document.getElementById('prod-grid');
+      grid.innerHTML = json.products.map(renderCard).join('');
+    }
+  }).catch(function(){ /* si la API falla, se quedan los productos de respaldo */ });
 </script>
 </body>
 </html>
