@@ -18,6 +18,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/store.css">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -123,10 +124,16 @@
   .hero {
     position: relative; min-height: 78vh; display: flex; align-items: center; justify-content: center;
     text-align: center; overflow: hidden;
-    background:
-      radial-gradient(circle at 20% 20%, rgba(175,214,222,.35), transparent 45%),
-      radial-gradient(circle at 80% 30%, rgba(228,206,147,.32), transparent 45%),
-      linear-gradient(135deg, var(--rosa-bg) 0%, var(--rosa-soft) 45%, var(--arena) 100%);
+    /* Portada: si existe Imagen-portada-principal.jpeg se muestra encima;
+       si no, queda visible la imagen de respaldo (capa inferior). */
+    background-color: var(--rosa-bg);
+    background-image:
+      radial-gradient(ellipse at center, rgba(252,238,241,.88) 0%, rgba(248,223,229,.74) 42%, rgba(231,183,193,.5) 100%),
+      url('assets/images/Imagen-portada-principal.jpeg'),
+      url('assets/images/Imagen-portada-trajes-derecho.jpeg');
+    background-size: cover, cover, cover;
+    background-position: center, center, center 28%;
+    background-repeat: no-repeat;
     padding: 90px 6%;
   }
   .hero::after {
@@ -188,6 +195,9 @@
   .cat-ph.c3 { background: linear-gradient(160deg, var(--gold-soft) 0%, var(--arena) 100%); }
   .cat-ph.c4 { background: linear-gradient(160deg, var(--arena-deep) 0%, var(--rosa) 100%); }
   .cat-ph.c5 { background: linear-gradient(160deg, var(--rosa) 0%, var(--ocean) 100%); }
+  .cat-ph img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform .6s; }
+  .cat-card:hover .cat-ph img { transform: scale(1.05); }
+  .cat-ph .cat-crown { position: absolute; top: 38%; left: 0; right: 0; text-align: center; font-size: 3.2rem; color: rgba(255,255,255,.75); }
   .cat-ph::after {
     content: ''; position: absolute; inset: 0;
     background: linear-gradient(to top, rgba(58,46,42,.45), transparent 55%);
@@ -212,12 +222,9 @@
     max-width: 1200px; margin: 0 auto; border-radius: 22px; overflow: hidden;
     box-shadow: 0 20px 50px rgba(58,46,42,.1);
   }
-  .split-media { min-height: 460px; position: relative;
+  .split-media { min-height: 460px; position: relative; overflow: hidden;
     background: linear-gradient(150deg, var(--gold-soft), var(--rosa), var(--ocean)); }
-  .split-media::after {
-    content: 'SOLEIL SWIM'; position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
-    font-family: 'Playfair Display', serif; font-size: 2rem; letter-spacing: .3em; color: rgba(255,255,255,.55);
-  }
+  .split-media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
   .split-body {
     background: var(--marfil); padding: 60px 52px; display: flex; flex-direction: column; justify-content: center;
   }
@@ -288,8 +295,9 @@
   /* ── INSTAGRAM ── */
   .ig-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px; max-width: 1200px; margin: 40px auto 0; }
   .ig-cell { aspect-ratio: 1; border-radius: 10px; overflow: hidden; position: relative; cursor: pointer; }
-  .ig-cell .ph { position: absolute; inset: 0; transition: transform .3s; }
-  .ig-cell:hover .ph { transform: scale(1.08); }
+  .ig-cell .ph, .ig-cell img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform .3s; }
+  .ig-cell:hover .ph, .ig-cell:hover img { transform: scale(1.08); }
+  .prod-card { display: block; }
   .ig-cell::after { content: '⊕'; position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 1.4rem; opacity: 0; transition: opacity .25s; background: rgba(58,46,42,.25); }
   .ig-cell:hover::after { opacity: 1; }
 
@@ -333,10 +341,8 @@
   .wa svg { width: 30px; height: 30px; fill: #fff; }
 
   /* ── MOBILE MENU ── */
-  .hamburger { display: none; }
   @media (max-width: 900px) {
     .nav-menu { display: none; }
-    .hamburger { display: flex; }
     .foot-grid { grid-template-columns: 1fr 1fr; }
     .split { grid-template-columns: 1fr; }
     .split-media { min-height: 300px; }
@@ -378,11 +384,8 @@ fbq('track', 'PageView');
 <nav>
   <div class="nav-top">
     <div class="nav-icons">
-      <a class="nav-icon hamburger" onclick="toggleMenu()" aria-label="Menú">
+      <a class="nav-icon hamburger" href="#" data-menu-toggle aria-label="Menú" aria-expanded="false">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><line x1="3" y1="7" x2="21" y2="7"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="17" x2="21" y2="17"/></svg>
-      </a>
-      <a class="nav-icon" href="#" aria-label="Buscar">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
       </a>
     </div>
     <a class="brand" href="index.html">
@@ -391,11 +394,8 @@ fbq('track', 'PageView');
       <span class="sub">by Magda</span>
     </a>
     <div class="nav-icons right">
-      <a class="nav-icon" href="#" aria-label="Cuenta">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>
-      </a>
-      <a class="nav-icon" href="#" aria-label="Carrito">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 7h12l-1 13H7L6 7z"/><path d="M9 7a3 3 0 0 1 6 0"/></svg>
+      <a class="nav-icon cart-btn" href="#" data-cart-open aria-label="Abrir carrito">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 7h12l-1 13H7L6 7z"/><path d="M9 7a3 3 0 0 1 6 0"/></svg><span class="cart-count" data-cart-count hidden>0</span>
       </a>
     </div>
   </div>
@@ -452,18 +452,18 @@ fbq('track', 'PageView');
     <p>Desde el bikini perfecto hasta el resort wear que te acompaña del mar a la mesa.</p>
   </div>
   <div class="cat-grid reveal">
-    <a class="cat-card" href="swim.html"><span class="cat-ph c1"></span><span class="cat-label"><span>Bikinis</span><small>Explorar</small></span></a>
-    <a class="cat-card" href="swim.html"><span class="cat-ph c2"></span><span class="cat-label"><span>Enterizos</span><small>Explorar</small></span></a>
-    <a class="cat-card" href="swim.html"><span class="cat-ph c3"></span><span class="cat-label"><span>Cover-Ups</span><small>Explorar</small></span></a>
-    <a class="cat-card" href="swim.html"><span class="cat-ph c4"></span><span class="cat-label"><span>Resort Wear</span><small>Explorar</small></span></a>
-    <a class="cat-card" href="invisible.html"><span class="cat-ph c5"></span><span class="cat-label"><span>Esenciales Invisibles</span><small>Explorar</small></span></a>
+    <a class="cat-card" href="swim.html"><span class="cat-ph c1"><img src="assets/images/Producto-3.jpeg" alt="" loading="lazy"></span><span class="cat-label"><span>Bikinis</span><small>Explorar</small></span></a>
+    <a class="cat-card" href="swim.html"><span class="cat-ph c2"><img src="assets/images/Imagen-portada-trajes-izquierdo.jpeg" alt="" loading="lazy" style="object-position:center 25%"></span><span class="cat-label"><span>Enterizos</span><small>Explorar</small></span></a>
+    <a class="cat-card" href="swim.html"><span class="cat-ph c3"><img src="assets/images/Producto-4.jpeg" alt="" loading="lazy" style="object-position:center 45%"></span><span class="cat-label"><span>Cover-Ups</span><small>Explorar</small></span></a>
+    <a class="cat-card" href="swim.html"><span class="cat-ph c4"><img src="assets/images/Imagen-portada-trajes-derecho.jpeg" alt="" loading="lazy" style="object-position:center 30%"></span><span class="cat-label"><span>Resort Wear</span><small>Explorar</small></span></a>
+    <a class="cat-card" href="invisible.html"><span class="cat-ph c5"><span class="cat-crown">♛</span></span><span class="cat-label"><span>Esenciales Invisibles</span><small>Explorar</small></span></a>
   </div>
 </section>
 
 <!-- FEATURED SPLIT -->
-<section style="padding-top:0;">
+<section style="padding-top:0;" id="collections">
   <div class="split reveal">
-    <div class="split-media"></div>
+    <div class="split-media"><img src="assets/images/Producto-1.jpeg" alt="Bikini Riviera Rouge flotando en el agua turquesa" loading="lazy"></div>
     <div class="split-body">
       <p class="eyebrow">The Soleil Swim Edit</p>
       <h2>Elegancia europea, alma caribeña</h2>
@@ -480,17 +480,17 @@ fbq('track', 'PageView');
     <h2>The Vacation Edit</h2>
     <p>Piezas seleccionadas para tu próxima escapada bajo el sol.</p>
   </div>
-  <div class="prod-grid reveal" id="new-grid">
-    <a class="prod-card" href="swim.html"><div class="prod-img"><span class="tag">Nuevo</span><span class="ph ph-a"></span><span class="quick">Vista Rápida</span></div><h4>Bikini Riviera Dorado</h4><div class="price">$78.00</div></a>
-    <a class="prod-card" href="swim.html"><div class="prod-img"><span class="ph ph-b"></span><span class="quick">Vista Rápida</span></div><h4>Enterizo Océano Perla</h4><div class="price">$92.00</div></a>
-    <a class="prod-card" href="swim.html"><div class="prod-img"><span class="tag">Popular</span><span class="ph ph-c"></span><span class="quick">Vista Rápida</span></div><h4>Cover-Up Arena Suave</h4><div class="price">$64.00</div></a>
-    <a class="prod-card" href="swim.html"><div class="prod-img"><span class="ph ph-d"></span><span class="quick">Vista Rápida</span></div><h4>Bikini Soleil Champagne</h4><div class="price">$84.00</div></a>
+  <div class="prod-grid reveal" id="new-grid" aria-busy="true">
+    <div class="prod-card mms-skel"><div class="prod-img"></div><div class="mms-skel-line"></div><div class="mms-skel-line short"></div></div>
+    <div class="prod-card mms-skel"><div class="prod-img"></div><div class="mms-skel-line"></div><div class="mms-skel-line short"></div></div>
+    <div class="prod-card mms-skel"><div class="prod-img"></div><div class="mms-skel-line"></div><div class="mms-skel-line short"></div></div>
+    <div class="prod-card mms-skel"><div class="prod-img"></div><div class="mms-skel-line"></div><div class="mms-skel-line short"></div></div>
   </div>
   <div style="text-align:center; margin-top:44px;" class="reveal"><a href="swim.html" class="btn btn-outline">Ver Todo</a></div>
 </section>
 
 <!-- BRAND STORY -->
-<section class="story">
+<section class="story" id="story">
   <div class="sec-head reveal" style="margin-bottom:20px;">
     <p class="eyebrow">Nuestra Historia</p>
   </div>
@@ -510,11 +510,11 @@ fbq('track', 'PageView');
     <h2>Soporte Invisible, Confianza Visible</h2>
     <p>Bras adhesivos, cubre-pezones y más — el secreto perfecto bajo cada look.</p>
   </div>
-  <div class="prod-grid reveal" id="essentials-grid">
-    <a class="prod-card" href="invisible.html"><div class="prod-img"><span class="ph ph-e"></span><span class="quick">Vista Rápida</span></div><h4>Bra Adhesivo de Silicona</h4><div class="price">$28.00</div></a>
-    <a class="prod-card" href="invisible.html"><div class="prod-img"><span class="tag">Best Seller</span><span class="ph ph-f"></span><span class="quick">Vista Rápida</span></div><h4>Bra Invisible Mango</h4><div class="price">$24.00</div></a>
-    <a class="prod-card" href="invisible.html"><div class="prod-img"><span class="ph ph-a"></span><span class="quick">Vista Rápida</span></div><h4>Cubre-Pezones de Silicona</h4><div class="price">$18.00</div></a>
-    <a class="prod-card" href="invisible.html"><div class="prod-img"><span class="ph ph-b"></span><span class="quick">Vista Rápida</span></div><h4>Boob Tape Premium</h4><div class="price">$22.00</div></a>
+  <div class="prod-grid reveal" id="essentials-grid" aria-busy="true">
+    <div class="prod-card mms-skel"><div class="prod-img"></div><div class="mms-skel-line"></div><div class="mms-skel-line short"></div></div>
+    <div class="prod-card mms-skel"><div class="prod-img"></div><div class="mms-skel-line"></div><div class="mms-skel-line short"></div></div>
+    <div class="prod-card mms-skel"><div class="prod-img"></div><div class="mms-skel-line"></div><div class="mms-skel-line short"></div></div>
+    <div class="prod-card mms-skel"><div class="prod-img"></div><div class="mms-skel-line"></div><div class="mms-skel-line short"></div></div>
   </div>
   <div style="text-align:center; margin-top:44px;" class="reveal"><a href="invisible.html" class="btn btn-outline">Ver el Catálogo Completo</a></div>
 </section>
@@ -539,12 +539,12 @@ fbq('track', 'PageView');
     <h2>Síguenos en Instagram</h2>
   </div>
   <div class="ig-grid reveal">
-    <a class="ig-cell"><span class="ph ph-a"></span></a>
-    <a class="ig-cell"><span class="ph ph-b"></span></a>
-    <a class="ig-cell"><span class="ph ph-c"></span></a>
-    <a class="ig-cell"><span class="ph ph-d"></span></a>
-    <a class="ig-cell"><span class="ph ph-e"></span></a>
-    <a class="ig-cell"><span class="ph ph-f"></span></a>
+    <a class="ig-cell" href="https://instagram.com/" target="_blank" rel="noopener" aria-label="Ver en Instagram"><img src="assets/images/Producto-1.jpeg" alt="" loading="lazy" style="object-position:center 30%"></a>
+    <a class="ig-cell" href="https://instagram.com/" target="_blank" rel="noopener" aria-label="Ver en Instagram"><img src="assets/images/Producto-3.jpeg" alt="" loading="lazy" style="object-position:center 30%"></a>
+    <a class="ig-cell" href="https://instagram.com/" target="_blank" rel="noopener" aria-label="Ver en Instagram"><img src="assets/images/Imagen-portada-trajes-izquierdo.jpeg" alt="" loading="lazy" style="object-position:center 30%"></a>
+    <a class="ig-cell" href="https://instagram.com/" target="_blank" rel="noopener" aria-label="Ver en Instagram"><img src="assets/images/Producto-4.jpeg" alt="" loading="lazy" style="object-position:center 30%"></a>
+    <a class="ig-cell" href="https://instagram.com/" target="_blank" rel="noopener" aria-label="Ver en Instagram"><img src="assets/images/Imagen-portada-trajes-derecho.jpeg" alt="" loading="lazy" style="object-position:center 30%"></a>
+    <a class="ig-cell" href="https://instagram.com/" target="_blank" rel="noopener" aria-label="Ver en Instagram"><img src="assets/images/Producto-2.jpeg" alt="" loading="lazy" style="object-position:center 30%"></a>
   </div>
 </section>
 
@@ -570,9 +570,9 @@ fbq('track', 'PageView');
       <div class="sub">by Magda</div>
       <p>Boutique de lujo donde la elegancia europea se encuentra con el alma caribeña. Inspirado por el sol, la cultura y el arte de vivir bien.</p>
       <div class="foot-social">
-        <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
-        <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M14 9h3V6h-3c-2 0-3 1-3 3v2H9v3h2v7h3v-7h2.5l.5-3H14v-1.5c0-.6.4-1 1-1z"/></svg></a>
-        <a href="#" aria-label="TikTok"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 3c.3 2 1.6 3.4 3.5 3.7v3c-1.3 0-2.5-.4-3.5-1v6.3c0 3.3-2.5 5.7-5.6 5.7C7 20.7 5 18.6 5 15.8c0-2.7 2-4.9 4.8-4.9.4 0 .8 0 1.2.1v3.1c-.4-.1-.8-.2-1.2-.2-1 0-1.8.8-1.8 1.9s.8 1.9 1.9 1.9 2-.8 2-2.1V3h3z"/></svg></a>
+        <a href="https://instagram.com/" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
+        <a href="https://facebook.com/" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M14 9h3V6h-3c-2 0-3 1-3 3v2H9v3h2v7h3v-7h2.5l.5-3H14v-1.5c0-.6.4-1 1-1z"/></svg></a>
+        <a href="https://tiktok.com/" target="_blank" rel="noopener" aria-label="TikTok"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 3c.3 2 1.6 3.4 3.5 3.7v3c-1.3 0-2.5-.4-3.5-1v6.3c0 3.3-2.5 5.7-5.6 5.7C7 20.7 5 18.6 5 15.8c0-2.7 2-4.9 4.8-4.9.4 0 .8 0 1.2.1v3.1c-.4-.1-.8-.2-1.2-.2-1 0-1.8.8-1.8 1.9s.8 1.9 1.9 1.9 2-.8 2-2.1V3h3z"/></svg></a>
       </div>
     </div>
     <div class="foot-col">
@@ -584,16 +584,16 @@ fbq('track', 'PageView');
     </div>
     <div class="foot-col">
       <h4>Atención al Cliente</h4>
-      <a href="#">Contáctanos</a>
-      <a href="#">Envíos y Devoluciones</a>
-      <a href="#">Guía de Tallas</a>
-      <a href="#">Preguntas Frecuentes</a>
+      <a href="https://wa.me/17866670539" target="_blank" rel="noopener">Contáctanos</a>
+      <a href="info.html#envios">Envíos y Devoluciones</a>
+      <a href="info.html#tallas">Guía de Tallas</a>
+      <a href="info.html#faq">Preguntas Frecuentes</a>
     </div>
     <div class="foot-col">
       <h4>La Maison</h4>
-      <a href="#">Nuestra Historia</a>
-      <a href="#">Política de Privacidad</a>
-      <a href="#">Términos y Condiciones</a>
+      <a href="#story">Nuestra Historia</a>
+      <a href="info.html#privacidad">Política de Privacidad</a>
+      <a href="info.html#terminos">Términos y Condiciones</a>
       <a href="#contact">Newsletter</a>
     </div>
   </div>
@@ -605,12 +605,8 @@ fbq('track', 'PageView');
   <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.5 15.2L2 22l4.9-1.5A10 10 0 1 0 12 2zm5.8 14.2c-.2.7-1.4 1.3-2 1.4-.5.1-1.1.1-1.8-.1-.4-.1-1-.3-1.6-.6-2.8-1.2-4.6-4-4.8-4.2-.1-.2-1.1-1.4-1.1-2.7s.7-1.9.9-2.2c.2-.2.4-.3.6-.3h.5c.2 0 .4 0 .6.5l.7 1.7c.1.2.1.4 0 .5l-.3.5c-.1.2-.3.3-.1.6.1.2.6 1 1.3 1.6.9.8 1.6 1 1.9 1.2.2.1.4.1.5-.1l.6-.7c.2-.2.3-.2.6-.1l1.6.8c.3.1.4.2.5.3.1.2.1.6-.1 1.2z"/></svg>
 </a>
 
+<script src="assets/js/store.js"></script>
 <script>
-  function toggleMenu(){
-    var m = document.getElementById('navMenu');
-    m.style.display = (m.style.display === 'flex') ? 'none' : 'flex';
-    m.style.flexDirection = 'column';
-  }
   // Scroll reveal
   var io = new IntersectionObserver(function(entries){
     entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
@@ -663,42 +659,33 @@ fbq('track', 'PageView');
     });
   }
 
-  // Productos destacados desde la API (con fallback a los placeholders de arriba)
+  // Productos destacados (Supabase o catálogo de respaldo de assets/js/store.js)
   (function () {
-    var PH_CLASSES = ['ph-a','ph-b','ph-c','ph-d','ph-e','ph-f'];
-    function escHtml(str){ return String(str==null?'':str).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];}); }
-    function money(n){ return '$'+Number(n).toFixed(2); }
+    var esc = MMS.esc, money = MMS.money;
 
-    function renderCard(p, i, href){
-      var imgHtml = p.imagen_url
-        ? '<img src="'+escHtml(p.imagen_url)+'" alt="'+escHtml(p.nombre)+'" loading="lazy">'
-        : '<span class="ph '+PH_CLASSES[i % PH_CLASSES.length]+'"></span>';
-      var tagHtml = p.agotado ? '<span class="tag tag-agotado">Agotado</span>' : '';
-      return '<a class="prod-card'+(p.agotado?' agotado':'')+'" href="'+href+'">'+
-        '<div class="prod-img">'+tagHtml+imgHtml+'<span class="quick">Vista Rápida</span></div>'+
-        '<h4>'+escHtml(p.nombre)+'</h4><div class="price">'+money(p.precio)+'</div></a>';
+    function renderCard(p){
+      return '<a class="prod-card'+(p.agotado?' agotado':'')+'" href="'+MMS.productUrl(p)+'">'+
+        '<div class="prod-img">'+MMS.tagHtml(p)+MMS.imgHtml(p)+'<span class="quick">Ver producto</span></div>'+
+        '<h4>'+esc(p.nombre)+'</h4><div class="price">'+money(p.precio)+'</div></a>';
     }
 
     function pickFeatured(products, categoria, limit){
-      var pool = products.filter(function(p){ return p.categoria === categoria; });
+      var pool = products.filter(function(p){ return p.categoria === categoria && !p.agotado; });
       var destacados = pool.filter(function(p){ return p.destacado; });
       var resto = pool.filter(function(p){ return !p.destacado; });
       return destacados.concat(resto).slice(0, limit);
     }
 
-    fetch('/api/products').then(function(r){ return r.json(); }).then(function(json){
-      if (!json || !json.ok || !Array.isArray(json.products) || !json.products.length) return;
+    function fill(id, list){
+      var grid = document.getElementById(id);
+      grid.innerHTML = list.map(renderCard).join('');
+      grid.removeAttribute('aria-busy');
+    }
 
-      var trajes = pickFeatured(json.products, 'trajes', 4);
-      if (trajes.length) {
-        document.getElementById('new-grid').innerHTML = trajes.map(function(p,i){ return renderCard(p, i, 'swim.html'); }).join('');
-      }
-
-      var esenciales = pickFeatured(json.products, 'esenciales', 4);
-      if (esenciales.length) {
-        document.getElementById('essentials-grid').innerHTML = esenciales.map(function(p,i){ return renderCard(p, i, 'invisible.html'); }).join('');
-      }
-    }).catch(function(){ /* si la API falla, se quedan los productos de respaldo */ });
+    MMS.loadProducts().then(function(products){
+      fill('new-grid', pickFeatured(products, 'trajes', 4));
+      fill('essentials-grid', pickFeatured(products, 'esenciales', 4));
+    });
   })();
 </script>
 </body>

@@ -28,6 +28,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800&family=Cormorant+Garamond:ital,wght@0,400;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/store.css">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   :root {
@@ -107,7 +108,13 @@
   .prod-body .meta { font-size:.74rem; color:var(--ink-soft); margin-bottom:3px; }
   .prod-body .price { color:var(--gold); font-weight:500; font-size:.92rem; margin-top:10px; letter-spacing:.05em; }
   .prod-body .add { margin-top:14px; width:100%; border:1px solid var(--line); background:transparent; color:var(--ink); padding:11px; border-radius:50px; font-size:.66rem; letter-spacing:.18em; text-transform:uppercase; font-weight:500; cursor:pointer; transition:all .2s; }
-  .prod-body .add:hover { border-color:var(--ink); background:var(--ink); color:var(--pearl); }
+  .prod-body .add:hover, .prod-card:hover .add { border-color:var(--ink); background:var(--ink); color:var(--pearl); }
+  .prod-card { display:block; }
+  .prod-body .add { display:block; text-align:center; }
+  .prod-card.agotado .add { border-style:dashed; }
+  .empty-filter { text-align:center; font-family:'Cormorant Garamond',serif; font-style:italic; font-size:1.2rem; color:var(--ink-soft); padding:20px 0 10px; }
+  .empty-filter a { color:var(--gold); text-decoration:underline; }
+  .mms-skel .prod-img { aspect-ratio:1; }
 
   .cta { text-align:center; padding:60px 6% 84px; }
   .btn { display:inline-block; padding:15px 42px; border-radius:50px; font-size:.78rem; letter-spacing:.16em; text-transform:uppercase; font-weight:600; cursor:pointer; transition:transform .2s, box-shadow .2s; background:linear-gradient(135deg,var(--gold),var(--gold-soft)); color:#fff; box-shadow:0 10px 26px rgba(201,168,76,.34); }
@@ -147,12 +154,11 @@ fbq('track', 'PageView');
 <nav>
   <div class="nav-top">
     <div class="nav-icons">
-      <a class="nav-icon" href="#" aria-label="Buscar"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></a>
+      <a class="nav-icon hamburger" href="#" data-menu-toggle aria-label="Menú" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><line x1="3" y1="7" x2="21" y2="7"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="17" x2="21" y2="17"/></svg></a>
     </div>
     <a class="brand" href="index.html"><span class="crown">♛</span><span class="name">Madam Maison du Soleil</span><span class="sub">by Magda</span></a>
     <div class="nav-icons right">
-      <a class="nav-icon" href="#" aria-label="Cuenta"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg></a>
-      <a class="nav-icon" href="#" aria-label="Carrito"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 7h12l-1 13H7L6 7z"/><path d="M9 7a3 3 0 0 1 6 0"/></svg></a>
+      <a class="nav-icon cart-btn" href="#" data-cart-open aria-label="Abrir carrito"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 7h12l-1 13H7L6 7z"/><path d="M9 7a3 3 0 0 1 6 0"/></svg><span class="cart-count" data-cart-count hidden>0</span></a>
     </div>
   </div>
   <ul class="nav-menu">
@@ -187,45 +193,13 @@ fbq('track', 'PageView');
 </div>
 
 <section>
-  <div class="prod-grid reveal" id="prod-grid">
-
-    <div class="prod-card" data-sub="Bras Adhesivos"><div class="prod-img"><span class="tag">Best Seller</span><span class="ph ph-a"><svg viewBox="0 0 40 40" fill="currentColor"><path d="M12 14c-3 0-6 2-6 6s3 6 6 6 8-4 8-8-5-4-8-4zm16 0c-3 0-8 0-8 4s5 8 8 8 6-2 6-6-3-6-6-6z"/></svg></span></div>
-      <div class="prod-body"><div class="cat">Bra Adhesivo</div><h4>Thin Silicone Bra</h4><div class="meta">Front Clasp · Color: Skin / Transparent</div><div class="meta">Tallas: A / B / C / D</div><div class="price">$28.00</div><button class="add">Agregar</button></div></div>
-
-    <div class="prod-card" data-sub="Bras Adhesivos"><div class="prod-img"><span class="ph ph-b"><svg viewBox="0 0 40 40" fill="currentColor"><path d="M12 14c-3 0-6 2-6 6s3 6 6 6 8-4 8-8-5-4-8-4zm16 0c-3 0-8 0-8 4s5 8 8 8 6-2 6-6-3-6-6-6z"/></svg></span></div>
-      <div class="prod-body"><div class="cat">Bra Adhesivo</div><h4>Strong Self-Adhesive Bra</h4><div class="meta">Reutilizable · Color: Skin / Brown</div><div class="meta">Tallas: A / B / C / D / E / F</div><div class="price">$30.00</div><button class="add">Agregar</button></div></div>
-
-    <div class="prod-card" data-sub="Bras Adhesivos"><div class="prod-img"><span class="tag">Popular</span><span class="ph ph-c"><svg viewBox="0 0 40 40" fill="currentColor"><path d="M10 22c0-5 4-8 10-8s10 3 10 8-4 6-10 6-10-1-10-6z"/></svg></span></div>
-      <div class="prod-body"><div class="cat">Bra Adhesivo</div><h4>Invisible Mango Bra</h4><div class="meta">Esponja · Bio Adhesive</div><div class="meta">Tallas: A / B / C / D · Nude, Black</div><div class="price">$24.00</div><button class="add">Agregar</button></div></div>
-
-    <div class="prod-card" data-sub="Bras Adhesivos"><div class="prod-img"><span class="ph ph-d"><svg viewBox="0 0 40 40" fill="currentColor"><path d="M20 12l8 14H12z"/></svg></span></div>
-      <div class="prod-body"><div class="cat">Bra Adhesivo</div><h4>Side-Wing U-Shape Bra</h4><div class="meta">Seamless &amp; Secure Fit</div><div class="meta">Tallas: A / B / C / D · Nude, Black</div><div class="price">$26.00</div><button class="add">Agregar</button></div></div>
-
-    <div class="prod-card" data-sub="Cubre-Pezones"><div class="prod-img"><span class="tag">Nuevo</span><span class="ph ph-e"><svg viewBox="0 0 40 40" fill="currentColor"><circle cx="20" cy="20" r="10"/></svg></span></div>
-      <div class="prod-body"><div class="cat">Cubre-Pezones</div><h4>Matt Silicone Nipple Cover</h4><div class="meta">100% Silicona · Skin / Brown</div><div class="meta">Tallas: 7 / 8 / 10 / 13 / 15 cm</div><div class="price">$18.00</div><button class="add">Agregar</button></div></div>
-
-    <div class="prod-card" data-sub="Cubre-Pezones"><div class="prod-img"><span class="ph ph-f"><svg viewBox="0 0 40 40" fill="currentColor"><path d="M20 10l3 5 5-1-2 5 4 4-5 1-1 5-4-3-4 3-1-5-5-1 4-4-2-5 5 1z"/></svg></span></div>
-      <div class="prod-body"><div class="cat">Cubre-Pezones</div><h4>Invisible Comfort Flower</h4><div class="meta">Silicona + Adhesivo · Nude, Pink</div><div class="meta">Tallas: 6 – 14 cm</div><div class="price">$16.00</div><button class="add">Agregar</button></div></div>
-
-    <div class="prod-card" data-sub="Cubre-Pezones"><div class="prod-img"><span class="ph ph-a"><svg viewBox="0 0 40 40" fill="currentColor"><path d="M20 12l7 12H13z"/></svg></span></div>
-      <div class="prod-body"><div class="cat">Cubre-Pezones</div><h4>Solid Triangle Covers</h4><div class="meta">Silicona Gel · 8 x 10.5 cm</div><div class="meta">Nude, Coffee, Brown</div><div class="price">$17.00</div><button class="add">Agregar</button></div></div>
-
-    <div class="prod-card" data-sub="Bikini Pads"><div class="prod-img"><span class="ph ph-b"><svg viewBox="0 0 40 40" fill="currentColor"><path d="M20 12c4 0 8 4 8 9s-4 7-8 7-8-2-8-7 4-9 8-9z"/></svg></span></div>
-      <div class="prod-body"><div class="cat">Bikini Pads</div><h4>Invisible Lift Bikini Pads</h4><div class="meta">Silicona Gel · Nude, Clear</div><div class="meta">Tallas: M / L</div><div class="price">$20.00</div><button class="add">Agregar</button></div></div>
-
-    <div class="prod-card" data-sub="Bikini Pads"><div class="prod-img"><span class="ph ph-c"><svg viewBox="0 0 40 40" fill="currentColor"><path d="M13 14h14l-1 6h-12z"/><path d="M14 20h12l-1 6h-10z"/></svg></span></div>
-      <div class="prod-body"><div class="cat">Bikini Pads</div><h4>Double-Sided Glue Pads</h4><div class="meta">Esponja · Bio Adhesive · 11 x 11 cm</div><div class="meta">Color: Nude</div><div class="price">$19.00</div><button class="add">Agregar</button></div></div>
-
-    <div class="prod-card" data-sub="Boob Tape"><div class="prod-img"><span class="tag">Best Seller</span><span class="ph ph-d"><svg viewBox="0 0 40 40" fill="currentColor"><circle cx="20" cy="20" r="11"/><circle cx="20" cy="20" r="4" fill="#fff"/></svg></span></div>
-      <div class="prod-body"><div class="cat">Boob Tape</div><h4>Boob Tape Premium</h4><div class="meta">95% Algodón + 5% Spandex</div><div class="meta">Light Skin / Skin / Brown / Black</div><div class="price">$22.00</div><button class="add">Agregar</button></div></div>
-
-    <div class="prod-card" data-sub="Bras Adhesivos"><div class="prod-img"><span class="ph ph-e"><svg viewBox="0 0 40 40" fill="currentColor"><path d="M12 16c0-3 3-4 8-4s8 1 8 4-3 5-8 5-8-2-8-5z"/></svg></span></div>
-      <div class="prod-body"><div class="cat">Bra Adhesivo</div><h4>Silicone Spoon-Cup Bra</h4><div class="meta">Skin / Transparent</div><div class="meta">Tallas: A / B / C</div><div class="price">$27.00</div><button class="add">Agregar</button></div></div>
-
-    <div class="prod-card" data-sub="Cubre-Pezones"><div class="prod-img"><span class="ph ph-f"><svg viewBox="0 0 40 40" fill="currentColor"><path d="M20 11c5 0 9 4 9 9s-4 9-9 9-9-4-9-9 4-9 9-9zm0 4c-3 0-5 2-5 5s2 5 5 5 5-2 5-5-2-5-5-5z"/></svg></span></div>
-      <div class="prod-body"><div class="cat">Cubre-Pezones</div><h4>Liquid Silicone Cover</h4><div class="meta">Skin-Friendly · Skin</div><div class="meta">Talla: 8 x 8 cm</div><div class="price">$15.00</div><button class="add">Agregar</button></div></div>
-
+  <div class="prod-grid reveal" id="prod-grid" aria-busy="true">
+    <div class="prod-card mms-skel"><div class="prod-img"></div><div class="mms-skel-line"></div><div class="mms-skel-line short"></div></div>
+    <div class="prod-card mms-skel"><div class="prod-img"></div><div class="mms-skel-line"></div><div class="mms-skel-line short"></div></div>
+    <div class="prod-card mms-skel"><div class="prod-img"></div><div class="mms-skel-line"></div><div class="mms-skel-line short"></div></div>
+    <div class="prod-card mms-skel"><div class="prod-img"></div><div class="mms-skel-line"></div><div class="mms-skel-line short"></div></div>
   </div>
+  <p class="empty-filter" id="emptyFilter" hidden>Pronto tendremos nuevas piezas en esta categoría. <a href="#" data-chip-reset>Ver todo</a></p>
 </section>
 
 <div class="cta reveal">
@@ -239,56 +213,59 @@ fbq('track', 'PageView');
     <a href="index.html">Inicio</a>
     <a href="swim.html">Trajes de Baño</a>
     <a href="invisible.html">Esenciales Invisibles</a>
+    <a href="info.html">Ayuda</a>
     <a href="index.html#contact">Contacto</a>
   </div>
   <div class="copy">© 2026 Madam Maison du Soleil by Magda — Todos los derechos reservados.</div>
 </footer>
 <a class="wa" href="https://wa.me/17866670539" target="_blank" rel="noopener" aria-label="WhatsApp"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.5 15.2L2 22l4.9-1.5A10 10 0 1 0 12 2zm5.8 14.2c-.2.7-1.4 1.3-2 1.4-.5.1-1.1.1-1.8-.1-.4-.1-1-.3-1.6-.6-2.8-1.2-4.6-4-4.8-4.2-.1-.2-1.1-1.4-1.1-2.7s.7-1.9.9-2.2c.2-.2.4-.3.6-.3h.5c.2 0 .4 0 .6.5l.7 1.7c.1.2.1.4 0 .5l-.3.5c-.1.2-.3.3-.1.6.1.2.6 1 1.3 1.6.9.8 1.6 1 1.9 1.2.2.1.4.1.5-.1l.6-.7c.2-.2.3-.2.6-.1l1.6.8c.3.1.4.2.5.3.1.2.1.6-.1 1.2z"/></svg></a>
+<script src="assets/js/store.js"></script>
 <script>
   var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.08});
   document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
 
-  var PH_CLASSES = ['ph-a','ph-b','ph-c','ph-d','ph-e','ph-f'];
-  var SUB_LABEL = { 'Bras Adhesivos':'Bra Adhesivo', 'Cubre-Pezones':'Cubre-Pezón', 'Bikini Pads':'Bikini Pad', 'Boob Tape':'Boob Tape' };
-  function escHtml(str){ return String(str==null?'':str).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];}); }
-  function money(n){ return '$'+Number(n).toFixed(2); }
+  var SUB_LABEL = { 'Bras Adhesivos':'Bra Adhesivo', 'Cubre-Pezones':'Cubre-Pezones', 'Bikini Pads':'Bikini Pads', 'Boob Tape':'Boob Tape' };
+  var esc = MMS.esc, money = MMS.money;
 
   function applyFilter(sub){
+    var shown = 0;
     document.querySelectorAll('#prod-grid .prod-card').forEach(function(card){
       var match = !sub || card.dataset.sub === sub;
       card.style.display = match ? '' : 'none';
+      if (match) shown++;
     });
+    document.getElementById('emptyFilter').hidden = shown > 0;
   }
 
-  function wireChips(){
-    document.querySelectorAll('.chip').forEach(function(c){
-      c.addEventListener('click',function(){
-        document.querySelector('.chip.active').classList.remove('active');
-        c.classList.add('active');
-        applyFilter(c.dataset.sub || '');
-      });
-    });
+  function selectChip(c){
+    document.querySelector('.chip.active').classList.remove('active');
+    c.classList.add('active');
+    applyFilter(c.dataset.sub || '');
   }
-  wireChips();
+  document.querySelectorAll('.chip').forEach(function(c){
+    c.addEventListener('click', function(){ selectChip(c); });
+  });
+  document.querySelector('[data-chip-reset]').addEventListener('click', function(e){
+    e.preventDefault(); selectChip(document.querySelector('.chip[data-sub=""]'));
+  });
 
-  function renderCard(p, i){
-    var imgHtml = p.imagen_url
-      ? '<img src="'+escHtml(p.imagen_url)+'" alt="'+escHtml(p.nombre)+'" loading="lazy">'
-      : '<span class="ph '+PH_CLASSES[i % PH_CLASSES.length]+'"></span>';
-    var tagHtml = p.agotado ? '<span class="tag tag-agotado">Agotado</span>' : '';
-    var catLabel = SUB_LABEL[p.subcategoria] || p.subcategoria || '';
-    return '<div class="prod-card'+(p.agotado?' agotado':'')+'" data-sub="'+escHtml(p.subcategoria||'')+'">'+
-      '<div class="prod-img">'+tagHtml+imgHtml+'</div>'+
-      '<div class="prod-body"><div class="cat">'+escHtml(catLabel)+'</div><h4>'+escHtml(p.nombre)+'</h4>'+
-      '<div class="price">'+money(p.precio)+'</div><button class="add"'+(p.agotado?' disabled':'')+'>'+(p.agotado?'Agotado':'Agregar')+'</button></div></div>';
+  function renderCard(p){
+    var catLabel = SUB_LABEL[p.subcategoria] || p.subcategoria || 'Esencial';
+    var tallas = p.tallas.length > 1 ? 'Tallas: ' + p.tallas.join(' / ') : (p.tallas[0] === 'Talla única' ? 'Talla única' : 'Medida: ' + p.tallas[0]);
+    return '<a class="prod-card'+(p.agotado?' agotado':'')+'" href="'+MMS.productUrl(p)+'" data-sub="'+esc(p.subcategoria)+'">'+
+      '<div class="prod-img">'+MMS.tagHtml(p)+MMS.imgHtml(p)+'</div>'+
+      '<div class="prod-body"><div class="cat">'+esc(catLabel)+'</div><h4>'+esc(p.nombre)+'</h4>'+
+      (p.colores.length ? '<div class="meta">Color: '+esc(p.colores.join(' / '))+'</div>' : '')+
+      '<div class="meta">'+esc(tallas)+'</div>'+
+      '<div class="price">'+money(p.precio)+'</div><span class="add">'+(p.agotado?'Agotado':'Ver producto')+'</span></div></a>';
   }
 
-  fetch('/api/products?categoria=esenciales').then(function(r){ return r.json(); }).then(function(json){
-    if (json && json.ok && Array.isArray(json.products) && json.products.length){
-      var grid = document.getElementById('prod-grid');
-      grid.innerHTML = json.products.map(renderCard).join('');
-    }
-  }).catch(function(){ /* si la API falla, se quedan los productos de respaldo */ });
+  MMS.loadProducts('esenciales').then(function(products){
+    var grid = document.getElementById('prod-grid');
+    grid.innerHTML = products.map(renderCard).join('');
+    grid.removeAttribute('aria-busy');
+    applyFilter(document.querySelector('.chip.active').dataset.sub || '');
+  });
 </script>
 </body>
 </html>

@@ -1,0 +1,41 @@
+/* Estructura base para las páginas nuevas (producto, checkout, gracias, info).
+   Replica el estilo de nav/footer de swim.html e invisible.html. */
+*, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
+html { scroll-behavior:smooth; }
+body { font-family:'Montserrat',sans-serif; color:var(--ink); background:var(--pearl); overflow-x:hidden; line-height:1.6; }
+h1,h2,h3,h4 { font-family:'Playfair Display',serif; font-weight:600; line-height:1.15; }
+a { text-decoration:none; color:inherit; }
+img { max-width:100%; display:block; }
+button, input, select { font-family:inherit; }
+
+.announce { background:linear-gradient(90deg,var(--gold),var(--gold-soft),var(--gold)); color:#fff; text-align:center; font-size:.74rem; letter-spacing:.18em; text-transform:uppercase; padding:9px 5%; font-weight:500; }
+nav { position:sticky; top:0; z-index:100; background:rgba(252,238,241,.95); backdrop-filter:blur(10px); border-bottom:1px solid var(--line); }
+.nav-top { display:grid; grid-template-columns:1fr auto 1fr; align-items:center; padding:14px 5%; gap:12px; }
+.nav-icons { display:flex; align-items:center; gap:20px; }
+.nav-icons.right { justify-content:flex-end; }
+.nav-icon { cursor:pointer; color:var(--ink); display:flex; }
+.nav-icon svg { width:21px; height:21px; }
+.brand { text-align:center; display:flex; flex-direction:column; align-items:center; line-height:1; }
+.brand .crown { font-size:1.05rem; color:var(--gold); }
+.brand .name { font-family:'Playfair Display',serif; font-weight:700; font-size:clamp(1.1rem,2.4vw,1.55rem); letter-spacing:.04em; color:var(--ink); margin:2px 0; }
+.brand .sub { font-size:.58rem; letter-spacing:.34em; text-transform:uppercase; color:var(--gold); font-weight:500; }
+.nav-menu { display:flex; justify-content:center; gap:34px; border-top:1px solid var(--line); padding:12px 5%; list-style:none; }
+.nav-menu a { font-size:.78rem; letter-spacing:.13em; text-transform:uppercase; font-weight:600; color:var(--ink); transition:color .2s; }
+.nav-menu a:hover { color:var(--gold); }
+@media (max-width:900px) { .nav-menu { display:none; } }
+
+.site-foot { background:var(--rosa-bg); border-top:1px solid var(--line); padding:44px 6% 24px; text-align:center; }
+.site-foot .name { font-family:'Playfair Display',serif; font-weight:700; font-size:1.2rem; }
+.site-foot .sub { font-size:.58rem; letter-spacing:.3em; text-transform:uppercase; color:var(--gold); margin-bottom:14px; }
+.site-foot .links { display:flex; justify-content:center; gap:24px; flex-wrap:wrap; margin:18px 0; }
+.site-foot .links a { font-size:.78rem; letter-spacing:.08em; color:var(--ink-soft); text-transform:uppercase; }
+.site-foot .links a:hover { color:var(--gold); }
+.site-foot .copy { font-size:.74rem; color:var(--ink-soft); margin-top:16px; }
+
+.wa { position:fixed; bottom:26px; right:26px; z-index:200; width:56px; height:56px; border-radius:50%; background:#25D366; display:flex; align-items:center; justify-content:center; box-shadow:0 6px 20px rgba(37,211,102,.45); transition:transform .2s; }
+.wa:hover { transform:scale(1.08); }
+.wa svg { width:30px; height:30px; fill:#fff; }
+
+.eyebrow { font-size:.7rem; letter-spacing:.3em; text-transform:uppercase; color:var(--gold); font-weight:600; }
+.breadcrumb { font-size:.7rem; letter-spacing:.1em; color:var(--ink-soft); text-transform:uppercase; }
+.breadcrumb a:hover { color:var(--gold); }

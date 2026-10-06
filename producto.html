@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Producto — Madam Maison du Soleil by Magda</title>
+<meta name="description" content="Descubre las piezas de Madam Maison du Soleil by Magda: trajes de baño, resort wear y esenciales invisibles de lujo.">
+<meta property="og:type" content="product">
+<meta property="og:site_name" content="Madam Maison du Soleil by Magda">
+<meta name="theme-color" content="#E7B7C1">
+<link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/store.css">
+<link rel="stylesheet" href="assets/css/shell.css">
+<style>
+  .pdp { max-width:1180px; margin:0 auto; padding:34px 6% 70px; }
+  .pdp .breadcrumb { margin-bottom:26px; }
+  .pdp-grid { display:grid; grid-template-columns:1.08fr 1fr; gap:60px; align-items:start; }
+
+  /* Galería */
+  .gallery { position:sticky; top:140px; }
+  .gallery-main { position:relative; aspect-ratio:4/5; border-radius:12px; overflow:hidden; border:1px solid #F0E3E6; background:var(--rosa-soft); }
+  .gallery-main img { width:100%; height:100%; object-fit:cover; transition:opacity .25s; }
+  .gallery-main .tag { position:absolute; top:16px; left:16px; z-index:3; background:var(--gold); color:#fff; font-size:.6rem; letter-spacing:.14em; text-transform:uppercase; padding:6px 14px; border-radius:50px; font-weight:600; }
+  .gallery-main .tag-agotado { background:var(--danger); }
+  .gallery-main .mms-ph-crown { font-size:3rem; }
+  .gallery-main .mms-ph-name { font-size:1.5rem; }
+  .thumbs { display:flex; gap:10px; margin-top:12px; }
+  .thumbs button { position:relative; width:76px; aspect-ratio:4/5; border-radius:8px; overflow:hidden; border:1.5px solid transparent; padding:0; cursor:pointer; background:var(--rosa-soft); opacity:.7; transition:opacity .2s, border-color .2s; }
+  .thumbs button img { width:100%; height:100%; object-fit:cover; }
+  .thumbs button.active, .thumbs button:hover { opacity:1; border-color:var(--gold); }
+
+  /* Información */
+  .info .eyebrow { margin-bottom:12px; }
+  .info h1 { font-size:clamp(1.9rem,3.6vw,2.7rem); margin-bottom:14px; }
+  .price-row { display:flex; align-items:center; gap:14px; margin-bottom:22px; }
+  .price-row .price { font-size:1.35rem; color:var(--gold); font-weight:500; letter-spacing:.03em; }
+  .badge-out { background:var(--danger); color:#fff; font-size:.6rem; letter-spacing:.14em; text-transform:uppercase; padding:5px 12px; border-radius:50px; font-weight:600; }
+  .desc { font-family:'Cormorant Garamond',serif; font-size:1.2rem; line-height:1.55; color:var(--ink-soft); padding-bottom:24px; border-bottom:1px solid var(--line); }
+
+  .opt { margin-top:24px; }
+  .opt-head { display:flex; justify-content:space-between; align-items:baseline; margin-bottom:12px; }
+  .opt-label { font-size:.72rem; letter-spacing:.16em; text-transform:uppercase; font-weight:600; }
+  .opt-label span { color:var(--ink-soft); font-weight:500; letter-spacing:.04em; text-transform:none; margin-left:6px; }
+  .opt-head a { font-size:.7rem; color:var(--ink-soft); text-decoration:underline; text-underline-offset:3px; }
+  .opt-head a:hover { color:var(--gold); }
+  .chips { display:flex; flex-wrap:wrap; gap:10px; }
+  .chips button { min-width:52px; padding:11px 18px; border-radius:50px; border:1px solid var(--line); background:#fff; font-size:.78rem; font-weight:500; color:var(--ink); cursor:pointer; transition:all .18s; }
+  .chips button:hover { border-color:var(--ink); }
+  .chips button.active { background:var(--ink); border-color:var(--ink); color:var(--pearl); }
+  .chips.error button { border-color:var(--danger); }
+  .opt-error { color:var(--danger); font-size:.74rem; margin-top:8px; min-height:1em; }
+
+  .buy { display:grid; grid-template-columns:auto 1fr; gap:12px; margin-top:28px; }
+  .qty-lg { display:inline-flex; align-items:center; border:1px solid var(--line); border-radius:50px; background:#fff; height:52px; }
+  .qty-lg button { width:44px; height:100%; border:none; background:none; font-size:1.15rem; cursor:pointer; color:var(--ink); }
+  .qty-lg button:disabled { opacity:.3; cursor:default; }
+  .qty-lg span { min-width:28px; text-align:center; font-weight:600; }
+  .buy .mms-btn { height:52px; }
+  .continue { margin-top:12px; }
+
+  .perks { list-style:none; margin-top:28px; display:grid; gap:12px; padding:20px 22px; background:var(--marfil); border:1px solid var(--line); border-radius:12px; }
+  .perks li { display:flex; gap:12px; align-items:center; font-size:.8rem; color:var(--ink-soft); }
+  .perks li b { color:var(--gold); font-size:1rem; width:18px; text-align:center; }
+
+  details { border-bottom:1px solid var(--line); }
+  details:first-of-type { margin-top:26px; border-top:1px solid var(--line); }
+  summary { list-style:none; cursor:pointer; padding:17px 0; font-size:.74rem; letter-spacing:.16em; text-transform:uppercase; font-weight:600; display:flex; justify-content:space-between; }
+  summary::-webkit-details-marker { display:none; }
+  summary::after { content:'+'; font-size:1.1rem; color:var(--gold); font-weight:400; }
+  details[open] summary::after { content:'−'; }
+  details p, details ul { font-size:.86rem; color:var(--ink-soft); padding-bottom:18px; }
+  details ul { padding-left:18px; }
+
+  /* Relacionados */
+  .related { max-width:1180px; margin:0 auto; padding:10px 6% 90px; }
+  .related h2 { text-align:center; font-size:clamp(1.6rem,3.4vw,2.2rem); margin:8px 0 38px; }
+  .related .eyebrow { text-align:center; }
+  .rel-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:28px; }
+  .prod-card { text-align:center; transition:transform .25s; display:block; }
+  .prod-card:hover { transform:translateY(-3px); }
+  .prod-img { aspect-ratio:3/4; border-radius:8px; position:relative; overflow:hidden; margin-bottom:14px; border:1px solid #F0E3E6; }
+  .prod-img img { width:100%; height:100%; object-fit:cover; }
+  .prod-img .tag { position:absolute; top:12px; left:12px; z-index:3; background:var(--gold); color:#fff; font-size:.56rem; letter-spacing:.14em; text-transform:uppercase; padding:5px 12px; border-radius:50px; font-weight:600; }
+  .prod-img .tag-agotado { background:var(--danger); }
+  .prod-img .quick { position:absolute; bottom:0; left:0; right:0; z-index:3; background:rgba(255,253,249,.94); text-align:center; padding:11px; font-size:.66rem; letter-spacing:.16em; text-transform:uppercase; font-weight:600; transform:translateY(100%); transition:transform .25s; }
+  .prod-card:hover .quick { transform:translateY(0); }
+  .prod-card.agotado { opacity:.55; }
+  .prod-card h4 { font-family:'Montserrat',sans-serif; font-weight:500; font-size:.8rem; letter-spacing:.08em; }
+  .prod-card .price { color:var(--gold); font-size:.85rem; margin-top:6px; }
+
+  .notfound { text-align:center; padding:90px 6% 110px; }
+  .notfound .mms-empty-icon { margin:0 auto 18px; }
+  .notfound h1 { font-size:2rem; margin-bottom:10px; }
+  .notfound p { font-family:'Cormorant Garamond',serif; font-style:italic; font-size:1.2rem; color:var(--ink-soft); margin-bottom:26px; }
+  .notfound .mms-btn { max-width:300px; margin:0 auto; }
+
+  .pdp-skel .gallery-main, .pdp-skel .mms-skel-line { background:linear-gradient(100deg,#F6E3E7 30%,#FCEEF1 50%,#F6E3E7 70%); background-size:300% 100%; animation:mmsShimmer 1.3s linear infinite; }
+  .pdp-skel .mms-skel-line { margin:0 0 16px; height:14px; }
+
+  @media (max-width:900px) {
+    .pdp-grid { grid-template-columns:1fr; gap:30px; }
+    .gallery { position:static; }
+    .rel-grid { grid-template-columns:repeat(2,1fr); gap:22px; }
+  }
+  @media (max-width:560px) {
+    .pdp { padding:22px 16px 56px; }
+    .related { padding:0 16px 70px; }
+    .thumbs button { width:62px; }
+  }
+</style>
+</head>
+<body>
+<div class="announce">Envío gratis en pedidos superiores a $100 · Where European Elegance Meets Caribbean Soul</div>
+<nav>
+  <div class="nav-top">
+    <div class="nav-icons">
+      <a class="nav-icon hamburger" href="#" data-menu-toggle aria-label="Menú" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><line x1="3" y1="7" x2="21" y2="7"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="17" x2="21" y2="17"/></svg></a>
+    </div>
+    <a class="brand" href="index.html"><span class="crown">♛</span><span class="name">Madam Maison du Soleil</span><span class="sub">by Magda</span></a>
+    <div class="nav-icons right">
+      <a class="nav-icon cart-btn" href="#" data-cart-open aria-label="Abrir carrito"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M6 7h12l-1 13H7L6 7z"/><path d="M9 7a3 3 0 0 1 6 0"/></svg><span class="cart-count" data-cart-count hidden>0</span></a>
+    </div>
+  </div>
+  <ul class="nav-menu">
+    <li><a href="swim.html">Nuevas Llegadas</a></li>
+    <li><a href="swim.html">Trajes de Baño</a></li>
+    <li><a href="index.html#collections">Colecciones</a></li>
+    <li><a href="invisible.html">Esenciales Invisibles</a></li>
+    <li><a href="index.html#contact">Contacto</a></li>
+  </ul>
+</nav>
+
+<main id="pdp-root">
+  <div class="pdp pdp-skel" aria-busy="true">
+    <div class="pdp-grid">
+      <div class="gallery"><div class="gallery-main"></div></div>
+      <div class="info">
+        <div class="mms-skel-line" style="width:30%"></div>
+        <div class="mms-skel-line" style="width:75%;height:30px"></div>
+        <div class="mms-skel-line" style="width:20%"></div>
+        <div class="mms-skel-line" style="width:100%"></div>
+        <div class="mms-skel-line" style="width:90%"></div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<section class="related" id="related" hidden>
+  <p class="eyebrow">Completa tu look</p>
+  <h2>También te encantará</h2>
+  <div class="rel-grid" id="rel-grid"></div>
+</section>
+
+<footer class="site-foot">
+  <div class="name">Madam Maison du Soleil</div>
+  <div class="sub">by Magda</div>
+  <div class="links">
+    <a href="index.html">Inicio</a>
+    <a href="swim.html">Trajes de Baño</a>
+    <a href="invisible.html">Esenciales Invisibles</a>
+    <a href="info.html">Ayuda</a>
+  </div>
+  <div class="copy">© 2026 Madam Maison du Soleil by Magda — Todos los derechos reservados.</div>
+</footer>
+<a class="wa" href="https://wa.me/17866670539" target="_blank" rel="noopener" aria-label="WhatsApp"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.5 15.2L2 22l4.9-1.5A10 10 0 1 0 12 2zm5.8 14.2c-.2.7-1.4 1.3-2 1.4-.5.1-1.1.1-1.8-.1-.4-.1-1-.3-1.6-.6-2.8-1.2-4.6-4-4.8-4.2-.1-.2-1.1-1.4-1.1-2.7s.7-1.9.9-2.2c.2-.2.4-.3.6-.3h.5c.2 0 .4 0 .6.5l.7 1.7c.1.2.1.4 0 .5l-.3.5c-.1.2-.3.3-.1.6.1.2.6 1 1.3 1.6.9.8 1.6 1 1.9 1.2.2.1.4.1.5-.1l.6-.7c.2-.2.3-.2.6-.1l1.6.8c.3.1.4.2.5.3.1.2.1.6-.1 1.2z"/></svg></a>
+
+<script src="assets/js/store.js"></script>
+<script>
+(function () {
+  var esc = MMS.esc, money = MMS.money;
+  var root = document.getElementById('pdp-root');
+  var id = new URLSearchParams(location.search).get('id');
+
+  var state = { product: null, img: 0, talla: '', color: '', qty: 1 };
+
+  function notFound() {
+    document.title = 'Producto no encontrado — Madam Maison du Soleil by Magda';
+    root.innerHTML =
+      '<div class="notfound"><div class="mms-empty-icon">♛</div>' +
+      '<h1>Esta pieza ya no está disponible</h1>' +
+      '<p>Pero la Maison tiene mucho más esperándote.</p>' +
+      '<a href="swim.html" class="mms-btn mms-btn-gold">Ver la colección</a></div>';
+  }
+
+  function chipsHtml(list, selected, attr) {
+    return list.map(function (v) {
+      return '<button type="button" data-' + attr + '="' + esc(v) + '"' + (v === selected ? ' class="active" aria-pressed="true"' : ' aria-pressed="false"') + '>' + esc(v) + '</button>';
+    }).join('');
+  }
+
+  function render() {
+    var p = state.product;
+    var catPage = MMS.CAT_PAGE[p.categoria];
+    var catLabel = MMS.CAT_LABEL[p.categoria];
+    var multiImg = p.imagenes.length > 1;
+    var single = p.tallas.length === 1;
+    if (single) state.talla = p.tallas[0];
+    if (p.colores.length === 1) state.color = p.colores[0];
+
+    document.title = p.nombre + ' — Madam Maison du Soleil by Magda';
+    var md = document.querySelector('meta[name="description"]');
+    if (md) md.setAttribute('content', p.descripcion.slice(0, 155));
+
+    root.innerHTML =
+      '<div class="pdp">' +
+        '<div class="breadcrumb"><a href="index.html">Inicio</a> / <a href="' + catPage + '">' + esc(catLabel) + '</a> / ' + esc(p.nombre) + '</div>' +
+        '<div class="pdp-grid">' +
+          '<div class="gallery">' +
+            '<div class="gallery-main" id="gMain">' + MMS.tagHtml(p) + MMS.imgHtml(p, state.img, true) + '</div>' +
+            (multiImg ? '<div class="thumbs">' + p.imagenes.map(function (src, i) {
+              return '<button type="button" data-thumb="' + i + '"' + (i === state.img ? ' class="active"' : '') + ' aria-label="Ver imagen ' + (i + 1) + '"><img src="' + esc(src) + '" alt=""></button>';
+            }).join('') + '</div>' : '') +
+          '</div>' +
+          '<div class="info">' +
+            '<p class="eyebrow">' + esc(catLabel) + (p.subcategoria ? ' · ' + esc(p.subcategoria) : '') + '</p>' +
+            '<h1>' + esc(p.nombre) + '</h1>' +
+            '<div class="price-row"><span class="price">' + money(p.precio) + '</span>' + (p.agotado ? '<span class="badge-out">Agotado</span>' : '') + '</div>' +
+            '<p class="desc">' + esc(p.descripcion) + '</p>' +
+            (p.colores.length ? '<div class="opt"><div class="opt-head"><span class="opt-label">Color<span id="colorVal">' + esc(state.color) + '</span></span></div>' +
+              '<div class="chips" id="colorChips">' + chipsHtml(p.colores, state.color, 'color') + '</div><div class="opt-error" id="colorErr"></div></div>' : '') +
+            '<div class="opt"><div class="opt-head"><span class="opt-label">Talla<span id="tallaVal">' + esc(state.talla) + '</span></span><a href="info.html#tallas">Guía de tallas</a></div>' +
+              '<div class="chips" id="tallaChips">' + chipsHtml(p.tallas, state.talla, 'talla') + '</div><div class="opt-error" id="tallaErr"></div></div>' +
+            '<div class="buy">' +
+              '<div class="qty-lg" aria-label="Cantidad"><button type="button" data-q="-1" aria-label="Menos"' + (p.agotado ? ' disabled' : '') + '>−</button><span id="qtyVal">1</span><button type="button" data-q="1" aria-label="Más"' + (p.agotado ? ' disabled' : '') + '>+</button></div>' +
+              '<button type="button" class="mms-btn mms-btn-gold" id="addBtn"' + (p.agotado ? ' disabled' : '') + '>' + (p.agotado ? 'Agotado' : 'Agregar al carrito') + '</button>' +
+            '</div>' +
+            '<a href="' + catPage + '" class="mms-btn mms-btn-ghost continue">Seguir comprando</a>' +
+            '<ul class="perks">' +
+              '<li><b>✦</b>Envío gratis en pedidos superiores a $100</li>' +
+              '<li><b>↺</b>Cambios sin complicaciones durante 15 días</li>' +
+              '<li><b>♛</b>Empaque de regalo de la Maison en cada pedido</li>' +
+            '</ul>' +
+            '<details><summary>Detalles y cuidado</summary><ul>' +
+              (p.categoria === 'esenciales'
+                ? '<li>Lava con agua tibia y jabón neutro después de cada uso.</li><li>Deja secar al aire con el adhesivo hacia arriba.</li><li>Guarda en su estuche para conservar la adherencia.</li>'
+                : '<li>Enjuaga con agua fría después de cada baño de mar o piscina.</li><li>Lava a mano con jabón suave; no retorcer.</li><li>Seca a la sombra para conservar el color.</li>') +
+            '</ul></details>' +
+            '<details><summary>Envíos y cambios</summary><p>Preparamos tu pedido en 1–2 días hábiles. Envío estándar de 5 a 7 días o express de 2 a 3 días. ¿Dudas con tu talla? Escríbenos por WhatsApp y te asesoramos. <a href="info.html#envios" style="text-decoration:underline">Más información</a>.</p></details>' +
+          '</div>' +
+        '</div>' +
+      '</div>';
+  }
+
+  function setChoice(kind, value) {
+    state[kind] = value;
+    var wrap = document.getElementById(kind + 'Chips');
+    wrap.classList.remove('error');
+    document.getElementById(kind + 'Err').textContent = '';
+    wrap.querySelectorAll('button').forEach(function (b) {
+      var on = b.getAttribute('data-' + kind) === value;
+      b.classList.toggle('active', on);
+      b.setAttribute('aria-pressed', on ? 'true' : 'false');
+    });
+    document.getElementById(kind + 'Val').textContent = value;
+  }
+
+  function requireOpt(kind, msg) {
+    if (state[kind]) return true;
+    document.getElementById(kind + 'Chips').classList.add('error');
+    document.getElementById(kind + 'Err').textContent = msg;
+    return false;
+  }
+
+  root.addEventListener('click', function (e) {
+    var p = state.product;
+    if (!p) return;
+    var b;
+    if ((b = e.target.closest('[data-thumb]'))) {
+      state.img = parseInt(b.getAttribute('data-thumb'), 10);
+      document.getElementById('gMain').innerHTML = MMS.tagHtml(p) + MMS.imgHtml(p, state.img, true);
+      root.querySelectorAll('[data-thumb]').forEach(function (t) { t.classList.toggle('active', t === b); });
+    } else if ((b = e.target.closest('[data-talla]'))) {
+      setChoice('talla', b.getAttribute('data-talla'));
+    } else if ((b = e.target.closest('[data-color]'))) {
+      setChoice('color', b.getAttribute('data-color'));
+    } else if ((b = e.target.closest('[data-q]'))) {
+      state.qty = Math.max(1, Math.min(MMS.MAX_QTY, state.qty + parseInt(b.getAttribute('data-q'), 10)));
+      document.getElementById('qtyVal').textContent = state.qty;
+    } else if (e.target.closest('#addBtn')) {
+      if (p.agotado) return;
+      var okColor = !p.colores.length || requireOpt('color', 'Elige un color');
+      var okTalla = requireOpt('talla', 'Elige tu talla');
+      if (!okColor || !okTalla) return;
+      MMS.cart.add(p, { talla: state.talla, color: state.color, qty: state.qty });
+      MMS.cart.bump();
+      MMS.toast('✦ ' + p.nombre + ' se agregó a tu bolsa');
+      MMS.cart.open();
+    }
+  });
+
+  function renderRelated(p) {
+    MMS.loadProducts(p.categoria).then(function (list) {
+      var others = list.filter(function (x) { return x.id !== p.id && !x.agotado; });
+      var withImg = others.filter(function (x) { return x.imagenes.length; });
+      var pick = withImg.concat(others.filter(function (x) { return !x.imagenes.length; })).slice(0, 4);
+      if (!pick.length) return;
+      document.getElementById('rel-grid').innerHTML = pick.map(function (x) {
+        return '<a class="prod-card" href="' + MMS.productUrl(x) + '"><div class="prod-img">' + MMS.tagHtml(x) + MMS.imgHtml(x) +
+          '<span class="quick">Ver producto</span></div><h4>' + esc(x.nombre) + '</h4><div class="price">' + money(x.precio) + '</div></a>';
+      }).join('');
+      document.getElementById('related').hidden = false;
+    });
+  }
+
+  MMS.getProduct(id).then(function (p) {
+    if (!p) return notFound();
+    state.product = p;
+    render();
+    renderRelated(p);
+  });
+})();
+</script>
+</body>
+</html>
