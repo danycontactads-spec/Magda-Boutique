@@ -1,5 +1,6 @@
 const { getSupabasePublic } = require('./_lib/supabasePublic');
 const { CATEGORIES } = require('./_lib/categories');
+const { PRODUCT_COLUMNS } = require('./_lib/productColumns');
 
 // GET /api/products            -> todos los productos
 // GET /api/products?categoria=trajes|esenciales
@@ -23,7 +24,7 @@ module.exports = async function handler(req, res) {
     const supabase = getSupabasePublic();
     let query = supabase
       .from('products')
-      .select('id, nombre, precio, categoria, subcategoria, imagen_url, agotado, destacado, orden, created_at')
+      .select(PRODUCT_COLUMNS)
       .order('orden', { ascending: true })
       .order('created_at', { ascending: false });
 
@@ -35,7 +36,8 @@ module.exports = async function handler(req, res) {
       return res.status(500).json({ ok: false, error: 'No se pudieron cargar los productos.' });
     }
 
-    res.setHeader('Cache-Control', 's-maxage=30, stale-while-revalidate=120');
+    // Caché corta en el CDN: los cambios del panel se ven en la tienda en segundos.
+    res.setHeader('Cache-Control', 's-maxage=10, stale-while-revalidate=20');
     return res.status(200).json({ ok: true, products: data });
   } catch (err) {
     console.error('GET /api/products unexpected', err);

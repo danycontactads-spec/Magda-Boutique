@@ -20,7 +20,7 @@
   html,body { min-height:100%; }
   body { font-family:'Montserrat',sans-serif; color:var(--ink); background:var(--pearl); line-height:1.5; }
   h1,h2,h3,h4 { font-family:'Playfair Display',serif; font-weight:600; line-height:1.2; }
-  button, input, select { font-family:inherit; font-size:1rem; }
+  button, input, select, textarea { font-family:inherit; font-size:1rem; }
   img { max-width:100%; display:block; }
   [hidden] { display:none !important; }
 
@@ -32,8 +32,10 @@
   .login-card .sub { font-size:.6rem; letter-spacing:.3em; text-transform:uppercase; color:var(--gold); font-weight:600; margin-bottom:28px; display:block; }
   .field { text-align:left; margin-bottom:18px; }
   .field label { display:block; font-size:.72rem; letter-spacing:.08em; text-transform:uppercase; color:var(--ink-soft); font-weight:600; margin-bottom:7px; }
-  .field input, .field select { width:100%; padding:12px 14px; border:1px solid var(--line); border-radius:8px; background:var(--pearl); color:var(--ink); outline:none; transition:border-color .2s; }
-  .field input:focus, .field select:focus { border-color:var(--gold); }
+  .field input, .field select, .field textarea { width:100%; padding:12px 14px; border:1px solid var(--line); border-radius:8px; background:var(--pearl); color:var(--ink); outline:none; transition:border-color .2s; }
+  .field input:focus, .field select:focus, .field textarea:focus { border-color:var(--gold); }
+  .field textarea { resize:vertical; min-height:88px; line-height:1.45; }
+  .hint { font-size:.7rem; color:var(--ink-soft); margin-top:5px; }
   .btn { display:inline-flex; align-items:center; justify-content:center; gap:8px; padding:13px 28px; border-radius:50px; font-size:.76rem; letter-spacing:.14em; text-transform:uppercase; font-weight:600; cursor:pointer; border:none; transition:transform .15s, box-shadow .15s, opacity .15s; }
   .btn-gold { background:linear-gradient(135deg,var(--gold),var(--gold-soft)); color:#fff; box-shadow:0 10px 24px rgba(201,168,76,.32); }
   .btn-gold:hover:not(:disabled) { transform:translateY(-2px); }
@@ -78,11 +80,15 @@
   .card-cat { font-size:.66rem; letter-spacing:.1em; text-transform:uppercase; color:var(--gold); font-weight:600; }
   .card-price { color:var(--gold); font-weight:600; font-size:.92rem; }
   .card-toggle { display:flex; align-items:center; justify-content:space-between; margin-top:6px; padding-top:10px; border-top:1px solid var(--line); font-size:.72rem; color:var(--ink-soft); }
+  .card-toggle + .card-toggle { margin-top:0; border-top:none; padding-top:6px; }
+  .card-view { font-size:.68rem; color:var(--ink-soft); text-decoration:underline; text-underline-offset:3px; margin-top:8px; align-self:center; }
+  .card-view:hover { color:var(--gold); }
   .switch { position:relative; width:38px; height:22px; flex-shrink:0; }
   .switch input { opacity:0; width:100%; height:100%; margin:0; cursor:pointer; position:absolute; z-index:1; }
   .switch .track { position:absolute; inset:0; background:var(--line); border-radius:20px; transition:background .2s; }
   .switch .thumb-dot { position:absolute; top:2px; left:2px; width:18px; height:18px; background:#fff; border-radius:50%; transition:transform .2s; box-shadow:0 1px 3px rgba(0,0,0,.25); }
   .switch input:checked + .track { background:var(--danger); }
+  .switch.gold input:checked + .track { background:var(--gold); }
   .switch input:checked + .track + .thumb-dot { transform:translateX(16px); }
   .card-actions { display:flex; gap:8px; margin-top:10px; }
   .card-actions .btn { flex:1; padding:9px 10px; font-size:.64rem; }
@@ -98,6 +104,7 @@
   .preview-box img { width:100%; height:100%; object-fit:cover; }
   .upload-row { display:flex; gap:16px; align-items:flex-start; flex-wrap:wrap; }
   .upload-controls { flex:1; min-width:180px; }
+  .upload-controls .btn { margin-top:10px; padding:8px 16px; font-size:.62rem; }
   .toggles { display:flex; gap:24px; flex-wrap:wrap; margin:18px 0 6px; }
   .toggle-field { display:flex; align-items:center; gap:10px; font-size:.78rem; }
   .modal-actions { display:flex; gap:12px; justify-content:flex-end; margin-top:26px; }
@@ -195,12 +202,37 @@
     </div>
 
     <div class="field">
+      <label for="f-descripcion">Descripción (opcional)</label>
+      <textarea id="f-descripcion" maxlength="2000" placeholder="Tela, corte, detalles… Si la dejas vacía se muestra un texto general de la Maison."></textarea>
+    </div>
+
+    <div class="row2">
+      <div class="field">
+        <label for="f-colores">Colores (opcional)</label>
+        <input type="text" id="f-colores" placeholder="Ej: Rosa, Negro">
+        <div class="hint">Separados por coma.</div>
+      </div>
+      <div class="field">
+        <label for="f-tallas">Tallas (opcional)</label>
+        <input type="text" id="f-tallas" placeholder="Ej: S, M, L">
+        <div class="hint" id="tallas-hint">Vacío = tallas por defecto.</div>
+      </div>
+    </div>
+
+    <div class="field">
+      <label for="f-etiqueta">Etiqueta en la foto (opcional)</label>
+      <input type="text" id="f-etiqueta" list="etiquetas" maxlength="30" placeholder="Ej: Nuevo">
+      <datalist id="etiquetas"><option value="Nuevo"><option value="Best Seller"><option value="Popular"><option value="Oferta"><option value="Edición Limitada"></datalist>
+    </div>
+
+    <div class="field">
       <label>Imagen del producto</label>
       <div class="upload-row">
         <div class="preview-box" id="preview-box">Sin imagen</div>
         <div class="upload-controls">
           <input type="file" id="f-imagen" accept="image/png, image/jpeg, image/webp">
           <div class="status-line" id="upload-status"></div>
+          <button type="button" class="btn btn-outline" id="remove-img-btn" hidden>Quitar foto</button>
         </div>
       </div>
     </div>
@@ -231,9 +263,14 @@
     esenciales: ['Bras Adhesivos', 'Cubre-Pezones', 'Bikini Pads', 'Boob Tape'],
   };
   var CATEGORY_LABELS = { trajes: 'Trajes de Baño', esenciales: 'Esenciales Invisibles' };
+  // Mismas tallas por defecto que assets/js/store.js
+  var DEFAULT_SIZES = {
+    'Bikinis': 'S, M, L', 'Enterizos': 'S, M, L', 'Cover-Ups': 'S, M, L', 'Resort Wear': 'S, M, L',
+    'Bras Adhesivos': 'A, B, C, D', 'Cubre-Pezones': 'Talla única', 'Bikini Pads': 'M, L', 'Boob Tape': 'Talla única'
+  };
   var PH_CLASSES = ['ph-a', 'ph-b', 'ph-c', 'ph-d'];
 
-  var state = { products: [], filter: '', editingId: null, pendingImageUrl: null };
+  var state = { products: [], filter: '', editingId: null, pendingImageUrl: null, uploading: false };
 
   var loginScreen = document.getElementById('login-screen');
   var appScreen = document.getElementById('app-screen');
@@ -253,11 +290,17 @@
   var formStatus = document.getElementById('form-status');
   var uploadStatus = document.getElementById('upload-status');
   var previewBox = document.getElementById('preview-box');
+  var removeImgBtn = document.getElementById('remove-img-btn');
+  var tallasHint = document.getElementById('tallas-hint');
   var fNombre = document.getElementById('f-nombre');
   var fPrecio = document.getElementById('f-precio');
   var fOrden = document.getElementById('f-orden');
   var fCategoria = document.getElementById('f-categoria');
   var fSubcategoria = document.getElementById('f-subcategoria');
+  var fDescripcion = document.getElementById('f-descripcion');
+  var fColores = document.getElementById('f-colores');
+  var fTallas = document.getElementById('f-tallas');
+  var fEtiqueta = document.getElementById('f-etiqueta');
   var fImagen = document.getElementById('f-imagen');
   var fAgotado = document.getElementById('f-agotado');
   var fDestacado = document.getElementById('f-destacado');
@@ -272,11 +315,30 @@
 
   function money(n) { return '$' + Number(n).toFixed(2); }
 
+  // fetch + JSON; si la sesión expiró vuelve al login.
+  function api(url, options) {
+    return fetch(url, Object.assign({ cache: 'no-store' }, options || {}))
+      .then(function (r) {
+        return r.json().catch(function () { return {}; }).then(function (j) {
+          if (r.status === 401 && url.indexOf('/api/admin/login') !== 0) {
+            closeModal();
+            showLogin();
+            loginError.textContent = 'Tu sesión expiró. Vuelve a entrar.';
+          }
+          if (!r.ok || !j.ok) throw new Error(j.error || 'Algo salió mal. Intenta de nuevo.');
+          return j;
+        });
+      });
+  }
+  function jsonBody(method, payload) {
+    return { method: method, headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) };
+  }
+
   // ---------- Auth ----------
   function showApp() { loginScreen.hidden = true; appScreen.hidden = false; loadProducts(); }
   function showLogin() { appScreen.hidden = true; loginScreen.hidden = false; }
 
-  fetch('/api/admin/session').then(function (r) { return r.json(); }).then(function (json) {
+  fetch('/api/admin/session', { cache: 'no-store' }).then(function (r) { return r.json(); }).then(function (json) {
     if (json && json.authenticated) showApp(); else showLogin();
   }).catch(function () { showLogin(); });
 
@@ -285,13 +347,8 @@
     loginError.textContent = '';
     loginBtn.disabled = true;
     loginBtn.textContent = 'Entrando…';
-    fetch('/api/admin/login', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ password: document.getElementById('login-password').value }),
-    }).then(function (r) { return r.json().then(function (j) { return { ok: r.ok, json: j }; }); })
-      .then(function (res) {
-        if (!res.ok || !res.json.ok) throw new Error(res.json.error || 'No se pudo iniciar sesión.');
+    api('/api/admin/login', jsonBody('POST', { password: document.getElementById('login-password').value }))
+      .then(function () {
         document.getElementById('login-password').value = '';
         showApp();
       })
@@ -317,8 +374,7 @@
     listState.hidden = false;
     listState.textContent = 'Cargando productos…';
     grid.hidden = true;
-    fetch('/api/products').then(function (r) { return r.json(); }).then(function (json) {
-      if (!json.ok) throw new Error(json.error || 'No se pudieron cargar los productos.');
+    api('/api/admin/products').then(function (json) {
       state.products = json.products || [];
       renderList();
     }).catch(function (err) {
@@ -340,6 +396,25 @@
     items.forEach(function (p, i) {
       grid.appendChild(renderCard(p, i));
     });
+  }
+
+  function switchRow(label, checked, gold, onChange) {
+    var row = document.createElement('div');
+    row.className = 'card-toggle';
+    var text = document.createElement('span');
+    text.textContent = label;
+    var sw = document.createElement('label');
+    sw.className = 'switch' + (gold ? ' gold' : '');
+    var cb = document.createElement('input');
+    cb.type = 'checkbox'; cb.checked = checked;
+    cb.setAttribute('aria-label', label);
+    cb.addEventListener('change', function () { onChange(cb); });
+    sw.appendChild(cb);
+    var track = document.createElement('span'); track.className = 'track'; sw.appendChild(track);
+    var dot = document.createElement('span'); dot.className = 'thumb-dot'; sw.appendChild(dot);
+    row.appendChild(text);
+    row.appendChild(sw);
+    return row;
   }
 
   function renderCard(p, i) {
@@ -377,21 +452,12 @@
       '<h4>' + escapeHtml(p.nombre) + '</h4>' +
       '<div class="card-price">' + money(p.precio) + '</div>';
 
-    var toggleRow = document.createElement('div');
-    toggleRow.className = 'card-toggle';
-    var toggleLabel = document.createElement('span');
-    toggleLabel.textContent = 'Marcar agotado';
-    var sw = document.createElement('label');
-    sw.className = 'switch';
-    var cb = document.createElement('input');
-    cb.type = 'checkbox'; cb.checked = !!p.agotado;
-    cb.addEventListener('change', function () { quickToggleAgotado(p, cb); });
-    sw.appendChild(cb);
-    var track = document.createElement('span'); track.className = 'track'; sw.appendChild(track);
-    var dot = document.createElement('span'); dot.className = 'thumb-dot'; sw.appendChild(dot);
-    toggleRow.appendChild(toggleLabel);
-    toggleRow.appendChild(sw);
-    body.appendChild(toggleRow);
+    body.appendChild(switchRow('Agotado', !!p.agotado, false, function (cb) {
+      quickToggle(p, 'agotado', cb, cb.checked ? 'Marcado como agotado.' : 'Marcado como disponible.');
+    }));
+    body.appendChild(switchRow('Destacado en inicio', !!p.destacado, true, function (cb) {
+      quickToggle(p, 'destacado', cb, cb.checked ? 'Ahora aparece en el inicio.' : 'Ya no está destacado.');
+    }));
 
     var actions = document.createElement('div');
     actions.className = 'card-actions';
@@ -405,6 +471,14 @@
     actions.appendChild(delBtn);
     body.appendChild(actions);
 
+    var view = document.createElement('a');
+    view.className = 'card-view';
+    view.href = 'producto.html?id=' + encodeURIComponent(p.id);
+    view.target = '_blank';
+    view.rel = 'noopener';
+    view.textContent = 'Ver en la tienda ↗';
+    body.appendChild(view);
+
     card.appendChild(body);
     return card;
   }
@@ -415,33 +489,27 @@
     });
   }
 
-  function quickToggleAgotado(p, checkboxEl) {
+  function quickToggle(p, field, checkboxEl, okMessage) {
     checkboxEl.disabled = true;
-    var payload = Object.assign({}, p, { id: p.id, agotado: checkboxEl.checked });
-    fetch('/api/admin/products', {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload),
-    }).then(function (r) { return r.json().then(function (j) { return { ok: r.ok, json: j }; }); })
+    var payload = Object.assign({}, p);
+    payload[field] = checkboxEl.checked;
+    api('/api/admin/products', jsonBody('PUT', payload))
       .then(function (res) {
-        if (!res.ok || !res.json.ok) throw new Error(res.json.error || 'No se pudo actualizar.');
-        p.agotado = checkboxEl.checked;
-        toast(checkboxEl.checked ? 'Producto marcado como agotado.' : 'Producto marcado como disponible.', 'success');
+        Object.assign(p, res.product || payload);
+        toast(okMessage, 'success');
         renderList();
       })
       .catch(function (err) {
         checkboxEl.checked = !checkboxEl.checked;
+        checkboxEl.disabled = false;
         toast(err.message, 'error');
-      })
-      .finally(function () { checkboxEl.disabled = false; });
+      });
   }
 
   function deleteProduct(p) {
     if (!confirm('¿Eliminar "' + p.nombre + '"? Esta acción no se puede deshacer.')) return;
-    fetch('/api/admin/products?id=' + encodeURIComponent(p.id), { method: 'DELETE' })
-      .then(function (r) { return r.json().then(function (j) { return { ok: r.ok, json: j }; }); })
-      .then(function (res) {
-        if (!res.ok || !res.json.ok) throw new Error(res.json.error || 'No se pudo eliminar.');
+    api('/api/admin/products?id=' + encodeURIComponent(p.id), { method: 'DELETE' })
+      .then(function () {
         state.products = state.products.filter(function (x) { return x.id !== p.id; });
         toast('Producto eliminado.', 'success');
         renderList();
@@ -458,19 +526,35 @@
       if (sub === selected) opt.selected = true;
       fSubcategoria.appendChild(opt);
     });
+    fSubcategoria.disabled = !categoria;
+    updateTallasHint();
+  }
+
+  function updateTallasHint() {
+    var def = DEFAULT_SIZES[fSubcategoria.value] || (fCategoria.value === 'esenciales' ? 'Talla única' : 'S, M, L');
+    tallasHint.textContent = 'Vacío = ' + def + '.';
   }
 
   fCategoria.addEventListener('change', function () { populateSubcategorias(fCategoria.value, null); });
+  fSubcategoria.addEventListener('change', updateTallasHint);
 
   function resetPreview(url) {
     if (url) {
       previewBox.innerHTML = '';
       var img = document.createElement('img');
       img.src = url;
+      img.alt = 'Vista previa';
       previewBox.appendChild(img);
     } else {
       previewBox.textContent = 'Sin imagen';
     }
+    removeImgBtn.hidden = !url;
+  }
+
+  function setUploading(on) {
+    state.uploading = on;
+    saveBtn.disabled = on;
+    saveBtn.textContent = on ? 'Subiendo foto…' : 'Guardar';
   }
 
   function openModal(product) {
@@ -478,18 +562,24 @@
     formStatus.textContent = '';
     uploadStatus.textContent = '';
     fImagen.value = '';
+    setUploading(false);
     state.editingId = product ? product.id : null;
     state.pendingImageUrl = product ? (product.imagen_url || null) : null;
     modalTitle.textContent = product ? 'Editar Producto' : 'Agregar Producto';
     fNombre.value = product ? product.nombre : '';
     fPrecio.value = product ? product.precio : '';
     fOrden.value = product ? (product.orden || 0) : 0;
-    fCategoria.value = product ? product.categoria : '';
+    fCategoria.value = product ? product.categoria : (state.filter || '');
     populateSubcategorias(fCategoria.value, product ? product.subcategoria : null);
+    fDescripcion.value = product ? (product.descripcion || '') : '';
+    fColores.value = product && product.colores ? product.colores.join(', ') : '';
+    fTallas.value = product && product.tallas ? product.tallas.join(', ') : '';
+    fEtiqueta.value = product ? (product.etiqueta || '') : '';
     fAgotado.checked = !!(product && product.agotado);
     fDestacado.checked = !!(product && product.destacado);
     resetPreview(state.pendingImageUrl);
     overlay.hidden = false;
+    setTimeout(function () { fNombre.focus(); }, 30);
   }
 
   function closeModal() { overlay.hidden = true; }
@@ -497,6 +587,13 @@
   addBtn.addEventListener('click', function () { openModal(null); });
   cancelBtn.addEventListener('click', closeModal);
   overlay.addEventListener('click', function (e) { if (e.target === overlay) closeModal(); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !overlay.hidden) closeModal(); });
+  removeImgBtn.addEventListener('click', function () {
+    state.pendingImageUrl = null;
+    fImagen.value = '';
+    uploadStatus.textContent = 'La foto se quitará al guardar.';
+    resetPreview(null);
+  });
 
   function compressImage(file) {
     return new Promise(function (resolve, reject) {
@@ -514,7 +611,10 @@
           }
           var canvas = document.createElement('canvas');
           canvas.width = width; canvas.height = height;
-          canvas.getContext('2d').drawImage(img, 0, 0, width, height);
+          var ctx = canvas.getContext('2d');
+          ctx.fillStyle = '#fff'; // fondo blanco para PNG con transparencia
+          ctx.fillRect(0, 0, width, height);
+          ctx.drawImage(img, 0, 0, width, height);
           resolve(canvas.toDataURL('image/jpeg', 0.82));
         };
         img.src = reader.result;
@@ -531,28 +631,28 @@
       fImagen.value = '';
       return;
     }
-    uploadStatus.textContent = 'Comprimiendo imagen…';
+    var previousUrl = state.pendingImageUrl;
+    setUploading(true);
+    uploadStatus.textContent = 'Preparando foto…';
     compressImage(file).then(function (dataUrl) {
       resetPreview(dataUrl);
-      uploadStatus.textContent = 'Subiendo imagen…';
-      var base64 = dataUrl.split(',')[1];
-      return fetch('/api/admin/upload', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ contentType: 'image/jpeg', dataBase64: base64 }),
-      }).then(function (r) { return r.json().then(function (j) { return { ok: r.ok, json: j }; }); });
+      uploadStatus.textContent = 'Subiendo foto…';
+      return api('/api/admin/upload', jsonBody('POST', { contentType: 'image/jpeg', dataBase64: dataUrl.split(',')[1] }));
     }).then(function (res) {
-      if (!res.ok || !res.json.ok) throw new Error(res.json.error || 'No se pudo subir la imagen.');
-      state.pendingImageUrl = res.json.url;
-      uploadStatus.textContent = 'Imagen lista.';
+      state.pendingImageUrl = res.url;
+      uploadStatus.textContent = '✓ Foto lista. Ahora pulsa "Guardar".';
     }).catch(function (err) {
+      state.pendingImageUrl = previousUrl;
+      resetPreview(previousUrl);
+      fImagen.value = '';
       uploadStatus.textContent = '';
       toast(err.message, 'error');
-    });
+    }).finally(function () { setUploading(false); });
   });
 
   form.addEventListener('submit', function (e) {
     e.preventDefault();
+    if (state.uploading) return;
     formError.textContent = '';
 
     var payload = {
@@ -561,14 +661,18 @@
       categoria: fCategoria.value,
       subcategoria: fSubcategoria.value || null,
       imagen_url: state.pendingImageUrl,
+      descripcion: fDescripcion.value.trim(),
+      colores: fColores.value,
+      tallas: fTallas.value,
+      etiqueta: fEtiqueta.value.trim(),
       agotado: fAgotado.checked,
       destacado: fDestacado.checked,
       orden: Number(fOrden.value) || 0,
     };
 
-    if (!payload.nombre) { formError.textContent = 'El nombre es requerido.'; return; }
-    if (!Number.isFinite(payload.precio) || payload.precio < 0) { formError.textContent = 'El precio debe ser un número válido.'; return; }
-    if (!payload.categoria) { formError.textContent = 'Selecciona una categoría.'; return; }
+    if (!payload.nombre) { formError.textContent = 'Escribe el nombre del producto.'; return; }
+    if (fPrecio.value === '' || !Number.isFinite(payload.precio) || payload.precio < 0) { formError.textContent = 'Escribe un precio válido (ej: 78 o 78.50).'; return; }
+    if (!payload.categoria) { formError.textContent = 'Elige una categoría.'; return; }
 
     saveBtn.disabled = true;
     formStatus.textContent = 'Guardando…';
@@ -576,14 +680,9 @@
     var isEdit = !!state.editingId;
     if (isEdit) payload.id = state.editingId;
 
-    fetch('/api/admin/products', {
-      method: isEdit ? 'PUT' : 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload),
-    }).then(function (r) { return r.json().then(function (j) { return { ok: r.ok, json: j }; }); })
-      .then(function (res) {
-        if (!res.ok || !res.json.ok) throw new Error(res.json.error || 'No se pudo guardar el producto.');
-        toast(isEdit ? 'Producto actualizado.' : 'Producto creado.', 'success');
+    api('/api/admin/products', jsonBody(isEdit ? 'PUT' : 'POST', payload))
+      .then(function () {
+        toast(isEdit ? 'Producto actualizado. Ya se ve en la tienda.' : 'Producto creado. Ya se ve en la tienda.', 'success');
         closeModal();
         loadProducts();
       })

@@ -5,14 +5,21 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Madam Maison du Soleil by Magda — Boutique de Lujo | Trajes de Baño & Resort</title>
 <meta name="description" content="Madam Maison du Soleil by Magda: boutique de lujo donde la elegancia europea se encuentra con el alma caribeña. Trajes de baño, resort wear y accesorios premium.">
-<link rel="canonical" href="https://madammaisondusoleilbymagda.life/">
+<link rel="canonical" href="https://magda-boutique.vercel.app/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Madam Maison du Soleil by Magda">
+<meta property="og:locale" content="es_ES">
 <meta property="og:title" content="Madam Maison du Soleil by Magda — Boutique de Lujo">
-<meta property="og:description" content="Where European Elegance Meets Caribbean Soul. Trajes de baño y resort wear de lujo.">
-<meta property="og:url" content="https://madammaisondusoleilbymagda.life/">
-<meta property="og:image" content="assets/images/og-image.jpg">
+<meta property="og:description" content="Where European Elegance Meets Caribbean Soul. Trajes de baño, resort wear y esenciales invisibles de lujo.">
+<meta property="og:url" content="https://magda-boutique.vercel.app/">
+<meta property="og:image" content="https://magda-boutique.vercel.app/assets/images/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Madam Maison du Soleil by Magda — trajes de baño y resort wear de lujo">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Madam Maison du Soleil by Magda — Boutique de Lujo">
+<meta name="twitter:description" content="Where European Elegance Meets Caribbean Soul. Trajes de baño, resort wear y esenciales invisibles de lujo.">
+<meta name="twitter:image" content="https://magda-boutique.vercel.app/assets/images/og-image.jpg">
 <meta name="theme-color" content="#E7B7C1">
 <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -22,11 +29,32 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "Organization",
-  "name": "Madam Maison du Soleil by Magda",
-  "url": "https://madammaisondusoleilbymagda.life/",
-  "slogan": "Where European Elegance Meets Caribbean Soul",
-  "sameAs": ["https://instagram.com/"]
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://magda-boutique.vercel.app/#org",
+      "name": "Madam Maison du Soleil by Magda",
+      "url": "https://magda-boutique.vercel.app/",
+      "logo": "https://magda-boutique.vercel.app/assets/images/og-image.jpg",
+      "image": "https://magda-boutique.vercel.app/assets/images/og-image.jpg",
+      "slogan": "Where European Elegance Meets Caribbean Soul",
+      "description": "Boutique de lujo de trajes de baño, resort wear y esenciales invisibles.",
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+1-786-667-0539",
+        "contactType": "customer service",
+        "availableLanguage": ["Spanish", "English"]
+      }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://magda-boutique.vercel.app/#website",
+      "name": "Madam Maison du Soleil by Magda",
+      "url": "https://magda-boutique.vercel.app/",
+      "inLanguage": "es",
+      "publisher": { "@id": "https://magda-boutique.vercel.app/#org" }
+    }
+  ]
 }
 </script>
 <style>
@@ -124,17 +152,22 @@
   .hero {
     position: relative; min-height: 78vh; display: flex; align-items: center; justify-content: center;
     text-align: center; overflow: hidden;
-    /* Portada: si existe Imagen-portada-principal.jpeg se muestra encima;
-       si no, queda visible la imagen de respaldo (capa inferior). */
-    background-color: var(--rosa-bg);
-    background-image:
-      radial-gradient(ellipse at center, rgba(252,238,241,.88) 0%, rgba(248,223,229,.74) 42%, rgba(231,183,193,.5) 100%),
-      url('assets/images/Imagen-portada-principal.jpeg'),
-      url('assets/images/Imagen-portada-trajes-derecho.jpeg');
-    background-size: cover, cover, cover;
-    background-position: center, center, center 28%;
-    background-repeat: no-repeat;
+    background-color: var(--pearl);
     padding: 90px 6%;
+  }
+  /* Portada con bordes difuminados: la foto se funde con el fondo (sin cortes rectos) */
+  .hero::before {
+    content: ''; position: absolute; inset: 0; z-index: 0;
+    background-image:
+      radial-gradient(ellipse at center, rgba(252,238,241,.86) 0%, rgba(248,223,229,.7) 42%, rgba(231,183,193,.45) 100%),
+      url('assets/images/Imagen-portada-trajes-derecho.jpeg');
+    background-size: cover, cover;
+    background-position: center, center 28%;
+    background-repeat: no-repeat;
+    -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 72%, transparent 100%), linear-gradient(to right, transparent 0%, #000 7%, #000 93%, transparent 100%);
+    -webkit-mask-composite: source-in;
+            mask-image: linear-gradient(to bottom, #000 0%, #000 72%, transparent 100%), linear-gradient(to right, transparent 0%, #000 7%, #000 93%, transparent 100%);
+            mask-composite: intersect;
   }
   .hero::after {
     content: ''; position: absolute; inset: 0;
@@ -359,21 +392,7 @@
   .reveal.in { opacity: 1; transform: translateY(0); }
   @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; transition: none; } .hero-inner { animation: none; } }
 </style>
-<!-- Meta Pixel (desactivado — reemplaza TU_PIXEL_ID y descomenta para activar)
-<script>
-!function(f,b,e,v,n,t,s)
-{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-n.queue=[];t=b.createElement(e);t.async=!0;
-t.src=v;s=b.getElementsByTagName(e)[0];
-s.parentNode.insertBefore(t,s)}(window, document,'script',
-'https://connect.facebook.net/en_US/fbevents.js');
-fbq('init', 'TU_PIXEL_ID');
-fbq('track', 'PageView');
-</script>
-<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=TU_PIXEL_ID&ev=PageView&noscript=1"/></noscript>
--->
+<script src="assets/js/pixel.js"></script>
 </head>
 <body>
 
@@ -405,10 +424,10 @@ fbq('track', 'PageView');
       <a href="swim.html">Trajes de Baño <span class="caret">▾</span></a>
       <div class="dropdown">
         <a href="swim.html">Ver todo</a>
-        <a href="swim.html">Bikinis</a>
-        <a href="swim.html">Enterizos</a>
-        <a href="swim.html">Cover-Ups</a>
-        <a href="swim.html">Resort Wear</a>
+        <a href="swim.html?sub=Bikinis">Bikinis</a>
+        <a href="swim.html?sub=Enterizos">Enterizos</a>
+        <a href="swim.html?sub=Cover-Ups">Cover-Ups</a>
+        <a href="swim.html?sub=Resort%20Wear">Resort Wear</a>
       </div>
     </li>
     <li>
@@ -424,10 +443,10 @@ fbq('track', 'PageView');
       <a href="invisible.html">Esenciales Invisibles <span class="caret">▾</span></a>
       <div class="dropdown">
         <a href="invisible.html">Ver todo</a>
-        <a href="invisible.html">Bras Adhesivos</a>
-        <a href="invisible.html">Cubre-Pezones</a>
-        <a href="invisible.html">Boob Tape</a>
-        <a href="invisible.html">Bikini Pads</a>
+        <a href="invisible.html?sub=Bras%20Adhesivos">Bras Adhesivos</a>
+        <a href="invisible.html?sub=Cubre-Pezones">Cubre-Pezones</a>
+        <a href="invisible.html?sub=Boob%20Tape">Boob Tape</a>
+        <a href="invisible.html?sub=Bikini%20Pads">Bikini Pads</a>
       </div>
     </li>
     <li><a href="#contact">Contacto</a></li>
@@ -452,11 +471,11 @@ fbq('track', 'PageView');
     <p>Desde el bikini perfecto hasta el resort wear que te acompaña del mar a la mesa.</p>
   </div>
   <div class="cat-grid reveal">
-    <a class="cat-card" href="swim.html"><span class="cat-ph c1"><img src="assets/images/Producto-3.jpeg" alt="" loading="lazy"></span><span class="cat-label"><span>Bikinis</span><small>Explorar</small></span></a>
-    <a class="cat-card" href="swim.html"><span class="cat-ph c2"><img src="assets/images/Imagen-portada-trajes-izquierdo.jpeg" alt="" loading="lazy" style="object-position:center 25%"></span><span class="cat-label"><span>Enterizos</span><small>Explorar</small></span></a>
-    <a class="cat-card" href="swim.html"><span class="cat-ph c3"><img src="assets/images/Producto-4.jpeg" alt="" loading="lazy" style="object-position:center 45%"></span><span class="cat-label"><span>Cover-Ups</span><small>Explorar</small></span></a>
-    <a class="cat-card" href="swim.html"><span class="cat-ph c4"><img src="assets/images/Imagen-portada-trajes-derecho.jpeg" alt="" loading="lazy" style="object-position:center 30%"></span><span class="cat-label"><span>Resort Wear</span><small>Explorar</small></span></a>
-    <a class="cat-card" href="invisible.html"><span class="cat-ph c5"><span class="cat-crown">♛</span></span><span class="cat-label"><span>Esenciales Invisibles</span><small>Explorar</small></span></a>
+    <a class="cat-card" href="swim.html?sub=Bikinis"><span class="cat-ph c1"><img src="assets/images/Producto-3.jpeg" alt="" loading="lazy"></span><span class="cat-label"><span>Bikinis</span><small>Explorar</small></span></a>
+    <a class="cat-card" href="swim.html?sub=Enterizos"><span class="cat-ph c2"><img src="assets/images/Imagen-portada-trajes-izquierdo.jpeg" alt="" loading="lazy" style="object-position:center 25%"></span><span class="cat-label"><span>Enterizos</span><small>Explorar</small></span></a>
+    <a class="cat-card" href="swim.html?sub=Cover-Ups"><span class="cat-ph c3"><img src="assets/images/Producto-4.jpeg" alt="" loading="lazy" style="object-position:center 45%"></span><span class="cat-label"><span>Cover-Ups</span><small>Explorar</small></span></a>
+    <a class="cat-card" href="swim.html?sub=Resort%20Wear"><span class="cat-ph c4"><img src="assets/images/Imagen-portada-trajes-derecho.jpeg" alt="" loading="lazy" style="object-position:center 30%"></span><span class="cat-label"><span>Resort Wear</span><small>Explorar</small></span></a>
+    <a class="cat-card" href="invisible.html"><span class="cat-ph c5"><img src="assets/images/Imagen-portada-productos.jpeg" alt="" loading="lazy"></span><span class="cat-label"><span>Esenciales Invisibles</span><small>Explorar</small></span></a>
   </div>
 </section>
 
@@ -579,7 +598,7 @@ fbq('track', 'PageView');
       <h4>Comprar</h4>
       <a href="swim.html">Nuevas Llegadas</a>
       <a href="swim.html">Trajes de Baño</a>
-      <a href="swim.html">Resort Wear</a>
+      <a href="swim.html?sub=Resort%20Wear">Resort Wear</a>
       <a href="invisible.html">Esenciales Invisibles</a>
     </div>
     <div class="foot-col">
@@ -641,7 +660,7 @@ fbq('track', 'PageView');
             msg.textContent = '¡Gracias! Revisa tu correo — tu 15% de descuento va en camino.';
             msg.style.color = 'var(--gold)';
             newsletterForm.reset();
-            if (typeof fbq === 'function') { fbq('track', 'Lead'); }
+            MMS.track('Lead');
           } else {
             msg.textContent = (result.data && result.data.error) || 'Algo salió mal. Intenta de nuevo.';
             msg.style.color = '#B3413B';

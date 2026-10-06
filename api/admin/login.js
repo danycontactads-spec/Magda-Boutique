@@ -10,7 +10,7 @@ module.exports = async function handler(req, res) {
   const adminPassword = process.env.ADMIN_PASSWORD;
   if (!adminPassword) {
     console.error('login: falta ADMIN_PASSWORD en el entorno.');
-    return res.status(500).json({ ok: false, error: 'Configuración del servidor incompleta.' });
+    return res.status(500).json({ ok: false, error: 'Falta configurar ADMIN_PASSWORD en Vercel.' });
   }
 
   const { password } = req.body || {};

@@ -79,6 +79,9 @@
     });
   }
   function money(n) { return '$' + (Number(n) || 0).toFixed(2); }
+  // Eventos del Meta Pixel (assets/js/pixel.js). Sin Pixel configurado no hace nada.
+  function track(event, params) { if (typeof window.mmsTrack === 'function') window.mmsTrack(event, params); }
+  function strList(v) { return Array.isArray(v) ? v.map(function (x) { return String(x).trim(); }).filter(Boolean) : []; }
 
   // Acepta productos de Supabase (imagen_url) o del respaldo (imagenes[]).
   // Si en el futuro se agregan columnas descripcion/tallas/colores/imagenes, se usan automáticamente.
@@ -86,7 +89,7 @@
     var cat = p.categoria === 'esenciales' ? 'esenciales' : 'trajes';
     var imgs = Array.isArray(p.imagenes) ? p.imagenes.filter(Boolean) : [];
     if (!imgs.length && p.imagen_url) imgs = [p.imagen_url];
-    var tallas = Array.isArray(p.tallas) && p.tallas.length ? p.tallas
+    var tallas = strList(p.tallas).length ? strList(p.tallas)
       : (SIZES_BY_SUB[p.subcategoria] || (cat === 'esenciales' ? ['Talla única'] : ['S', 'M', 'L']));
     var desc = p.descripcion && String(p.descripcion).trim();
     return {
@@ -102,7 +105,7 @@
       etiqueta: p.etiqueta || '',
       descripcion: desc || DEFAULT_DESC[cat],
       tallas: tallas,
-      colores: Array.isArray(p.colores) ? p.colores : [],
+      colores: strList(p.colores),
       demo: !!p.demo
     };
   }
@@ -204,7 +207,7 @@
     if (existing) existing.qty = Math.min(MAX_QTY, existing.qty + qty);
     else items.push({ key: key, id: p.id, nombre: p.nombre, precio: p.precio, imagen: p.imagenes[0] || '', foco: p.foco || '', categoria: p.categoria, subcategoria: p.subcategoria, talla: talla, color: color, qty: qty });
     writeCart(items);
-    if (typeof window.fbq === 'function') window.fbq('track', 'AddToCart', { value: p.precio * qty, currency: 'USD', content_ids: [p.id] });
+    track('AddToCart', { value: p.precio * qty, currency: 'USD', content_ids: [p.id], content_name: p.nombre, content_type: 'product' });
   }
 
   function setQty(key, qty) {
@@ -429,6 +432,7 @@
       bump: bump
     },
     toast: toast,
+    track: track,
     saveLastOrder: saveLastOrder,
     readLastOrder: readLastOrder
   };

@@ -1,6 +1,7 @@
 const { requireAdmin } = require('../_lib/auth');
 const { getSupabaseAdmin } = require('../_lib/supabaseAdmin');
 const { CATEGORIES } = require('../_lib/categories');
+const { PRODUCT_COLUMNS } = require('../_lib/productColumns');
 
 function validateProduct(body) {
   const errors = [];
@@ -48,9 +49,30 @@ function validateProduct(body) {
   const orden = Number(body.orden);
   out.orden = Number.isFinite(orden) ? Math.trunc(orden) : 0;
 
+  out.descripcion = typeof body.descripcion === 'string' && body.descripcion.trim()
+    ? body.descripcion.trim().slice(0, 2000)
+    : null;
+  out.etiqueta = typeof body.etiqueta === 'string' && body.etiqueta.trim()
+    ? body.etiqueta.trim().slice(0, 30)
+    : null;
+  out.colores = toList(body.colores);
+  out.tallas = toList(body.tallas);
+
   return { errors, data: out };
 }
 
+// Acepta un arreglo o un texto separado por comas ("S, M, L").
+function toList(value) {
+  const raw = Array.isArray(value) ? value : typeof value === 'string' ? value.split(',') : [];
+  const seen = new Set();
+  return raw
+    .filter((v) => typeof v === 'string')
+    .map((v) => v.trim().slice(0, 40))
+    .filter((v) => v && !seen.has(v.toLowerCase()) && seen.add(v.toLowerCase()))
+    .slice(0, 20);
+}
+
+// GET    /api/admin/products         -> listar (sin caché, para el panel)
 // POST   /api/admin/products         -> crear
 // PUT    /api/admin/products         -> editar (body incluye id)
 // DELETE /api/admin/products?id=...  -> eliminar
@@ -60,6 +82,20 @@ module.exports = async function handler(req, res) {
 
   try {
     const supabase = getSupabaseAdmin();
+
+    if (req.method === 'GET') {
+      const { data, error } = await supabase
+        .from('products')
+        .select(PRODUCT_COLUMNS)
+        .order('orden', { ascending: true })
+        .order('created_at', { ascending: false });
+      if (error) {
+        console.error('GET /api/admin/products', error);
+        return res.status(500).json({ ok: false, error: 'No se pudieron cargar los productos. Revisa que sql/schema.sql se haya ejecutado en Supabase.' });
+      }
+      res.setHeader('Cache-Control', 'no-store');
+      return res.status(200).json({ ok: true, products: data });
+    }
 
     if (req.method === 'POST') {
       const { errors, data } = validateProduct(req.body || {});
@@ -103,10 +139,16 @@ module.exports = async function handler(req, res) {
       return res.status(200).json({ ok: true });
     }
 
-    res.setHeader('Allow', 'POST, PUT, DELETE');
+    res.setHeader('Allow', 'GET, POST, PUT, DELETE');
     return res.status(405).json({ ok: false, error: 'Método no permitido.' });
   } catch (err) {
     console.error('/api/admin/products unexpected', err);
-    return res.status(500).json({ ok: false, error: 'Error inesperado del servidor.' });
+    const notConfigured = /SUPABASE_URL|SUPABASE_SERVICE_ROLE_KEY/.test(String(err && err.message));
+    return res.status(500).json({
+      ok: false,
+      error: notConfigured
+        ? 'El panel aún no está conectado a la base de datos (faltan las variables de Supabase en Vercel).'
+        : 'Error inesperado del servidor.',
+    });
   }
 };

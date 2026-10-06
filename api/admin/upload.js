@@ -56,6 +56,12 @@ module.exports = async function handler(req, res) {
     return res.status(200).json({ ok: true, url: data.publicUrl });
   } catch (err) {
     console.error('/api/admin/upload unexpected', err);
-    return res.status(500).json({ ok: false, error: 'Error inesperado al subir la imagen.' });
+    const notConfigured = /SUPABASE_URL|SUPABASE_SERVICE_ROLE_KEY/.test(String(err && err.message));
+    return res.status(500).json({
+      ok: false,
+      error: notConfigured
+        ? 'El panel aún no está conectado a la base de datos (faltan las variables de Supabase en Vercel).'
+        : 'Error inesperado al subir la imagen.',
+    });
   }
 };

@@ -4,7 +4,22 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>¡Gracias por tu compra! — Madam Maison du Soleil by Magda</title>
+<meta name="description" content="Gracias por comprar en Madam Maison du Soleil by Magda. Tu pedido ya está en manos de la Maison.">
 <meta name="robots" content="noindex, nofollow">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Madam Maison du Soleil by Magda">
+<meta property="og:locale" content="es_ES">
+<meta property="og:title" content="¡Gracias por tu compra! — Madam Maison du Soleil by Magda">
+<meta property="og:description" content="Gracias por comprar en Madam Maison du Soleil by Magda. Tu pedido ya está en manos de la Maison.">
+<meta property="og:url" content="https://magda-boutique.vercel.app/gracias.html">
+<meta property="og:image" content="https://magda-boutique.vercel.app/assets/images/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Madam Maison du Soleil by Magda — trajes de baño y resort wear de lujo">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="¡Gracias por tu compra! — Madam Maison du Soleil by Magda">
+<meta name="twitter:description" content="Gracias por comprar en Madam Maison du Soleil by Magda. Tu pedido ya está en manos de la Maison.">
+<meta name="twitter:image" content="https://magda-boutique.vercel.app/assets/images/og-image.jpg">
 <meta name="theme-color" content="#E7B7C1">
 <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -73,21 +88,7 @@
     .thanks-body { padding:36px 16px 70px; }
   }
 </style>
-<!-- Meta Pixel (desactivado — reemplaza TU_PIXEL_ID y descomenta para activar)
-<script>
-!function(f,b,e,v,n,t,s)
-{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-n.queue=[];t=b.createElement(e);t.async=!0;
-t.src=v;s=b.getElementsByTagName(e)[0];
-s.parentNode.insertBefore(t,s)}(window, document,'script',
-'https://connect.facebook.net/en_US/fbevents.js');
-fbq('init', 'TU_PIXEL_ID');
-fbq('track', 'PageView');
-</script>
-<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=TU_PIXEL_ID&ev=PageView&noscript=1"/></noscript>
--->
+<script src="assets/js/pixel.js"></script>
 </head>
 <body>
 <div class="announce">Envío gratis en pedidos superiores a $100 · Where European Elegance Meets Caribbean Soul</div>
@@ -194,18 +195,19 @@ fbq('track', 'PageView');
   document.getElementById('orderCard').hidden = false;
   document.getElementById('demoFlag').hidden = !order.demo;
 
-  /* Meta Pixel — evento Purchase (descomentar cuando el Pixel ID esté configurado arriba).
+  /* Meta Pixel — evento Purchase. Queda apagado mientras el checkout sea demo
+     (no hay cobro real). Descomentar al conectar Stripe.
      Se dispara una sola vez por pedido gracias a la marca en sessionStorage.
   try {
     var firedKey = 'mms_purchase_' + order.numero;
-    if (typeof fbq === 'function' && !sessionStorage.getItem(firedKey)) {
-      fbq('track', 'Purchase', {
+    if (!order.demo && !sessionStorage.getItem(firedKey)) {
+      MMS.track('Purchase', {
         value: order.total,
         currency: 'USD',
         content_type: 'product',
         content_ids: order.items.map(function (i) { return i.id; }),
         num_items: order.items.reduce(function (s, i) { return s + i.qty; }, 0)
-      }, { eventID: order.numero });
+      });
       sessionStorage.setItem(firedKey, '1');
     }
   } catch (e) {}

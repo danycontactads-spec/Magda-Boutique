@@ -19,9 +19,9 @@
 @keyframes mmsBump { 0%{transform:scale(1)} 40%{transform:scale(1.35)} 100%{transform:scale(1)} }
 
 /* ── Menú móvil ── */
-.hamburger { display:none; }
+.nav-icon.hamburger { display:none; }
 @media (max-width:900px) {
-  .hamburger { display:flex; }
+  .nav-icon.hamburger { display:flex; }
   .nav-menu.open {
     display:flex !important; flex-direction:column; align-items:center; gap:14px; padding:18px 5% 22px;
   }
@@ -141,3 +141,22 @@ html.mms-lock, html.mms-lock body { overflow:hidden; }
 @media (hover:none) {
   .prod-img .quick { transform:translateY(0) !important; }
 }
+
+/* ── Móvil: grillas a 2 columnas (más prolijo que 1 tarjeta gigante por fila) ── */
+@media (max-width:560px) {
+  body .prod-grid { grid-template-columns:repeat(2, minmax(0, 1fr)); gap:26px 14px; }
+  body .cat-grid { grid-template-columns:repeat(2, minmax(0, 1fr)); gap:12px; }
+  body .cat-grid .cat-card:last-child:nth-child(odd) { grid-column:1 / -1; aspect-ratio:16/10; }
+  body .cat-label { padding:0 10px 16px; }
+  body .cat-label span { font-size:1.05rem; }
+  body .cat-label small { font-size:.56rem; padding:5px 12px; letter-spacing:.14em; }
+  body .prod-card h4 { font-size:.72rem; letter-spacing:.05em; }
+  body .prod-img .quick { padding:8px 4px; font-size:.58rem; letter-spacing:.1em; }
+  body .prod-body h4 { font-size:.9rem; }
+  body .prod-body .add { padding:9px 6px; font-size:.58rem; letter-spacing:.1em; }
+  body .filters { gap:8px; }
+  body .chip { padding:8px 14px; font-size:.64rem; }
+}
+/* Con el carrito abierto, el aviso sube para no tapar los botones */
+html.mms-lock .mms-toast { bottom:auto; top:86px; transform:translate(-50%, -20px); }
+html.mms-lock .mms-toast.show { transform:translate(-50%, 0); }

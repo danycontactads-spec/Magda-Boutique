@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /admin.html
 
-Sitemap: https://madammaisondusoleilbymagda.life/sitemap.xml
+Sitemap: https://magda-boutique.vercel.app/sitemap.xml

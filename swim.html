@@ -5,14 +5,21 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Trajes de Baño — Madam Maison du Soleil by Magda</title>
 <meta name="description" content="Colección Soleil Swim: bikinis, enterizos, cover-ups y resort wear de lujo. Elegancia europea, alma caribeña.">
-<link rel="canonical" href="https://madammaisondusoleilbymagda.life/swim.html">
+<link rel="canonical" href="https://magda-boutique.vercel.app/swim.html">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Madam Maison du Soleil by Magda">
+<meta property="og:locale" content="es_ES">
 <meta property="og:title" content="Trajes de Baño — Madam Maison du Soleil by Magda">
 <meta property="og:description" content="Colección Soleil Swim: bikinis, enterizos, cover-ups y resort wear de lujo. Elegancia europea, alma caribeña.">
-<meta property="og:url" content="https://madammaisondusoleilbymagda.life/swim.html">
-<meta property="og:image" content="assets/images/og-image.jpg">
+<meta property="og:url" content="https://magda-boutique.vercel.app/swim.html">
+<meta property="og:image" content="https://magda-boutique.vercel.app/assets/images/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Madam Maison du Soleil by Magda — trajes de baño y resort wear de lujo">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Trajes de Baño — Madam Maison du Soleil by Magda">
+<meta name="twitter:description" content="Colección Soleil Swim: bikinis, enterizos, cover-ups y resort wear de lujo. Elegancia europea, alma caribeña.">
+<meta name="twitter:image" content="https://magda-boutique.vercel.app/assets/images/og-image.jpg">
 <meta name="theme-color" content="#E7B7C1">
 <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg">
 <script type="application/ld+json">
@@ -20,8 +27,8 @@
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
   "itemListElement": [
-    {"@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://madammaisondusoleilbymagda.life/"},
-    {"@type": "ListItem", "position": 2, "name": "Trajes de Baño", "item": "https://madammaisondusoleilbymagda.life/swim.html"}
+    {"@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://magda-boutique.vercel.app/"},
+    {"@type": "ListItem", "position": 2, "name": "Trajes de Baño", "item": "https://magda-boutique.vercel.app/swim.html"}
   ]
 }
 </script>
@@ -125,21 +132,7 @@
   .reveal.in { opacity:1; transform:translateY(0); }
   @media(prefers-reduced-motion:reduce){ .reveal{opacity:1;transform:none;transition:none;} }
 </style>
-<!-- Meta Pixel (desactivado — reemplaza TU_PIXEL_ID y descomenta para activar)
-<script>
-!function(f,b,e,v,n,t,s)
-{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-n.queue=[];t=b.createElement(e);t.async=!0;
-t.src=v;s=b.getElementsByTagName(e)[0];
-s.parentNode.insertBefore(t,s)}(window, document,'script',
-'https://connect.facebook.net/en_US/fbevents.js');
-fbq('init', 'TU_PIXEL_ID');
-fbq('track', 'PageView');
-</script>
-<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=TU_PIXEL_ID&ev=PageView&noscript=1"/></noscript>
--->
+<script src="assets/js/pixel.js"></script>
 </head>
 <body>
 <div class="announce">Envío gratis en pedidos superiores a $100 · Where European Elegance Meets Caribbean Soul</div>
@@ -243,7 +236,9 @@ fbq('track', 'PageView');
     var grid = document.getElementById('prod-grid');
     grid.innerHTML = products.map(renderCard).join('');
     grid.removeAttribute('aria-busy');
-    applyFilter(document.querySelector('.chip.active').dataset.sub || '');
+    var wanted = new URLSearchParams(location.search).get('sub');
+    var chip = wanted && Array.prototype.filter.call(document.querySelectorAll('.chip'), function(c){ return c.dataset.sub === wanted; })[0];
+    if (chip) selectChip(chip); else applyFilter(document.querySelector('.chip.active').dataset.sub || '');
   });
 </script>
 </body>

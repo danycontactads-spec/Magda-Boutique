@@ -7,6 +7,18 @@
 <meta name="description" content="Descubre las piezas de Madam Maison du Soleil by Magda: trajes de baño, resort wear y esenciales invisibles de lujo.">
 <meta property="og:type" content="product">
 <meta property="og:site_name" content="Madam Maison du Soleil by Magda">
+<meta property="og:locale" content="es_ES">
+<meta property="og:title" content="Producto — Madam Maison du Soleil by Magda">
+<meta property="og:description" content="Descubre las piezas de Madam Maison du Soleil by Magda: trajes de baño, resort wear y esenciales invisibles de lujo.">
+<meta property="og:url" content="https://magda-boutique.vercel.app/producto.html">
+<meta property="og:image" content="https://magda-boutique.vercel.app/assets/images/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Madam Maison du Soleil by Magda — trajes de baño y resort wear de lujo">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Producto — Madam Maison du Soleil by Magda">
+<meta name="twitter:description" content="Descubre las piezas de Madam Maison du Soleil by Magda: trajes de baño, resort wear y esenciales invisibles de lujo.">
+<meta name="twitter:image" content="https://magda-boutique.vercel.app/assets/images/og-image.jpg">
 <meta name="theme-color" content="#E7B7C1">
 <link rel="icon" type="image/svg+xml" href="assets/images/favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -111,6 +123,7 @@
     .thumbs button { width:62px; }
   }
 </style>
+<script src="assets/js/pixel.js"></script>
 </head>
 <body>
 <div class="announce">Envío gratis en pedidos superiores a $100 · Where European Elegance Meets Caribbean Soul</div>
@@ -203,6 +216,7 @@
     document.title = p.nombre + ' — Madam Maison du Soleil by Magda';
     var md = document.querySelector('meta[name="description"]');
     if (md) md.setAttribute('content', p.descripcion.slice(0, 155));
+    setMeta(p);
 
     root.innerHTML =
       '<div class="pdp">' +
@@ -305,11 +319,62 @@
     });
   }
 
+  // Metadatos del producto para compartir y para Google (Product + Breadcrumb).
+  function setMeta(p) {
+    var url = location.origin + '/producto.html?id=' + encodeURIComponent(p.id);
+    var img = p.imagenes[0] ? new URL(p.imagenes[0], location.href).href : location.origin + '/assets/images/og-image.jpg';
+    var set = function (sel, val) { var el = document.querySelector(sel); if (el) el.setAttribute('content', val); };
+    set('meta[property="og:title"]', document.title);
+    set('meta[name="twitter:title"]', document.title);
+    set('meta[property="og:description"]', p.descripcion.slice(0, 155));
+    set('meta[name="twitter:description"]', p.descripcion.slice(0, 155));
+    set('meta[property="og:url"]', url);
+    set('meta[property="og:image"]', img);
+    set('meta[name="twitter:image"]', img);
+    var canon = document.createElement('link');
+    canon.rel = 'canonical'; canon.href = url;
+    document.head.appendChild(canon);
+    var ld = document.createElement('script');
+    ld.type = 'application/ld+json';
+    ld.textContent = JSON.stringify({
+      '@context': 'https://schema.org',
+      '@graph': [
+        {
+          '@type': 'Product',
+          name: p.nombre,
+          description: p.descripcion,
+          image: [img],
+          sku: p.id,
+          category: MMS.CAT_LABEL[p.categoria] + (p.subcategoria ? ' > ' + p.subcategoria : ''),
+          brand: { '@type': 'Brand', name: 'Madam Maison du Soleil by Magda' },
+          offers: {
+            '@type': 'Offer',
+            url: url,
+            price: p.precio.toFixed(2),
+            priceCurrency: 'USD',
+            availability: p.agotado ? 'https://schema.org/OutOfStock' : 'https://schema.org/InStock',
+            itemCondition: 'https://schema.org/NewCondition'
+          }
+        },
+        {
+          '@type': 'BreadcrumbList',
+          itemListElement: [
+            { '@type': 'ListItem', position: 1, name: 'Inicio', item: location.origin + '/' },
+            { '@type': 'ListItem', position: 2, name: MMS.CAT_LABEL[p.categoria], item: location.origin + '/' + MMS.CAT_PAGE[p.categoria] },
+            { '@type': 'ListItem', position: 3, name: p.nombre, item: url }
+          ]
+        }
+      ]
+    });
+    document.head.appendChild(ld);
+  }
+
   MMS.getProduct(id).then(function (p) {
     if (!p) return notFound();
     state.product = p;
     render();
     renderRelated(p);
+    MMS.track('ViewContent', { content_ids: [p.id], content_name: p.nombre, content_type: 'product', value: p.precio, currency: 'USD' });
   });
 })();
 </script>

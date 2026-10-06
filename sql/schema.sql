@@ -1,5 +1,6 @@
 -- Madam Maison du Soleil by Magda — Panel Administrativo
--- Ejecutar en Supabase → SQL Editor (una sola vez)
+-- Ejecutar en Supabase → SQL Editor. Se puede volver a ejecutar sin romper nada
+-- (por ejemplo, para agregar las columnas nuevas a una tabla ya creada).
 
 create extension if not exists "pgcrypto";
 
@@ -16,7 +17,15 @@ create table if not exists public.products (
   created_at timestamptz not null default now()
 );
 
+-- Detalles que se muestran en la ficha del producto (producto.html).
+-- colores/tallas vacíos = la tienda usa tallas por defecto según subcategoría.
+alter table public.products add column if not exists descripcion text;
+alter table public.products add column if not exists etiqueta text;
+alter table public.products add column if not exists colores text[] not null default '{}';
+alter table public.products add column if not exists tallas text[] not null default '{}';
+
 -- Restringe subcategoria a las opciones válidas de cada categoría
+alter table public.products drop constraint if exists subcategoria_valida;
 alter table public.products
   add constraint subcategoria_valida check (
     subcategoria is null
@@ -40,20 +49,9 @@ create policy "Lectura pública de productos"
   to anon, authenticated
   using (true);
 
--- ── Storage: bucket de imágenes de productos ──
--- Crea el bucket "product-images" desde el Dashboard (Storage → New bucket
--- → Public bucket = ON) siguiendo las instrucciones del README. Si prefieres
--- crearlo por SQL, descomenta las siguientes líneas:
-
--- insert into storage.buckets (id, name, public)
--- values ('product-images', 'product-images', true)
--- on conflict (id) do nothing;
-
--- drop policy if exists "Lectura pública de imágenes de productos" on storage.objects;
--- create policy "Lectura pública de imágenes de productos"
---   on storage.objects for select
---   to anon, authenticated
---   using (bucket_id = 'product-images');
-
--- No se agregan policies de insert/update/delete para storage.objects:
--- las subidas solo las hace /api/admin/upload con la service role key.
+-- ── Storage: bucket público de imágenes de productos ──
+-- Las subidas solo las hace /api/admin/upload con la service role key,
+-- por eso no se agregan policies de insert/update/delete en storage.objects.
+insert into storage.buckets (id, name, public)
+values ('product-images', 'product-images', true)
+on conflict (id) do update set public = true;
