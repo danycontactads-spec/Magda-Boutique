@@ -112,6 +112,8 @@
 
   /* ── Catálogo ── */
   var apiPromise = null;
+  var known = {}; // id -> producto, para "agregar" desde las tarjetas
+  function remember(list) { (list || []).forEach(function (p) { known[p.id] = p; }); return list; }
   function fetchApi() {
     if (apiPromise) return apiPromise;
     apiPromise = new Promise(function (resolve) {
@@ -133,15 +135,15 @@
   function loadProducts(categoria) {
     return fetchApi().then(function (list) {
       var byCat = function (arr) { return categoria ? arr.filter(function (p) { return p.categoria === categoria; }) : arr; };
-      if (!list) return byCat(FALLBACK);
-      if (categoria) { var own = byCat(list); return own.length ? own : byCat(FALLBACK); }
+      if (!list) return remember(byCat(FALLBACK));
+      if (categoria) { var own = byCat(list); return remember(own.length ? own : byCat(FALLBACK)); }
       var out = list.slice();
       ['trajes', 'esenciales'].forEach(function (c) {
         if (!list.some(function (p) { return p.categoria === c; })) {
           out = out.concat(FALLBACK.filter(function (p) { return p.categoria === c; }));
         }
       });
-      return out;
+      return remember(out);
     });
   }
 
@@ -361,6 +363,78 @@
     toastTimer = setTimeout(function () { el.classList.remove('show'); }, 2600);
   }
 
+  /* ── Agregar desde las tarjetas del catálogo ── */
+  function quickAddHtml(p) {
+    if (p.agotado) return '';
+    return '<button type="button" class="mms-qa" data-quick-add="' + esc(p.id) + '">Agregar al carrito</button>';
+  }
+
+  function lookup(id) { return known[id] || findFallback(id); }
+
+  function chipRow(label, list, attr) {
+    return '<div class="mms-qa-row"><span class="mms-qa-label">' + label + '</span><div class="mms-qa-chips">' +
+      list.map(function (v) { return '<button type="button" ' + attr + '="' + esc(v) + '">' + esc(v) + '</button>'; }).join('') +
+      '</div></div>';
+  }
+
+  function closePickers() {
+    document.querySelectorAll('.mms-qa-pick').forEach(function (el) { el.remove(); });
+  }
+
+  function addedFeedback() {
+    bump();
+    toast('Agregado al carrito ✓');
+    openCart();
+  }
+
+  // Con una sola talla (y un solo color) se agrega directo; si no, se abre un
+  // selector sobre la foto y no se agrega nada hasta elegir.
+  function quickAdd(btn) {
+    var id = btn.getAttribute('data-quick-add');
+    var card = btn.closest('.prod-card') || btn.parentNode;
+    var p = lookup(id);
+    if (!p) { location.href = productUrl({ id: id }); return; }
+    var talla = p.tallas.length === 1 ? p.tallas[0] : '';
+    var color = p.colores.length === 1 ? p.colores[0] : '';
+    if (talla && (color || !p.colores.length)) { addToCart(p, { talla: talla, color: color, qty: 1 }); addedFeedback(); return; }
+
+    var existing = card.querySelector('.mms-qa-pick');
+    if (existing) { pickerSubmit(existing); return; }
+    closePickers();
+    var pick = document.createElement('div');
+    pick.className = 'mms-qa-pick';
+    pick.setAttribute('data-qa-id', p.id);
+    pick.setAttribute('data-talla', talla);
+    pick.setAttribute('data-color', color);
+    pick.innerHTML = '<button type="button" class="mms-qa-x" data-qa-close aria-label="Cerrar">&times;</button>' +
+      (p.colores.length > 1 ? chipRow('Color', p.colores, 'data-qa-color') : '') +
+      (p.tallas.length > 1 ? chipRow('Elige tu talla', p.tallas, 'data-qa-talla') : '') +
+      '<div class="mms-qa-err" role="alert"></div>';
+    (card.querySelector('.prod-img') || card).appendChild(pick);
+  }
+
+  function pickerSubmit(pick) {
+    var p = lookup(pick.getAttribute('data-qa-id'));
+    var talla = pick.getAttribute('data-talla');
+    var color = pick.getAttribute('data-color');
+    var err = pick.querySelector('.mms-qa-err');
+    if (p.colores.length > 1 && !color) { err.textContent = 'Elige un color'; toast('Elige un color'); return; }
+    if (!talla) { err.textContent = 'Elige tu talla'; toast('Elige tu talla'); return; }
+    addToCart(p, { talla: talla, color: color, qty: 1 });
+    pick.remove();
+    addedFeedback();
+  }
+
+  function pickerChoose(chip, kind) {
+    var pick = chip.closest('.mms-qa-pick');
+    pick.setAttribute('data-' + kind, chip.getAttribute('data-qa-' + kind));
+    chip.parentNode.querySelectorAll('button').forEach(function (b) { b.classList.toggle('active', b === chip); });
+    pick.querySelector('.mms-qa-err').textContent = '';
+    var p = lookup(pick.getAttribute('data-qa-id'));
+    // Con todo elegido, agrega sin pedir otro clic.
+    if (pick.getAttribute('data-talla') && (pick.getAttribute('data-color') || p.colores.length < 2)) pickerSubmit(pick);
+  }
+
   /* ── Pedido (solo datos no sensibles; nunca datos de tarjeta) ── */
   function saveLastOrder(order) { try { sessionStorage.setItem(ORDER_KEY, JSON.stringify(order)); } catch (e) { window.__mmsOrder = order; } }
   function readLastOrder() {
@@ -372,6 +446,19 @@
   document.addEventListener('click', function (e) {
     var t = e.target.closest ? e.target : null;
     if (!t) return;
+    var qa = t.closest('[data-quick-add], .mms-qa-pick');
+    if (qa) {
+      // Viven dentro de la tarjeta <a>: el clic no debe navegar a la ficha.
+      e.preventDefault();
+      var b = t.closest('[data-quick-add], [data-qa-talla], [data-qa-color], [data-qa-close]');
+      if (!b) return;
+      if (b.hasAttribute('data-quick-add')) quickAdd(b);
+      else if (b.hasAttribute('data-qa-talla')) pickerChoose(b, 'talla');
+      else if (b.hasAttribute('data-qa-color')) pickerChoose(b, 'color');
+      else b.closest('.mms-qa-pick').remove();
+      return;
+    }
+    if (!t.closest('.prod-card')) closePickers();
     var open = t.closest('[data-cart-open]');
     if (open) { e.preventDefault(); openCart(); return; }
     if (t.closest('[data-cart-close]')) { e.preventDefault(); closeCart(); return; }
@@ -397,8 +484,20 @@
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeCart(); });
   window.addEventListener('storage', function (e) { if (e.key === CART_KEY) { memCart = null; refresh(); } });
 
+  // Carrito flotante (abajo a la izquierda; WhatsApp ocupa la derecha).
+  function buildFab() {
+    var fab = document.createElement('button');
+    fab.type = 'button';
+    fab.className = 'mms-fab';
+    fab.setAttribute('data-cart-open', '');
+    fab.setAttribute('aria-label', 'Abrir carrito');
+    fab.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="M6 7h12l-1 13H7L6 7z"/><path d="M9 7a3 3 0 0 1 6 0"/></svg>' +
+      '<span class="mms-fab-count" data-cart-count hidden>0</span>';
+    document.body.appendChild(fab);
+  }
+
   function init() {
-    if (!document.body.hasAttribute('data-no-drawer')) buildDrawer();
+    if (!document.body.hasAttribute('data-no-drawer')) { buildDrawer(); buildFab(); }
     refresh();
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init);
@@ -413,6 +512,7 @@
     SHIPPING: SHIPPING,
     MAX_QTY: MAX_QTY,
     loadProducts: loadProducts,
+    quickAddHtml: quickAddHtml,
     getProduct: getProduct,
     productUrl: productUrl,
     imgHtml: imgHtml,

@@ -685,7 +685,7 @@
     function renderCard(p){
       return '<a class="prod-card'+(p.agotado?' agotado':'')+'" href="'+MMS.productUrl(p)+'">'+
         '<div class="prod-img">'+MMS.tagHtml(p)+MMS.imgHtml(p)+'<span class="quick">Ver producto</span></div>'+
-        '<h4>'+esc(p.nombre)+'</h4><div class="price">'+money(p.precio)+'</div></a>';
+        '<h4>'+esc(p.nombre)+'</h4><div class="price">'+money(p.precio)+'</div>'+MMS.quickAddHtml(p)+'</a>';
     }
 
     function pickFeatured(products, categoria, limit){

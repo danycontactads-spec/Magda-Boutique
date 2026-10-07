@@ -131,7 +131,7 @@ html.mms-lock, html.mms-lock body { overflow:hidden; }
   background:var(--ink); color:var(--pearl); padding:13px 24px; border-radius:50px;
   font-family:'Montserrat',sans-serif; font-size:.78rem; letter-spacing:.05em;
   box-shadow:0 14px 34px rgba(58,46,42,.3); transition:opacity .3s, transform .3s; pointer-events:none;
-  max-width:calc(100% - 32px); text-align:center;
+  width:max-content; max-width:calc(100% - 32px); text-align:center;
 }
 .mms-toast.show { opacity:1; transform:translate(-50%, 0); }
 
@@ -160,3 +160,61 @@ html.mms-lock, html.mms-lock body { overflow:hidden; }
 /* Con el carrito abierto, el aviso sube para no tapar los botones */
 html.mms-lock .mms-toast { bottom:auto; top:86px; transform:translate(-50%, -20px); }
 html.mms-lock .mms-toast.show { transform:translate(-50%, 0); }
+
+/* ── Carrito flotante (abajo a la izquierda; WhatsApp va a la derecha) ── */
+.mms-fab {
+  position:fixed; left:26px; bottom:calc(26px + env(safe-area-inset-bottom, 0px)); z-index:210;
+  width:56px; height:56px; border-radius:50%; border:none; cursor:pointer; color:#fff;
+  display:flex; align-items:center; justify-content:center;
+  background:linear-gradient(135deg,var(--gold),var(--gold-soft));
+  box-shadow:0 8px 22px rgba(201,168,76,.4), 0 0 0 3px rgba(255,255,255,.7);
+  transition:transform .2s, opacity .25s, visibility .25s;
+}
+.mms-fab:hover { transform:scale(1.07); }
+.mms-fab:focus-visible { outline:2px solid var(--ink); outline-offset:3px; }
+.mms-fab svg { width:26px; height:26px; }
+.mms-fab-count {
+  position:absolute; top:-3px; right:-3px; min-width:22px; height:22px; padding:0 6px; border-radius:11px;
+  background:#D9718A; color:#fff; border:2px solid #fff; font-family:'Montserrat',sans-serif;
+  font-size:.66rem; font-weight:700; line-height:18px; text-align:center;
+}
+.mms-fab-count[hidden] { display:none; }
+.mms-fab-count.bump { animation:mmsBump .45s ease; }
+html.mms-lock .mms-fab { opacity:0; visibility:hidden; }
+@media (max-width:560px) {
+  .mms-fab { left:16px; bottom:calc(18px + env(safe-area-inset-bottom, 0px)); width:52px; height:52px; }
+  .mms-toast { bottom:calc(84px + env(safe-area-inset-bottom, 0px)); }
+}
+
+/* ── "Agregar al carrito" en las tarjetas del catálogo ── */
+.mms-qa {
+  display:block; width:100%; margin-top:12px; padding:11px 8px; min-height:40px; border-radius:50px; cursor:pointer;
+  border:1px solid var(--gold); background:transparent; color:var(--ink); font-family:'Montserrat',sans-serif;
+  font-size:.64rem; letter-spacing:.14em; text-transform:uppercase; font-weight:600; transition:background .2s, color .2s;
+}
+.mms-qa:hover { background:var(--gold); color:#fff; }
+.mms-qa-pick {
+  position:absolute; left:8px; right:8px; bottom:8px; z-index:5; padding:14px 10px 10px; border-radius:10px;
+  background:rgba(255,253,249,.97); box-shadow:0 8px 24px rgba(58,46,42,.18); text-align:center; cursor:default;
+  animation:mmsPickIn .2s ease;
+}
+@keyframes mmsPickIn { from{opacity:0; transform:translateY(8px)} to{opacity:1; transform:none} }
+.mms-qa-x { position:absolute; top:2px; right:6px; border:none; background:none; font-size:1.2rem; line-height:1; color:var(--ink-soft); cursor:pointer; padding:4px; }
+.mms-qa-row + .mms-qa-row { margin-top:8px; }
+.mms-qa-label { display:block; font-family:'Montserrat',sans-serif; font-size:.58rem; letter-spacing:.16em; text-transform:uppercase; font-weight:600; color:var(--gold); margin-bottom:7px; }
+.mms-qa-chips { display:flex; flex-wrap:wrap; justify-content:center; gap:6px; }
+.mms-qa-chips button {
+  min-width:36px; min-height:32px; padding:5px 10px; border-radius:50px; border:1px solid var(--line); background:#fff;
+  font-family:'Montserrat',sans-serif; font-size:.68rem; font-weight:500; color:var(--ink); cursor:pointer;
+}
+.mms-qa-chips button:hover { border-color:var(--ink); }
+.mms-qa-chips button.active { background:var(--ink); border-color:var(--ink); color:var(--pearl); }
+.mms-qa-err { color:var(--danger); font-family:'Montserrat',sans-serif; font-size:.64rem; min-height:1em; margin-top:6px; }
+@media (max-width:560px) {
+  .mms-qa { font-size:.56rem; letter-spacing:.08em; padding:10px 4px; }
+  .mms-qa-pick { left:4px; right:4px; bottom:4px; padding:12px 6px 6px; }
+}
+
+/* Aviso de talla/color faltante en la ficha */
+@keyframes mmsShake { 0%,100%{transform:none} 20%,60%{transform:translateX(-5px)} 40%,80%{transform:translateX(5px)} }
+.chips.shake { animation:mmsShake .4s ease; }

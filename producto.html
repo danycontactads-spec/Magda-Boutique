@@ -273,7 +273,9 @@
 
   function requireOpt(kind, msg) {
     if (state[kind]) return true;
-    document.getElementById(kind + 'Chips').classList.add('error');
+    var chips = document.getElementById(kind + 'Chips');
+    chips.classList.add('error');
+    chips.classList.remove('shake'); void chips.offsetWidth; chips.classList.add('shake');
     document.getElementById(kind + 'Err').textContent = msg;
     return false;
   }
@@ -297,10 +299,16 @@
       if (p.agotado) return;
       var okColor = !p.colores.length || requireOpt('color', 'Elige un color');
       var okTalla = requireOpt('talla', 'Elige tu talla');
-      if (!okColor || !okTalla) return;
+      if (!okColor || !okTalla) {
+        // Aviso visible: antes solo aparecía una línea roja pequeña y parecía que el botón no hacía nada.
+        MMS.toast(!okColor ? 'Elige un color' : 'Elige tu talla');
+        var miss = document.getElementById((!okColor ? 'color' : 'talla') + 'Chips');
+        if (miss.getBoundingClientRect().top < 70) miss.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        return;
+      }
       MMS.cart.add(p, { talla: state.talla, color: state.color, qty: state.qty });
       MMS.cart.bump();
-      MMS.toast('✦ ' + p.nombre + ' se agregó a tu bolsa');
+      MMS.toast('Agregado al carrito ✓');
       MMS.cart.open();
     }
   });

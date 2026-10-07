@@ -250,7 +250,7 @@
       '<div class="prod-body"><div class="cat">'+esc(catLabel)+'</div><h4>'+esc(p.nombre)+'</h4>'+
       (p.colores.length ? '<div class="meta">Color: '+esc(p.colores.join(' / '))+'</div>' : '')+
       '<div class="meta">'+esc(tallas)+'</div>'+
-      '<div class="price">'+money(p.precio)+'</div><span class="add">'+(p.agotado?'Agotado':'Ver producto')+'</span></div></a>';
+      '<div class="price">'+money(p.precio)+'</div>'+(p.agotado?'<span class="add">Agotado</span>':MMS.quickAddHtml(p))+'</div></a>';
   }
 
   MMS.loadProducts('esenciales').then(function(products){
