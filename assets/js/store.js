@@ -4,7 +4,6 @@
   'use strict';
 
   var CART_KEY = 'mms_cart_v1';
-  var ORDER_KEY = 'mms_last_order';
   var FREE_SHIPPING_FROM = 100;
   var SHIPPING = { estandar: 9.5, express: 19 };
   var MAX_QTY = 10;
@@ -435,13 +434,6 @@
     if (pick.getAttribute('data-talla') && (pick.getAttribute('data-color') || p.colores.length < 2)) pickerSubmit(pick);
   }
 
-  /* ── Pedido (solo datos no sensibles; nunca datos de tarjeta) ── */
-  function saveLastOrder(order) { try { sessionStorage.setItem(ORDER_KEY, JSON.stringify(order)); } catch (e) { window.__mmsOrder = order; } }
-  function readLastOrder() {
-    try { var o = JSON.parse(sessionStorage.getItem(ORDER_KEY) || 'null'); if (o) return o; } catch (e) { /* ignorar */ }
-    return window.__mmsOrder || null;
-  }
-
   /* ── Eventos globales ── */
   document.addEventListener('click', function (e) {
     var t = e.target.closest ? e.target : null;
@@ -532,8 +524,6 @@
       bump: bump
     },
     toast: toast,
-    track: track,
-    saveLastOrder: saveLastOrder,
-    readLastOrder: readLastOrder
+    track: track
   };
 })();

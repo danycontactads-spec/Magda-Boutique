@@ -79,15 +79,12 @@
   .pay-top span { display:flex; align-items:center; gap:10px; font-size:.84rem; font-weight:600; }
   .pay-top span svg { width:20px; height:20px; color:var(--ink); }
   .brands { display:flex; gap:6px; }
-  .brands svg { width:38px; height:24px; border-radius:4px; box-shadow:0 0 0 1px rgba(0,0,0,.07); transition:opacity .2s, filter .2s; }
-  .brands.detected svg { opacity:.25; filter:grayscale(1); }
-  .brands.detected svg.on { opacity:1; filter:none; }
-  .pay-body { padding:20px 20px 6px; }
-  .card-input { position:relative; }
-  .card-input input { padding-right:60px; letter-spacing:.06em; font-variant-numeric:tabular-nums; }
-  .card-input .lock { position:absolute; right:16px; top:15px; width:18px; height:18px; color:#B8AAA6; }
-  .pay-note { display:flex; gap:10px; align-items:flex-start; margin:4px 20px 20px; padding:12px 14px; background:#FBF6EA; border:1px dashed var(--gold-soft); border-radius:10px; font-size:.74rem; color:var(--ink-soft); line-height:1.5; }
+  .brands svg { width:38px; height:24px; border-radius:4px; box-shadow:0 0 0 1px rgba(0,0,0,.07); }
+  .pay-body { padding:18px 20px 20px; font-size:.84rem; color:var(--ink-soft); line-height:1.6; }
+  .pay-body b { color:var(--ink); }
+  .pay-note { display:flex; gap:10px; align-items:flex-start; margin:0 20px 20px; padding:12px 14px; background:#FBF6EA; border:1px dashed var(--gold-soft); border-radius:10px; font-size:.74rem; color:var(--ink-soft); line-height:1.5; }
   .pay-note b { color:var(--ink); }
+  .notice { margin:0 0 26px; padding:14px 16px; border-radius:10px; background:#FBF6EA; border:1px solid var(--gold-soft); font-size:.82rem; line-height:1.5; }
   .powered { display:flex; justify-content:center; align-items:center; gap:8px; margin-top:14px; font-size:.68rem; color:var(--ink-soft); letter-spacing:.04em; }
   .powered svg { width:13px; height:13px; }
 
@@ -150,7 +147,6 @@
     .co-main { padding:26px 16px 56px; }
     .co-side { padding:0 16px; }
     .row, .row-3 { grid-template-columns:1fr; gap:0; }
-    .row-card { grid-template-columns:1fr 1fr; gap:12px; }
     .secure .txt { display:none; }
     .wa { display:none; }
   }
@@ -171,6 +167,7 @@
     <div class="steps"><span>Bolsa</span><i>›</i><b>Información y pago</b><i>›</i><span>Confirmación</span></div>
     <h1>Finalizar compra</h1>
     <p class="lead">Estás a un paso de tu próxima escapada bajo el sol.</p>
+    <p class="notice" id="cancelNotice" role="status" hidden>No se realizó ningún cargo. Tu bolsa sigue intacta: revisa tus datos y vuelve a intentarlo cuando quieras.</p>
 
     <form id="coForm" novalidate autocomplete="on">
       <fieldset>
@@ -210,8 +207,8 @@
 
       <fieldset>
         <legend><span class="n">3</span>Pago</legend>
-        <!-- DEMO: los campos de tarjeta NO tienen atributo "name" y el formulario nunca se envía,
-             por lo que estos datos no salen del navegador ni se guardan en ningún lado. -->
+        <!-- La tarjeta se ingresa en la página segura de Stripe (Checkout hosted):
+             los datos de pago nunca pasan por este sitio. -->
         <div class="pay-box">
           <div class="pay-top">
             <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2.5" y="5" width="19" height="14" rx="2.5"/><line x1="2.5" y1="10" x2="21.5" y2="10"/></svg>Tarjeta de crédito o débito</span>
@@ -221,19 +218,10 @@
               <svg data-brand="amex" viewBox="0 0 38 24"><rect width="38" height="24" rx="4" fill="#2E77BC"/><text x="19" y="15.5" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-size="8" font-weight="700" fill="#fff" letter-spacing=".4">AMEX</text></svg>
             </div>
           </div>
-          <div class="pay-body">
-            <div class="field"><label for="c-num">Número de tarjeta</label>
-              <div class="card-input"><input id="c-num" type="text" inputmode="numeric" autocomplete="cc-number" placeholder="1234 1234 1234 1234" maxlength="23"><svg class="lock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></div>
-            </div>
-            <div class="row row-card">
-              <div class="field"><label for="c-exp">Vencimiento (MM/AA)</label><input id="c-exp" type="text" inputmode="numeric" autocomplete="cc-exp" placeholder="MM / AA" maxlength="7"></div>
-              <div class="field"><label for="c-cvc">CVC</label><input id="c-cvc" type="text" inputmode="numeric" autocomplete="cc-csc" placeholder="123" maxlength="4"></div>
-            </div>
-            <div class="field"><label for="c-name">Nombre en la tarjeta</label><input id="c-name" type="text" autocomplete="cc-name" placeholder="Como aparece en la tarjeta"></div>
-          </div>
-          <div class="pay-note"><span>🔒</span><span><b>Modo demostración.</b> No se realizará ningún cargo y los datos de tarjeta no se envían ni se almacenan. Puedes probar con 4242 4242 4242 4242.</span></div>
+          <div class="pay-body">Al continuar te llevaremos a la <b>página de pago segura de Stripe</b> para ingresar tu tarjeta. Tus datos de pago nunca pasan por nuestro sitio. Al terminar volverás aquí con la confirmación de tu pedido.</div>
+          <div class="pay-note" id="testNote" hidden><span>🧪</span><span><b>Modo prueba.</b> No se realizará ningún cargo real. Usa la tarjeta 4242 4242 4242 4242, cualquier fecha futura y cualquier CVC.</span></div>
         </div>
-        <div class="powered"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>Conexión cifrada · Pagos procesados de forma segura</div>
+        <div class="powered"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>Conexión cifrada · Pagos procesados por Stripe</div>
       </fieldset>
 
       <button type="submit" class="mms-btn mms-btn-gold pay-btn" id="payBtn"><span class="spinner"></span><span id="payLabel">Pagar</span></button>
@@ -265,8 +253,8 @@
 
 <div class="processing" id="processing" aria-live="assertive">
   <div class="ring"></div>
-  <h3>Procesando pago…</h3>
-  <p>Por favor no cierres ni actualices esta página.</p>
+  <h3>Conectando con el pago seguro…</h3>
+  <p>Te estamos llevando a la página de pago de Stripe.</p>
 </div>
 
 <a class="wa" href="https://wa.me/17866670539" target="_blank" rel="noopener" aria-label="WhatsApp"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.5 15.2L2 22l4.9-1.5A10 10 0 1 0 12 2zm5.8 14.2c-.2.7-1.4 1.3-2 1.4-.5.1-1.1.1-1.8-.1-.4-.1-1-.3-1.6-.6-2.8-1.2-4.6-4-4.8-4.2-.1-.2-1.1-1.4-1.1-2.7s.7-1.9.9-2.2c.2-.2.4-.3.6-.3h.5c.2 0 .4 0 .6.5l.7 1.7c.1.2.1.4 0 .5l-.3.5c-.1.2-.3.3-.1.6.1.2.6 1 1.3 1.6.9.8 1.6 1 1.9 1.2.2.1.4.1.5-.1l.6-.7c.2-.2.3-.2.6-.1l1.6.8c.3.1.4.2.5.3.1.2.1.6-.1 1.2z"/></svg></a>
@@ -281,27 +269,46 @@
   var formErr = document.getElementById('formErr');
   var busy = false;
 
-  /* ── Proveedor de pago ──────────────────────────────────────────────
-     Todo el cobro pasa por PaymentProvider.pay(). Hoy es una simulación.
-     // TODO: integrar Stripe aquí.
-     Para pasar a producción con Stripe Checkout:
-       1. Crear /api/create-checkout-session.js (serverless) que reciba los
-          items y el envío, cree la sesión con la secret key de Stripe y
-          devuelva { url }.
-       2. Reemplazar el cuerpo de pay() por un fetch a ese endpoint y
-          redirigir a session.url (Stripe aloja los campos de tarjeta).
-       3. Eliminar la sección "Pago" del formulario (Stripe la muestra).
-       4. Usar success_url = /gracias?session_id={CHECKOUT_SESSION_ID}.
-     Nunca enviar datos de tarjeta a nuestro servidor. */
-  var PaymentProvider = {
-    mode: 'demo',
-    pay: function (order) {
-      // TODO: integrar Stripe aquí (ver comentario arriba). La demo no envía nada a ningún servidor.
-      return new Promise(function (resolve) {
-        setTimeout(function () { resolve({ ok: true, id: order.numero }); }, 2000);
+  var FORM_KEY = 'mms_checkout_form';
+  var FORM_FIELDS = ['email', 'telefono', 'nombre', 'direccion', 'ciudad', 'pais'];
+
+  /* ── Pago con Stripe Checkout (página alojada por Stripe) ──
+     Solo se envían ids, cantidades y variantes: el servidor busca los precios
+     reales en Supabase y recalcula el envío. Nunca se envían datos de tarjeta. */
+  function startCheckout(payload) {
+    return fetch('/api/create-checkout-session', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    }).then(function (r) {
+      return r.json().catch(function () { return {}; }).then(function (json) {
+        if (!r.ok || !json.ok || !json.url) {
+          var err = new Error(json.error || 'No pudimos iniciar el pago. Intenta de nuevo.');
+          err.ids = json.ids || null;
+          err.code = json.code || '';
+          throw err;
+        }
+        return json.url;
       });
-    }
-  };
+    });
+  }
+
+  // Guarda los datos de contacto/envío para no perderlos si el cliente cancela en Stripe.
+  function saveForm() {
+    var data = {};
+    FORM_FIELDS.forEach(function (n) { data[n] = form[n].value; });
+    data.envio = shippingMethod();
+    try { sessionStorage.setItem(FORM_KEY, JSON.stringify(data)); } catch (e) { /* ignorar */ }
+  }
+  function restoreForm() {
+    try {
+      var data = JSON.parse(sessionStorage.getItem(FORM_KEY) || 'null');
+      if (!data) return;
+      FORM_FIELDS.forEach(function (n) { if (data[n] && !form[n].value) form[n].value = data[n]; });
+      var r = form.querySelector('input[name="envio"][value="' + (data.envio === 'express' ? 'express' : 'estandar') + '"]');
+      if (r) r.checked = true;
+    } catch (e) { /* ignorar */ }
+  }
 
   function shippingMethod() {
     var r = form.querySelector('input[name="envio"]:checked');
@@ -338,36 +345,7 @@
       '<a href="/invisible" class="mms-btn mms-btn-ghost">Esenciales Invisibles</a></div></div>';
   }
 
-  /* ── Formato de tarjeta (solo visual) ── */
-  var cNum = document.getElementById('c-num');
-  var cExp = document.getElementById('c-exp');
-  var cCvc = document.getElementById('c-cvc');
-  var brands = document.getElementById('brands');
-
-  function detectBrand(d) {
-    if (/^4/.test(d)) return 'visa';
-    if (/^(5[1-5]|2[2-7])/.test(d)) return 'mastercard';
-    if (/^3[47]/.test(d)) return 'amex';
-    return '';
-  }
-  cNum.addEventListener('input', function () {
-    var d = cNum.value.replace(/\D/g, '').slice(0, 19);
-    var b = detectBrand(d);
-    cNum.value = b === 'amex'
-      ? d.replace(/^(\d{0,4})(\d{0,6})(\d{0,5}).*/, function (_, a, b2, c) { return [a, b2, c].filter(Boolean).join(' '); })
-      : d.replace(/(\d{4})(?=\d)/g, '$1 ');
-    brands.classList.toggle('detected', !!b);
-    brands.querySelectorAll('svg').forEach(function (s) { s.classList.toggle('on', s.getAttribute('data-brand') === b); });
-    cCvc.maxLength = b === 'amex' ? 4 : 3;
-  });
-  cExp.addEventListener('input', function (e) {
-    var d = cExp.value.replace(/\D/g, '').slice(0, 4);
-    if (d.length === 1 && d > '1') d = '0' + d;
-    cExp.value = d.length > 2 ? d.slice(0, 2) + ' / ' + d.slice(2) : (d.length === 2 && e.inputType !== 'deleteContentBackward' ? d + ' / ' : d);
-  });
-  cCvc.addEventListener('input', function () { cCvc.value = cCvc.value.replace(/\D/g, '').slice(0, cCvc.maxLength); });
-
-  /* ── Validación (formato básico; no se envía nada) ── */
+  /* ── Validación de contacto y envío ── */
   function setErr(input, msg) {
     var f = input.closest('.field');
     var e = f.querySelector('.err');
@@ -385,20 +363,10 @@
       case 'f-addr': return setErr(input, v.length >= 5 ? '' : 'Ingresa tu dirección');
       case 'f-city': return setErr(input, v ? '' : 'Ingresa tu ciudad');
       case 'f-country': return setErr(input, v ? '' : 'Selecciona tu país');
-      case 'c-num': var n = v.replace(/\D/g, ''); return setErr(input, n.length >= 13 && n.length <= 19 ? '' : 'Número de tarjeta incompleto');
-      case 'c-exp':
-        var m = v.replace(/\D/g, '');
-        if (m.length !== 4) return setErr(input, 'Usa el formato MM/AA');
-        var mm = +m.slice(0, 2), yy = +m.slice(2);
-        var now = new Date(), cy = now.getFullYear() % 100, cm = now.getMonth() + 1;
-        if (mm < 1 || mm > 12) return setErr(input, 'Mes inválido');
-        return setErr(input, (yy > cy || (yy === cy && mm >= cm)) ? '' : 'La tarjeta está vencida');
-      case 'c-cvc': return setErr(input, v.length >= 3 ? '' : 'CVC incompleto');
-      case 'c-name': return setErr(input, v.length >= 3 ? '' : 'Ingresa el nombre del titular');
     }
     return true;
   }
-  var fields = ['f-email', 'f-phone', 'f-name', 'f-addr', 'f-city', 'f-country', 'c-num', 'c-exp', 'c-cvc', 'c-name'].map(function (id) { return document.getElementById(id); });
+  var fields = ['f-email', 'f-phone', 'f-name', 'f-addr', 'f-city', 'f-country'].map(function (id) { return document.getElementById(id); });
   fields.forEach(function (el) {
     el.addEventListener('blur', function () { if (el.value) check(el); });
     el.addEventListener('input', function () { if (el.closest('.field').classList.contains('invalid')) check(el); });
@@ -407,10 +375,12 @@
 
   form.addEventListener('change', function (e) { if (e.target.name === 'envio') renderSummary(); });
 
-  function orderNumber() {
-    var d = new Date();
-    var p = function (n) { return (n < 10 ? '0' : '') + n; };
-    return 'MMS-' + String(d.getFullYear()).slice(2) + p(d.getMonth() + 1) + p(d.getDate()) + '-' + Math.floor(1000 + Math.random() * 9000);
+  function resetBusy() {
+    busy = false;
+    payBtn.classList.remove('loading');
+    payBtn.disabled = false;
+    document.getElementById('processing').classList.remove('show');
+    renderSummary();
   }
 
   form.addEventListener('submit', function (e) {
@@ -426,48 +396,46 @@
     formErr.textContent = '';
     var items = MMS.cart.items();
     if (!items.length) { renderEmpty(); return; }
-    var method = shippingMethod();
-    var t = MMS.cart.totals(items, method);
 
-    // Solo datos del pedido y de envío. Los datos de tarjeta NO se incluyen.
-    var order = {
-      numero: orderNumber(),
-      fecha: new Date().toISOString(),
-      items: items,
-      subtotal: t.subtotal,
-      envio: t.shipping,
-      metodoEnvio: method,
-      total: t.total,
-      cliente: {
-        nombre: form.nombre.value.trim(),
-        email: form.email.value.trim(),
-        ciudad: form.ciudad.value.trim(),
-        pais: form.pais.value
-      },
-      demo: PaymentProvider.mode === 'demo'
+    // Sin precios: el servidor los lee de la base de datos.
+    var payload = {
+      items: items.map(function (i) { return { id: i.id, qty: i.qty, talla: i.talla, color: i.color }; }),
+      envio: shippingMethod(),
+      cliente: {}
     };
+    FORM_FIELDS.forEach(function (n) { payload.cliente[n] = form[n].value.trim(); });
+    saveForm();
 
     busy = true;
     payBtn.classList.add('loading');
     payBtn.disabled = true;
-    payLabel.textContent = 'Procesando pago…';
+    payLabel.textContent = 'Conectando con Stripe…';
     document.getElementById('processing').classList.add('show');
 
-    PaymentProvider.pay(order).then(function (res) {
-      if (!res.ok) throw new Error('pago rechazado');
-      // Limpia los campos de tarjeta antes de salir de la página.
-      [cNum, cExp, cCvc, document.getElementById('c-name')].forEach(function (el) { el.value = ''; });
-      MMS.saveLastOrder(order);
-      location.href = '/gracias';
-    }).catch(function () {
-      busy = false;
-      payBtn.classList.remove('loading');
-      payBtn.disabled = false;
-      document.getElementById('processing').classList.remove('show');
-      formErr.textContent = 'No pudimos procesar el pago. Intenta de nuevo.';
-      renderSummary();
+    startCheckout(payload).then(function (url) {
+      location.href = url;
+    }).catch(function (err) {
+      if (err.code === 'unavailable' && err.ids && err.ids.length) {
+        // Quita de la bolsa lo que ya no se puede comprar (agotado o borrado).
+        MMS.cart.items().forEach(function (i) { if (err.ids.indexOf(i.id) !== -1) MMS.cart.remove(i.key); });
+      }
+      resetBusy();
+      formErr.textContent = err.message || 'No pudimos iniciar el pago. Intenta de nuevo.';
     });
   });
+
+  // Al volver con el botón "atrás" desde Stripe, la página puede restaurarse congelada.
+  window.addEventListener('pageshow', function (e) { if (e.persisted && busy) resetBusy(); });
+
+  if (/[?&]cancelado=1/.test(location.search)) {
+    document.getElementById('cancelNotice').hidden = false;
+    if (history.replaceState) history.replaceState(null, '', '/checkout');
+  }
+  restoreForm();
+
+  fetch('/api/config').then(function (r) { return r.ok ? r.json() : null; }).then(function (cfg) {
+    if (cfg && cfg.stripeMode === 'test') document.getElementById('testNote').hidden = false;
+  }).catch(function () { /* ignorar */ });
 
   document.getElementById('sumToggle').addEventListener('click', function () {
     var side = document.getElementById('coSide');

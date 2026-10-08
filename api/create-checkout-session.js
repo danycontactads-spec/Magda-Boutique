@@ -55,14 +55,22 @@ module.exports = async function handler(req, res) {
   }
 
   const items = [];
+  const invalid = [];
   for (const i of rawItems) {
     const id = text(i && i.id, 64);
     const qty = parseInt(i && i.qty, 10);
-    if (!UUID_RE.test(id)) {
-      return res.status(409).json({ ok: false, code: 'unavailable', error: 'Algunos productos de tu bolsa ya no están disponibles. Quítalos para continuar.' });
-    }
+    // Ids que no son de Supabase (p. ej. el catálogo de respaldo "demo-...") no se pueden cobrar.
+    if (!UUID_RE.test(id)) { invalid.push(id); continue; }
     if (!(qty >= 1 && qty <= MAX_QTY)) return res.status(400).json({ ok: false, error: 'Cantidad inválida.' });
     items.push({ id, qty, talla: text(i.talla, 40), color: text(i.color, 60) });
+  }
+  if (invalid.length) {
+    return res.status(409).json({
+      ok: false,
+      code: 'unavailable',
+      ids: invalid,
+      error: 'Algunos productos de tu bolsa ya no están disponibles. Los quitamos; revisa tu pedido y vuelve a intentarlo.',
+    });
   }
 
   try {
@@ -84,7 +92,7 @@ module.exports = async function handler(req, res) {
         ok: false,
         code: 'unavailable',
         ids: unavailable,
-        error: 'Algunos productos de tu bolsa ya no están disponibles o se agotaron. Quítalos para continuar.',
+        error: 'Algunos productos de tu bolsa se agotaron o ya no están disponibles. Los quitamos; revisa tu pedido y vuelve a intentarlo.',
       });
     }
 

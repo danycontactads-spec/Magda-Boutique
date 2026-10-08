@@ -142,7 +142,7 @@
     <a href="/swim" class="mms-btn mms-btn-gold">Seguir comprando</a>
     <a href="https://wa.me/17866670539" target="_blank" rel="noopener" class="mms-btn mms-btn-ghost">Escríbenos por WhatsApp</a>
   </div>
-  <p class="demo-flag" id="demoFlag" hidden>Pedido de demostración · no se realizó ningún cargo.</p>
+  <p class="demo-flag" id="demoFlag" hidden>Pedido de prueba (modo test de Stripe) · no se realizó ningún cargo real.</p>
 </main>
 
 <footer class="site-foot">
@@ -162,56 +162,81 @@
 <script>
 (function () {
   var esc = MMS.esc, money = MMS.money;
-  var order = MMS.readLastOrder();
+  var $ = function (id) { return document.getElementById(id); };
+  var m = /[?&]session_id=(cs_[A-Za-z0-9_]+)/.exec(location.search);
 
-  // La compra terminó: vaciamos el carrito.
-  MMS.cart.clear();
+  // Visita directa (sin pago): solo el agradecimiento general; el carrito no se toca.
+  if (!m) return;
 
-  if (!order) return; // Visita directa: se muestra solo el agradecimiento general.
+  var sessionId = m[1];
+  $('lead').textContent = 'Estamos confirmando tu pago…';
 
-  var first = (order.cliente && order.cliente.nombre || '').split(' ')[0];
-  if (first) document.getElementById('lead').textContent = 'Gracias, ' + first + '. Tu pedido ya está en manos de la Maison y lo prepararemos con todo el cuidado que merece.';
-  document.getElementById('orderNoVal').textContent = '#' + order.numero;
-  document.getElementById('orderNo').hidden = false;
+  function render(order) {
+    var first = (order.cliente && order.cliente.nombre || '').split(' ')[0];
+    $('lead').textContent = (first ? 'Gracias, ' + first + '. ' : '') + 'Tu pago fue aprobado y tu pedido ya está en manos de la Maison. Lo prepararemos con todo el cuidado que merece.';
+    $('orderNoVal').textContent = '#' + order.numero;
+    $('orderNo').hidden = false;
 
-  var d = new Date(order.fecha);
-  document.getElementById('orderDate').textContent = isNaN(d) ? '' : d.toLocaleDateString('es', { day: 'numeric', month: 'long', year: 'numeric' }) + ' · ' + d.toLocaleTimeString('es', { hour: '2-digit', minute: '2-digit' });
+    var d = new Date(order.fecha);
+    $('orderDate').textContent = isNaN(d) ? '' : d.toLocaleDateString('es', { day: 'numeric', month: 'long', year: 'numeric' }) + ' · ' + d.toLocaleTimeString('es', { hour: '2-digit', minute: '2-digit' });
 
-  document.getElementById('orderItems').innerHTML = (order.items || []).map(function (i) {
-    var meta = [MMS.variantText(i), 'Cantidad: ' + i.qty].filter(Boolean).join(' · ');
-    return '<div class="ti"><div class="ti-img">' + MMS.thumbHtml(i) + '</div>' +
-      '<div><div class="ti-name">' + esc(i.nombre) + '</div><div class="ti-meta">' + esc(meta) + '</div></div>' +
-      '<div class="ti-price">' + money(i.precio * i.qty) + '</div></div>';
-  }).join('');
-  document.getElementById('oSub').textContent = money(order.subtotal);
-  document.getElementById('oShipLabel').textContent = order.metodoEnvio === 'express' ? 'Envío express' : 'Envío estándar';
-  document.getElementById('oShip').textContent = order.envio ? money(order.envio) : 'Gratis';
-  document.getElementById('oTotal').textContent = money(order.total);
-  if (order.cliente) {
-    document.getElementById('shipTo').innerHTML = '<b>Enviar a</b>' + esc(order.cliente.nombre) + '<br>' +
-      esc([order.cliente.ciudad, order.cliente.pais].filter(Boolean).join(', ')) +
-      (order.cliente.email ? '<br>Confirmación a: ' + esc(order.cliente.email) : '');
-  }
-  document.getElementById('orderCard').hidden = false;
-  document.getElementById('demoFlag').hidden = !order.demo;
-
-  /* Meta Pixel — evento Purchase. Queda apagado mientras el checkout sea demo
-     (no hay cobro real). Descomentar al conectar Stripe.
-     Se dispara una sola vez por pedido gracias a la marca en sessionStorage.
-  try {
-    var firedKey = 'mms_purchase_' + order.numero;
-    if (!order.demo && !sessionStorage.getItem(firedKey)) {
-      MMS.track('Purchase', {
-        value: order.total,
-        currency: 'USD',
-        content_type: 'product',
-        content_ids: order.items.map(function (i) { return i.id; }),
-        num_items: order.items.reduce(function (s, i) { return s + i.qty; }, 0)
-      });
-      sessionStorage.setItem(firedKey, '1');
+    $('orderItems').innerHTML = (order.items || []).map(function (i) {
+      var meta = [MMS.variantText(i), 'Cantidad: ' + i.qty].filter(Boolean).join(' · ');
+      return '<div class="ti"><div class="ti-img">' + MMS.thumbHtml(i) + '</div>' +
+        '<div><div class="ti-name">' + esc(i.nombre) + '</div><div class="ti-meta">' + esc(meta) + '</div></div>' +
+        '<div class="ti-price">' + money(i.total) + '</div></div>';
+    }).join('');
+    $('oSub').textContent = money(order.subtotal);
+    $('oShipLabel').textContent = order.metodoEnvio === 'express' ? 'Envío express' : 'Envío estándar';
+    $('oShip').textContent = order.envio ? money(order.envio) : 'Gratis';
+    $('oTotal').textContent = money(order.total) + ' ' + (order.moneda || 'USD');
+    if (order.cliente) {
+      $('shipTo').innerHTML = '<b>Enviar a</b>' + esc(order.cliente.nombre) + '<br>' +
+        esc([order.cliente.ciudad, order.cliente.pais].filter(Boolean).join(', ')) +
+        (order.cliente.email ? '<br>Confirmación a: ' + esc(order.cliente.email) : '');
     }
-  } catch (e) {}
-  */
+    $('orderCard').hidden = false;
+    $('demoFlag').hidden = !!order.livemode;
+  }
+
+  // Meta Pixel — Purchase con el valor real cobrado por Stripe, una sola vez por pedido.
+  // Sin META_PIXEL_ID, MMS.track no hace nada.
+  function trackPurchase(order) {
+    var key = 'mms_purchase_' + order.numero;
+    try { if (localStorage.getItem(key)) return; } catch (e) { /* sin storage: se dispara igual */ }
+    MMS.track('Purchase', {
+      value: order.total,
+      currency: order.moneda || 'USD',
+      content_type: 'product',
+      content_ids: (order.items || []).map(function (i) { return i.id; }).filter(Boolean),
+      num_items: (order.items || []).reduce(function (s, i) { return s + i.qty; }, 0)
+    });
+    try { localStorage.setItem(key, '1'); } catch (e) { /* ignorar */ }
+  }
+
+  function pending(msg) {
+    document.querySelector('.thanks-hero .eyebrow').textContent = 'Pedido recibido';
+    $('lead').textContent = msg;
+  }
+
+  fetch('/api/order?session_id=' + encodeURIComponent(sessionId))
+    .then(function (r) { return r.json().catch(function () { return {}; }); })
+    .then(function (json) {
+      if (!json.ok || !json.order) throw new Error(json.error || 'error');
+      var order = json.order;
+      if (!order.pagado) {
+        pending('Tu pago se está procesando. Te enviaremos un email en cuanto se confirme.');
+        return;
+      }
+      // Pago confirmado: vaciamos la bolsa y olvidamos los datos del formulario.
+      MMS.cart.clear();
+      try { sessionStorage.removeItem('mms_checkout_form'); } catch (e) { /* ignorar */ }
+      render(order);
+      trackPurchase(order);
+    })
+    .catch(function () {
+      pending('No pudimos cargar el detalle de tu pedido en este momento. Si completaste el pago, recibirás la confirmación por email. ¿Dudas? Escríbenos por WhatsApp.');
+    });
 })();
 </script>
 </body>
