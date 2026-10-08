@@ -11,7 +11,7 @@
 <meta property="og:locale" content="es_ES">
 <meta property="og:title" content="Checkout — Madam Maison du Soleil by Magda">
 <meta property="og:description" content="Finaliza tu compra en Madam Maison du Soleil by Magda: envío gratis en pedidos superiores a $100 y empaque de regalo de la Maison.">
-<meta property="og:url" content="https://magda-boutique.vercel.app/checkout.html">
+<meta property="og:url" content="https://magda-boutique.vercel.app/checkout">
 <meta property="og:image" content="https://magda-boutique.vercel.app/assets/images/og-image.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -160,8 +160,8 @@
 <body>
 <header class="co-head">
   <div class="nav-top">
-    <div class="nav-icons"><a href="swim.html" class="back-link">← Tienda</a></div>
-    <a class="brand" href="index.html"><span class="crown">♛</span><span class="name">Madam Maison du Soleil</span><span class="sub">by Magda</span></a>
+    <div class="nav-icons"><a href="/swim" class="back-link">← Tienda</a></div>
+    <a class="brand" href="/"><span class="crown">♛</span><span class="name">Madam Maison du Soleil</span><span class="sub">by Magda</span></a>
     <div class="nav-icons right"><span class="secure"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg><span class="txt">Pago seguro</span></span></div>
   </div>
 </header>
@@ -238,7 +238,7 @@
 
       <button type="submit" class="mms-btn mms-btn-gold pay-btn" id="payBtn"><span class="spinner"></span><span id="payLabel">Pagar</span></button>
       <p class="form-err" id="formErr" role="alert"></p>
-      <p class="legal">Al confirmar aceptas nuestros <a href="info.html#terminos" style="text-decoration:underline">Términos</a> y la <a href="info.html#privacidad" style="text-decoration:underline">Política de Privacidad</a>.</p>
+      <p class="legal">Al confirmar aceptas nuestros <a href="/info#terminos" style="text-decoration:underline">Términos</a> y la <a href="/info#privacidad" style="text-decoration:underline">Política de Privacidad</a>.</p>
     </form>
   </main>
 
@@ -291,7 +291,7 @@
        2. Reemplazar el cuerpo de pay() por un fetch a ese endpoint y
           redirigir a session.url (Stripe aloja los campos de tarjeta).
        3. Eliminar la sección "Pago" del formulario (Stripe la muestra).
-       4. Usar success_url = /gracias.html?session_id={CHECKOUT_SESSION_ID}.
+       4. Usar success_url = /gracias?session_id={CHECKOUT_SESSION_ID}.
      Nunca enviar datos de tarjeta a nuestro servidor. */
   var PaymentProvider = {
     mode: 'demo',
@@ -334,8 +334,8 @@
     document.getElementById('co').innerHTML =
       '<div class="co-empty"><div class="mms-empty"><div class="mms-empty-icon">♛</div>' +
       '<h4>Tu bolsa está vacía</h4><p>Agrega tus piezas favoritas para continuar con la compra.</p>' +
-      '<a href="swim.html" class="mms-btn mms-btn-gold">Ver Trajes de Baño</a>' +
-      '<a href="invisible.html" class="mms-btn mms-btn-ghost">Esenciales Invisibles</a></div></div>';
+      '<a href="/swim" class="mms-btn mms-btn-gold">Ver Trajes de Baño</a>' +
+      '<a href="/invisible" class="mms-btn mms-btn-ghost">Esenciales Invisibles</a></div></div>';
   }
 
   /* ── Formato de tarjeta (solo visual) ── */
@@ -458,7 +458,7 @@
       // Limpia los campos de tarjeta antes de salir de la página.
       [cNum, cExp, cCvc, document.getElementById('c-name')].forEach(function (el) { el.value = ''; });
       MMS.saveLastOrder(order);
-      location.href = 'gracias.html';
+      location.href = '/gracias';
     }).catch(function () {
       busy = false;
       payBtn.classList.remove('loading');

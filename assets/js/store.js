@@ -10,7 +10,7 @@
   var MAX_QTY = 10;
 
   var CAT_LABEL = { trajes: 'Trajes de Baño', esenciales: 'Esenciales Invisibles' };
-  var CAT_PAGE = { trajes: 'swim.html', esenciales: 'invisible.html' };
+  var CAT_PAGE = { trajes: '/swim', esenciales: '/invisible' };
 
   var DEFAULT_DESC = {
     trajes: 'Confeccionado en tejido premium de secado rápido, con forro completo y un ajuste que realza tu silueta. Diseñado en la Maison para acompañarte del mar a la mesa con la elegancia europea y el alma caribeña que nos definen.',
@@ -161,7 +161,7 @@
     });
   }
 
-  function productUrl(p) { return 'producto.html?id=' + encodeURIComponent(p.id); }
+  function productUrl(p) { return '/producto?id=' + encodeURIComponent(p.id); }
 
   function placeholderHtml(p) {
     var label = p.subcategoria || CAT_LABEL[p.categoria] || 'La Maison';
@@ -260,7 +260,7 @@
       '<div class="mms-drawer-foot">' +
         '<div class="mms-row mms-row-total"><span>Subtotal</span><strong class="mms-subtotal"></strong></div>' +
         '<p class="mms-note">Envío calculado en el checkout.</p>' +
-        '<a href="checkout.html" class="mms-btn mms-btn-gold">Proceder al pago</a>' +
+        '<a href="/checkout" class="mms-btn mms-btn-gold">Proceder al pago</a>' +
         '<button type="button" class="mms-btn mms-btn-ghost" data-cart-close>Seguir comprando</button>' +
       '</div>';
     document.body.appendChild(overlay);
@@ -283,8 +283,8 @@
         '<div class="mms-empty"><div class="mms-empty-icon">♛</div>' +
         '<h4>Tu bolsa está vacía</h4>' +
         '<p>Descubre piezas creadas para brillar bajo el sol.</p>' +
-        '<a href="swim.html" class="mms-btn mms-btn-gold">Ver Trajes de Baño</a>' +
-        '<a href="invisible.html" class="mms-btn mms-btn-ghost">Esenciales Invisibles</a></div>';
+        '<a href="/swim" class="mms-btn mms-btn-gold">Ver Trajes de Baño</a>' +
+        '<a href="/invisible" class="mms-btn mms-btn-ghost">Esenciales Invisibles</a></div>';
       return;
     }
 
@@ -300,9 +300,9 @@
     body.innerHTML = items.map(function (i) {
       var k = esc(i.key);
       return '<div class="mms-item">' +
-        '<a class="mms-item-img" href="producto.html?id=' + encodeURIComponent(i.id) + '">' + thumbHtml(i) + '</a>' +
+        '<a class="mms-item-img" href="/producto?id=' + encodeURIComponent(i.id) + '">' + thumbHtml(i) + '</a>' +
         '<div class="mms-item-info">' +
-          '<a class="mms-item-name" href="producto.html?id=' + encodeURIComponent(i.id) + '">' + esc(i.nombre) + '</a>' +
+          '<a class="mms-item-name" href="/producto?id=' + encodeURIComponent(i.id) + '">' + esc(i.nombre) + '</a>' +
           (variantText(i) ? '<div class="mms-item-meta">' + esc(variantText(i)) + '</div>' : '') +
           '<div class="mms-item-price">' + money(i.precio) + '</div>' +
           '<div class="mms-item-actions">' +

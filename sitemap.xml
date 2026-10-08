@@ -6,17 +6,17 @@
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://magda-boutique.vercel.app/swim.html</loc>
+    <loc>https://magda-boutique.vercel.app/swim</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://magda-boutique.vercel.app/invisible.html</loc>
+    <loc>https://magda-boutique.vercel.app/invisible</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://magda-boutique.vercel.app/info.html</loc>
+    <loc>https://magda-boutique.vercel.app/info</loc>
     <changefreq>monthly</changefreq>
     <priority>0.4</priority>
   </url>

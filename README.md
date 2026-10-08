@@ -5,7 +5,7 @@ serverless en `/api`. El navegador nunca habla directo con Supabase: siempre pas
 por `/api/*`.
 
 - Tienda en vivo: https://magda-boutique.vercel.app
-- Panel de administración: https://magda-boutique.vercel.app/admin.html
+- Panel de administración: https://magda-boutique.vercel.app/admin
 
 **Pendiente (se hará después):** pago real con Stripe (hoy el checkout es una
 demo que no cobra) y el dominio propio.
@@ -16,7 +16,7 @@ demo que no cobra) y el dominio propio.
 
 ### Entrar al panel
 1. Abre en el navegador (computadora o celular):
-   **https://magda-boutique.vercel.app/admin.html**
+   **https://magda-boutique.vercel.app/admin**
 2. Escribe tu contraseña y pulsa **Entrar**.
 3. La sesión dura 12 horas. Para salir, pulsa **Cerrar sesión** (arriba a la
    derecha).
